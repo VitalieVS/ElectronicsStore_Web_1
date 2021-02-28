@@ -96,4 +96,11 @@ header ul li a {
     text-decoration: none;
 }
 
+.content .imgBox {
+    width: 600px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 50px;
+    margin-top: 50px;
+}
 
