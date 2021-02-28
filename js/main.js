@@ -5,7 +5,7 @@ class StyleManager {
     learnMore = document.querySelector(".content .textBox a");
 
     setStyle(imageSource, color) {
-        this.mainImage.src = imageSource.replace("_mini", "");
+        this.mainImage.src = imageSource;
         this.h2Text.style.color = color;
         this.circle.style.background = color;
         this.learnMore.style.background = color;
@@ -16,8 +16,9 @@ class StyleManager {
         thumbItems.forEach(elem => {
             elem.addEventListener("click", () => {
                 const index = elem.src.indexOf("img/");
-                const imageSource = elem.src.substring(index);
+                let imageSource = elem.src.substring(index);
                 let color = imageSource.split("_")[1];
+                imageSource = imageSource.replace("_mini", "");
                 if (color === "gold") color = "#fedfc6";
                 this.setStyle(imageSource, color);
             });
