@@ -54,3 +54,17 @@ header ul li a {
     text-decoration: none;
 }
 
+.content {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content .textBox {
+    position: relative;
+    max-width: 600px;
+}
+
+
