@@ -116,3 +116,10 @@ header ul li a {
     display: flex;
 }
 
+.thumb li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    cursor: pointer;
+}
+
