@@ -104,3 +104,7 @@ header ul li a {
     margin-top: 50px;
 }
 
+.content .imgBox img {
+    max-width: 440px;
+}
+
