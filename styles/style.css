@@ -129,5 +129,5 @@ header ul li a {
 }
 
 .thumb li img {
-
+    max-width: 60px;
 }
