@@ -1,19 +1,31 @@
-const imgSlider = source => {
-    console.log(source);
-};
+class StyleManager {
+    mainImage = document.querySelector(".imgBox .iphone");
+    h2Text = document.querySelector(".content .textBox h2 span");
+    circle = document.querySelector(".circle");
+    learnMore = document.querySelector(".content .textBox a");
 
-const liClickHandler = () => {
-    const thumbItems = document.querySelectorAll(".thumb li img");
-    console.log(thumbItems);
-    thumbItems.forEach(elem => {
-        elem.addEventListener("click", () => {
-            console.log(elem.src.length);
-            console.log(elem.src.substring(15,534));
-            //imgSlider(elem.getAttribute("src"));
+    setStyle(imageSource, color) {
+        this.mainImage.src = imageSource.replace("_mini", "");
+        this.h2Text.style.color = color;
+        this.circle.style.background = color;
+        this.learnMore.style.background = color;
+    }
+
+    liClickHandler() {
+        const thumbItems = document.querySelectorAll(".thumb li img");
+        thumbItems.forEach(elem => {
+            elem.addEventListener("click", () => {
+                const index = elem.src.indexOf("img/");
+                const imageSource = elem.src.substring(index);
+                let color = imageSource.split("_")[1];
+                if (color === "gold") color = "#fedfc6";
+                this.setStyle(imageSource, color);
+            });
         });
-    });
-};
+    }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
-    liClickHandler();
+    const manager = new StyleManager();
+    manager.liClickHandler();
 });
