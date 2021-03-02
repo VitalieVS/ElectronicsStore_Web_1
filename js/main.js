@@ -25,20 +25,17 @@ class StyleManager {
         });
     }
 
-    toggleClickHandler() {
+    toggleMenu() {
         const menuToggle = document.querySelector(".toggle");
-        menuToggle.addEventListener("click", (evt => {
-            this.toggleMenu(evt);
-        }));
+        menuToggle.addEventListener("click", () => {
+            menuToggle.classList.toggle("active");
+        });
     }
 
-    toggleMenu(evt) {
-        evt.target.classList.toggle('active');
-    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const manager = new StyleManager();
     manager.liClickHandler();
-    manager.toggleClickHandler();
+    manager.toggleMenu();
 });
