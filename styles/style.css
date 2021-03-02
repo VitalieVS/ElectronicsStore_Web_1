@@ -198,6 +198,7 @@ header ul li a {
 
     .content .imgBox {
         max-width: 100%;
+        justify-content: center;
     }
 
 }
