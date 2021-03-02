@@ -175,5 +175,16 @@ header ul li a {
         display: none;
     }
 
+    section {
+        padding: 20px;
+    }
+
+    .content {
+        flex-direction: column;
+        margin-top: 100px;
+    }
+
+
+
 
 }
