@@ -184,7 +184,12 @@ header ul li a {
         margin-top: 100px;
     }
 
+    .content .textBox h2 {
+        font-size: 2.5em;
+        margin-bottom: 15px;
+    }
+    .content .textBox {
 
-
+    }
 
 }
