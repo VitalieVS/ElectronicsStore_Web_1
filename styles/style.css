@@ -176,7 +176,7 @@ header ul li a {
     }
 
     section {
-        padding: 20px;
+        padding: 20px 20px 120px;
     }
 
     .content {
@@ -194,6 +194,10 @@ header ul li a {
 
     section .circle {
         clip-path: circle(400px at center bottom);
+    }
+
+    .content .imgBox {
+        max-width: 100%;
     }
 
 }
