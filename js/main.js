@@ -26,17 +26,15 @@ class StyleManager {
     }
 
     toggleMenu() {
-        const elements = [
-            document.querySelector(".toggle"),
-            document.querySelector(".navigation")
-        ];
+        const toggle = document.querySelector(".toggle");
+        const navigation = document.querySelector(".navigation");
 
-        for (const value of elements) {
-           value.addEventListener("click", () => {
-               value.classList.toggle("active");
-           })
-        }
+        toggle.addEventListener("click", () => {
+            toggle.toggleAttribute("active");
+            navigation.toggleAttribute("active");
+        })
     }
+}
 
 }
 
