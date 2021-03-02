@@ -201,4 +201,8 @@ header ul li a {
         justify-content: center;
     }
 
+    .content .imgBox img {
+        max-width: 250px;
+    }
+
 }
