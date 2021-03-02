@@ -162,3 +162,18 @@ header ul li a {
     background: #fedfc6;
     clip-path: circle(600px at right 800px);
 }
+
+@media (max-width: 991px) {
+    header {
+        padding: 20px;
+    }
+    header .logo {
+        max-width: 60px;
+    }
+
+    header ul {
+        display: none;
+    }
+
+
+}
