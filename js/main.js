@@ -30,11 +30,10 @@ class StyleManager {
         const navigation = document.querySelector(".navigation");
 
         toggle.addEventListener("click", () => {
-            toggle.toggleAttribute("active");
-            navigation.toggleAttribute("active");
+            toggle.classList.toggle("active");
+            navigation.classList.toggle("active");
         })
-    }
-}
+    };
 
 }
 

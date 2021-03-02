@@ -185,7 +185,7 @@ header ul li a {
         filter: invert(1);
     }
 
-    .toggle .active {
+    .toggle.active {
         background-size: 25px;
         background: url("../img/close.png") no-repeat center;
     }
