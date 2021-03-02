@@ -185,6 +185,11 @@ header ul li a {
         filter: invert(1);
     }
 
+    .toggle .active {
+        background-size: 25px;
+        background: url("../img/close.png") no-repeat center;
+    }
+
     section {
         padding: 20px 20px 120px;
     }
