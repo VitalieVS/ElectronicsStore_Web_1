@@ -189,7 +189,11 @@ header ul li a {
         margin-bottom: 15px;
     }
     .content .textBox {
+        max-width: 100%;
+    }
 
+    section .circle {
+        clip-path: circle(400px at center bottom);
     }
 
 }
