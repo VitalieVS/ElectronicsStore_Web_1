@@ -175,6 +175,16 @@ header ul li a {
         display: none;
     }
 
+    .toggle {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        background-size: 30px;
+        background: url("../img/menu.png") no-repeat center;
+        filter: invert(1);
+    }
+
     section {
         padding: 20px 20px 120px;
     }

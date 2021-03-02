@@ -24,9 +24,21 @@ class StyleManager {
             });
         });
     }
+
+    toggleClickHandler() {
+        const menuToggle = document.querySelector(".toggle");
+        menuToggle.addEventListener("click", (evt => {
+            this.toggleMenu(evt);
+        }));
+    }
+
+    toggleMenu(evt) {
+        evt.target.classList.toggle('active');
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const manager = new StyleManager();
     manager.liClickHandler();
+    manager.toggleClickHandler();
 });
