@@ -106,6 +106,15 @@ body {
     transition: 0.5s;
 }
 
+.container .card .contentBx .size h3 {
+    color: #fff;
+    font-weight: 300;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-right: 10px;
+}
+
 /*ul {*/
 /*    display: grid;*/
 /*    grid-template-columns: repeat(5, 1fr);*/
