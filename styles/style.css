@@ -15,7 +15,7 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #fff;
+    background: #131313;
 }
 
 header {
@@ -47,7 +47,7 @@ header ul li {
 
 header ul li a {
     display: inline-block;
-    color: #333;
+    color: #fff;
     font-weight: 400;
     margin-left: 40px;
     text-decoration: none;
@@ -67,7 +67,7 @@ header ul li a {
 }
 
 .content .textBox h2 {
-    color: #333;
+    color: #fff;
     font-size: 4em;
     line-height: 1.4em;
     font-weight: 500;
@@ -80,7 +80,7 @@ header ul li a {
 }
 
 .content .textBox p {
-    color: #333;
+    color: #fff;
 }
 
 .content .textBox a {
