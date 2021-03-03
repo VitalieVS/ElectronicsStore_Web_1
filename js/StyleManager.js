@@ -24,7 +24,6 @@ class StyleManager {
             });
         });
     }
-
     toggleMenu() {
         const toggle = document.querySelector(".toggle");
         const navigation = document.querySelector(".navigation");
@@ -34,11 +33,10 @@ class StyleManager {
             navigation.classList.toggle("active");
         })
     };
-
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const manager = new StyleManager();
-    manager.liClickHandler();
     manager.toggleMenu();
+    manager.liClickHandler();
 });

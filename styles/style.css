@@ -22,6 +22,7 @@ header {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
     padding: 20px 100px;
     display: flex;
     justify-content: space-between;
@@ -184,7 +185,7 @@ header ul li a {
         justify-self: center;
         align-items: center;
         flex-direction: column;
-        background: #fff;
+        background: #131313;
         z-index: 10;
     }
 
@@ -202,12 +203,10 @@ header ul li a {
         cursor: pointer;
         background-size: 30px;
         background: url("../img/menu.png") no-repeat center;
-        filter: invert(1);
         z-index: 11;
     }
 
     .toggle.active {
-        position: fixed;
         right: 20px;
         background-size: 25px;
         background: url("../img/close.png") no-repeat center;

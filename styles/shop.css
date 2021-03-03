@@ -15,6 +15,20 @@ body {
     background: #131313;
 }
 
+header ul .navigation.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    flex-direction: column;
+    background: #fff;
+    z-index: 10;
+}
+
 header {
     position: absolute;
     top: 0;
