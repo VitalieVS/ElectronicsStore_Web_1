@@ -24,19 +24,11 @@ class StyleManager {
             });
         });
     }
-    toggleMenu() {
-        const toggle = document.querySelector(".toggle");
-        const navigation = document.querySelector(".navigation");
-
-        toggle.addEventListener("click", () => {
-            toggle.classList.toggle("active");
-            navigation.classList.toggle("active");
-        })
-    };
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const manager = new StyleManager();
-    manager.toggleMenu();
+    const toggleMenu = new ToggleMenu();
+    toggleMenu.toggleMenu();
     manager.liClickHandler();
 });
