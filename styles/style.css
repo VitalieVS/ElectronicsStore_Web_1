@@ -175,7 +175,7 @@ header ul li a {
         display: none;
     }
 
-    header ul.navigation.active {
+    header ul .navigation.active {
         position: fixed;
         top: 0;
         left: 0;
