@@ -20,7 +20,7 @@ body {
 
 .container .card {
     position: relative;
-    width: 280px;
+    width: 240px;
     height: 450px;
     background: #232323;
     border-radius: 20px;
@@ -191,7 +191,7 @@ body {
     transition-delay: 0.75s;
 }
 
-ul {
+#products {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 30px;
