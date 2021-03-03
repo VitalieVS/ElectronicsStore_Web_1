@@ -51,7 +51,7 @@ body {
     font-size: 12em;
     font-weight: 800;
     font-style: italic;
-    color: rgba(255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.04);
 }
 
 .container .card .imgBx {
@@ -64,8 +64,8 @@ body {
     transition: 0.5s;
 }
 
-.container.card:hover .imgBx {
-    top: 0%;
+.container .card:hover .imgBx {
+    top: 0;
     transform: translateY(0%);
 }
 
@@ -73,7 +73,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%) rotate(-25deg);
+    transform: translate(-50%, -50%) rotate(-25deg);
     width: 170px;
 }
 
@@ -92,9 +92,19 @@ body {
 }
 
 .container .card .contentBx h2 {
-
+    position: relative;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #fff;
 }
 
+.container .card .contentBx .size {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 20px;
+    transition: 0.5s;
+}
 
 /*ul {*/
 /*    display: grid;*/
