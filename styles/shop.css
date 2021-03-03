@@ -20,7 +20,7 @@ body {
 
 .container .card {
     position: relative;
-    width: 380px;
+    width: 280px;
     height: 450px;
     background: #232323;
     border-radius: 20px;
@@ -44,7 +44,7 @@ body {
 }
 
 .container .card:after {
-    content: 'EL';
+    content: 'ELS';
     position: absolute;
     top: 30%;
     left: -20%;
@@ -191,11 +191,11 @@ body {
     transition-delay: 0.75s;
 }
 
-
-/*ul {*/
-/*    display: grid;*/
-/*    grid-template-columns: repeat(5, 1fr);*/
-/*    grid-column-gap: 30px;*/
-/*    list-style: none;*/
-/*    text-align: center;*/
-/*}*/
+ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 50px;
+    list-style: none;
+    text-align: center;
+}
