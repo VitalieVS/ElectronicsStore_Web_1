@@ -64,6 +64,23 @@ nav {
     transition: all 0.4s;
     border-radius: 8px;
     overflow: hidden;
+    opacity: 0;
+}
+
+.select-box .options-container.active {
+    max-height: 240px;
+    opacity: 1;
+    overflow-y: scroll;
+}
+
+.select-box .options-container::-webkit-scrollbar {
+    width: 8px;
+    background: #0d141f;
+    border-radius: 0 8px 8px 0;
+}
+
+.select-box .option:hover {
+    background: #414b57;
 }
 
 .select-box .option,
@@ -75,6 +92,12 @@ nav {
 .select-box label {
     cursor: pointer;
 }
+
+.select-box .option .radio {
+    display: none;
+}
+
+
 
 header .logo {
     width: 100%;
