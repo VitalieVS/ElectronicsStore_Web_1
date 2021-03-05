@@ -1,6 +1,0 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const toggleMenu = new ToggleMenu();
-    const style = new StyleManager();
-    style.selectBoxHandler();
-    toggleMenu.toggleMenu();
-});

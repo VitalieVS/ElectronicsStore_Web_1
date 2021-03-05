@@ -19,30 +19,15 @@
     </ul>
 </header>
 
-
-<nav id="categories">
-
+<nav>
     <div class="select-box">
-        <div class="options-container">
-            <div class="option">
-                <input
-                        type="radio"
-                        class="radio"
-                        id="iphones"
-                        name="category"
-                />
-                <label for="iphones">Iphones</label>
-            </div>
-
-            <div class="option">
-                <input type="radio" class="radio" id="cables" name="category"/>
-                <label for="Cables">Cables</label>
-            </div>
-
-            <div class="option">
-                <input type="radio" class="radio" id="cases" name="category"/>
-                <label for="cases">Cases</label>
-            </div>
+        <div id="options-container">
+            <template id="div-option">
+                <div class="option">
+                    <input type="radio" class="radio" name="category"/>
+                    <label></label>
+                </div>
+            </template>
         </div>
 
         <div class="selected">
@@ -50,6 +35,7 @@
         </div>
     </div>
 </nav>
+
 
 <section>
     <ul id="products">
@@ -101,83 +87,13 @@
                 </div>
             </div>
         </li>
-        <li class="container">
-            <div class="card">
-                <div class="imgBx">
-                    <img src="img/iphones/iph11_gold_mini.png" alt="can't">
-                </div>
-                <div class="contentBx">
-                    <h2>Iphone 12 Pro Max</h2>
-                    <div class="size">
-                        <h3>Memory size (GB):</h3>
-                        <span>128</span>
-                        <span>256</span>
-                        <span>512</span>
-                    </div>
-                    <div class="color">
-                        <h3>Color:</h3>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <a href="#">Buy Now</a>
-                </div>
-            </div>
-        </li>
-        <li class="container">
-            <div class="card">
-                <div class="imgBx">
-                    <img src="img/iphones/iph11_gold_mini.png" alt="can't">
-                </div>
-                <div class="contentBx">
-                    <h2>Iphone 12 Pro Max</h2>
-                    <div class="size">
-                        <h3>Memory size (GB):</h3>
-                        <span>128</span>
-                        <span>256</span>
-                        <span>512</span>
-                    </div>
-                    <div class="color">
-                        <h3>Color:</h3>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <a href="#">Buy Now</a>
-                </div>
-            </div>
-        </li>
-        <li class="container">
-            <div class="card">
-                <div class="imgBx">
-                    <img src="img/iphones/iph12_purple_mini.png" alt="can't">
-                </div>
-                <div class="contentBx">
-                    <h2>Iphone 12 Pro Max</h2>
-                    <div class="size">
-                        <h3>Memory size (GB):</h3>
-                        <span>128</span>
-                        <span>256</span>
-                        <span>512</span>
-                    </div>
-                    <div class="color">
-                        <h3>Color:</h3>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <a href="#">Buy Now</a>
-                </div>
-            </div>
-        </li>
     </ul>
 </section>
-<script src="js/shop.js"></script>
+<script src="js/Shop.js"></script>
 <script src="js/ToggleMenu.js"></script>
 <script src="js/StyleManager.js"></script>
+<script src="js/APIGet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </body>
 </html>
