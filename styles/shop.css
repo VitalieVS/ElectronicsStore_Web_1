@@ -41,6 +41,17 @@ header {
     z-index: 1;
 }
 
+nav {
+    position: absolute;
+    top: 150px;
+    left: 0;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+    color: #fff;
+}
+
 header .logo {
     width: 100%;
     position: relative;
@@ -158,7 +169,7 @@ section {
 }
 
 .container .card .contentBx .size,
-.container .card .contentBx .color{
+.container .card .contentBx .color {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -182,7 +193,7 @@ section {
 
 
 .container .card .contentBx .size h3,
-.container .card .contentBx .color h3{
+.container .card .contentBx .color h3 {
     color: #fff;
     font-weight: 300;
     font-size: 14px;
@@ -191,8 +202,7 @@ section {
     margin-right: 10px;
 }
 
-.container .card .contentBx .size span
-{
+.container .card .contentBx .size span {
     width: 100%;
     height: 26px;
     text-align: center;
@@ -205,9 +215,10 @@ section {
     transition: 0.5s;
     border-radius: 4px;
     cursor: pointer;
+    z-index: 10000;
 }
 
-.container .card .contentBx .size span:hover{
+.container .card .contentBx .size span:hover {
     background: #9bdc28;
 }
 
@@ -218,14 +229,17 @@ section {
     border-radius: 50%;
     margin: 0 5px;
     cursor: pointer;
+    z-index: 1000;
 }
 
 .container .card .contentBx .color span:nth-child(2) {
     background: #9bdc28;
 }
+
 .container .card .contentBx .color span:nth-child(3) {
     background: #03a9f4;
 }
+
 .container .card .contentBx .color span:nth-child(4) {
     background: #e91e63;
 }
@@ -300,6 +314,7 @@ section {
         background-size: 25px;
         background: url("../img/close.png") no-repeat center;
     }
+
     .toggle {
         position: relative;
         width: 30px;
