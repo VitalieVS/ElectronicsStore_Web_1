@@ -85,13 +85,11 @@ nav {
     content: "";
     background-size: contain;
     background: url("../img/arrow-down.svg") no-repeat;
-
     position: absolute;
     height: 100%;
     width: 32px;
     right: 10px;
-    top: 5px;
-
+    top: 10px;
     transition: all 0.4s;
 }
 
