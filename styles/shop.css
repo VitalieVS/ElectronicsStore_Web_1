@@ -52,6 +52,30 @@ nav {
     color: #fff;
 }
 
+.select-box {
+    display: flex;
+    width: 400px;
+}
+
+.select-box .options-container {
+    background: #2f3640;
+    color: #f5f6fa;
+    width: 100%;
+    transition: all 0.4s;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.select-box .option,
+.selected {
+    padding: 12px 24px;
+    cursor: pointer;
+}
+
+.select-box label {
+    cursor: pointer;
+}
+
 header .logo {
     width: 100%;
     position: relative;
