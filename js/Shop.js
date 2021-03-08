@@ -43,6 +43,10 @@ class Shop {
         const selected = document.querySelector(".selected");
         let currCategory;
         const optionsContainer = document.querySelector("#options-container");
+        const container = document.getElementById("products");
+        const template = document.getElementById("product-card");
+        const memoryContainer = template.content.querySelector(".size");
+        const colorContainer = template.content.querySelector(".color");
 
         optionsList.forEach(option => {
             option.addEventListener("click", () => {
@@ -51,18 +55,11 @@ class Shop {
                 optionsContainer.classList.remove("active");
                 this.getProducts(currCategory.trim().toLowerCase())
                     .then(response => {
-                        const container = document.getElementById("products");
-                        const template = document.getElementById("product-card");
+                        container.innerHTML = "";
 
                         response.forEach(elem => {
-                            // template.content.querySelector(
-                            //     ".option input").setAttribute("id", `${elem.name.toLowerCase()}`);
-                            // template.content.querySelector(
-                            //     ".option label").setAttribute("for", `${elem.name.toLowerCase()}`);
-                            // template.content.querySelector(".option label").textContent = elem.name;
-                            // const content = template.content.cloneNode(true);
-                            // container.append(content);
-
+                            memoryContainer.innerHTML = "<h3>Color:</h3>";
+                            colorContainer.innerHTML = "<h3>Memory Size:</h3>";
 
                             template.content.querySelector(
                                 "img").setAttribute("src", `img/iphone/${elem.imageUrl}`);
@@ -71,7 +68,24 @@ class Shop {
                                 "h2"
                             ).textContent = elem.title;
 
+                            elem.colors.forEach(color => {
+                                if (color.available === true) {
+                                    const colorSpan = document.createElement("span");
+                                    colorSpan.style.background = `${color.color}`;
+                                    colorContainer.append(colorSpan);
+                                }
+                            });
 
+                            elem.memoryCapacity.forEach(memory => {
+                                if (memory.available === true) {
+                                    const memorySpan = document.createElement("span");
+                                    memorySpan.textContent = `${memory.size}`;
+                                    memoryContainer.append(memorySpan);
+                                }
+                            });
+
+                            const content = template.content.cloneNode(true);
+                            container.append(content);
 
 
                         });
