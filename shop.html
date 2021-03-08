@@ -39,60 +39,38 @@
 
 <section>
     <ul id="products">
-        <li class="container">
-            <div class="card">
-                <div class="imgBx">
-                    <img src="img/iphones/iph11_gold_mini.png" alt="can't">
-                </div>
-                <div class="contentBx">
-                    <h2>Iphone 12 Pro Max</h2>
-                    <div class="size">
-                        <h3>Memory size (GB):</h3>
-                        <span>128</span>
-                        <span>256</span>
-                        <span>512</span>
+        <template id="product-card">
+            <li class="container">
+                <div class="card">
+                    <div class="imgBx">
+                        <img src="img/iphones/iph11_gold_mini.png" alt="can't">
                     </div>
-                    <div class="color">
-                        <h3>Color:</h3>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                    <div class="contentBx">
+                        <h2>Iphone 12 Pro Max</h2>
+                        <div class="size">
+                            <h3>Memory size (GB):</h3>
+                            <span>128</span>
+                            <span>256</span>
+                            <span>512</span>
+                        </div>
+                        <div class="color">
+                            <h3>Color:</h3>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <a href="#">100$ <i class="material-icons">add_shopping_cart</i></a>
                     </div>
-                    <a href="#">100$ <i class="material-icons">add_shopping_cart</i></a>
                 </div>
-            </div>
-        </li>
-        <li class="container">
-            <div class="card">
-                <div class="imgBx">
-                    <img src="img/iphones/iph11_gold_mini.png" alt="can't">
-                </div>
-                <div class="contentBx">
-                    <h2>Iphone 11 Pro Max</h2>
-                    <div class="size">
-                        <h3>Memory size (GB):</h3>
-                        <span>128</span>
-                        <span>256</span>
-                        <span>512</span>
-                    </div>
-                    <div class="color">
-                        <h3>Color:</h3>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <a href="#">Buy Now</a>
-                </div>
-            </div>
-        </li>
+            </li>
+        </template>
     </ul>
 </section>
 <script src="js/Shop.js"></script>
 <script src="js/ToggleMenu.js"></script>
 <script src="js/StyleManager.js"></script>
-<script src="js/APIGet.js"></script>
+<script src="js/Service.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </body>
