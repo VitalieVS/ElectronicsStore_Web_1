@@ -5,6 +5,5 @@ class Service {
          } catch (e) {
              return e;
          }
-
     }
 }
