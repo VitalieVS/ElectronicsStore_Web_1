@@ -289,16 +289,21 @@ header ul li a {
 
 .container .card .contentBx .size span:hover {
     background: #9bdc28;
+    z-index: 100000;
 }
 
 .container .card .contentBx .color span {
     width: 20px;
     height: 20px;
-
     border-radius: 50%;
     margin: 0 5px;
     cursor: pointer;
     z-index: 1000;
+}
+
+.container .card .contentBx .color span:hover {
+    border-radius: 20%;
+    z-index: 100000;
 }
 
 .container .card .contentBx a {
