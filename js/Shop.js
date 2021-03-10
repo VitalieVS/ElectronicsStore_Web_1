@@ -5,25 +5,21 @@ class Shop {
 class UI {
     getCategories() {
         return new Promise((resolve) => {
-            setTimeout(() => {
-                const API = new Service();
-                API.GET("http://localhost:8080/categories")
-                    .then(response => {
-                        resolve(response.data)
-                    });
-            }, 300)
+            const API = new Service();
+            API.GET("http://localhost:8080/categories")
+                .then(response => {
+                    resolve(response.data)
+                });
         });
     }
 
     getProducts(category) {
         return new Promise((resolve) => {
-            setTimeout(() => {
-                const API = new Service();
-                API.GET(`http://localhost:8080/products/${category}`)
-                    .then(response => {
-                        resolve(response.data);
-                    })
-            }, 300)
+            const API = new Service();
+            API.GET(`http://localhost:8080/products/${category}`)
+                .then(response => {
+                    resolve(response.data);
+                })
         })
     }
 
@@ -45,20 +41,18 @@ class UI {
 
     optionListClickHandler() {
         return new Promise(resolve => {
-            setTimeout(() => {
-                const optionsList = document.querySelectorAll(".option");
-                const selected = document.querySelector(".selected");
-                const optionsContainer = document.querySelector("#options-container");
+            const optionsList = document.querySelectorAll(".option");
+            const selected = document.querySelector(".selected");
+            const optionsContainer = document.querySelector("#options-container");
 
-                optionsList.forEach(option => {
-                    option.addEventListener("click", () => {
-                        selected.innerHTML = option.querySelector("label").innerHTML;
-                        optionsContainer.classList.remove("active");
-                        this.renderCategoryProduct(selected.innerHTML.trim().toLowerCase());
-                    })
-                });
-                resolve();
-            }, 300)
+            for (const option of optionsList) {
+                option.addEventListener("click", () => {
+                    selected.innerHTML = option.querySelector("label").innerHTML;
+                    optionsContainer.classList.remove("active");
+                    this.renderCategoryProduct(selected.innerHTML.trim().toLowerCase()).then();
+                })
+            }
+            resolve();
         })
     }
 
@@ -69,7 +63,7 @@ class UI {
 
         container.innerHTML = "";
 
-        response.forEach(elem => {
+        for (const key of response) {
             const colorContainer = template.content.querySelector(".color");
             const memoryContainer = template.content.querySelector(".size");
 
@@ -77,36 +71,33 @@ class UI {
             colorContainer.innerHTML = "<h3>Color:</h3>";
 
             template.content.querySelector(
-                "img").setAttribute("src", `img/iphone/${elem.imageUrl}`);
+                "img").setAttribute("src", `img/iphone/${key.imageUrl}`);
 
             template.content.querySelector(
                 "h2"
-            ).textContent = elem.title;
+            ).textContent = key.title;
 
-            elem.colors.forEach(color => {
-                if (color.available === true) {
+            for (const colorKey of key.colors) {
+                if (colorKey.available) {
                     const colorSpan = document.createElement("span");
-                    colorSpan.style.background = `${color.color}`;
+                    colorSpan.style.background = `${colorKey.color}`;
                     colorContainer.append(colorSpan);
                 }
-            });
+            }
 
-            elem.memoryCapacity.forEach(memory => {
-                if (memory.available === true) {
+            for (const memoryKey of key.colors) {
+                if (memoryKey.available) {
                     const memorySpan = document.createElement("span");
-                    memorySpan.textContent = `${memory.size}`;
-                    memorySpan.addEventListener("click", () => {
-                        console.log("miau");
-                    });
+                    memorySpan.textContent = `${memoryKey.size}`;
                     memoryContainer.append(memorySpan);
                 }
-            });
+            }
 
-            template.content.querySelector("a").innerHTML = `${elem.price}$ <i class="material-icons">add_shopping_cart</i>`;
-            template.content.querySelector("a").setAttribute("data-id", `${elem.id}`);
+            template.content.querySelector("a").innerHTML = `${key.price}$ <i class="material-icons">add_shopping_cart</i>`;
+            template.content.querySelector("a").setAttribute("data-id", `${key.id}`);
             const content = template.content.cloneNode(true);
             container.append(content);
-        });
+        }
     }
 }
 
@@ -116,9 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const ui = new UI();
 
     toggleMenu.toggleMenu();
-    ui.renderCategories().then(r => {
+    ui.renderCategories().then(() => {
         style.selectBoxHandler();
         ui.optionListClickHandler();
     });
-
 });
