@@ -1,4 +1,8 @@
 class Shop {
+
+}
+
+class UI {
     getCategories() {
         return new Promise((resolve) => {
             setTimeout(() => {
@@ -9,6 +13,18 @@ class Shop {
                     });
             }, 300)
         });
+    }
+
+    getProducts(category) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                const API = new Service();
+                API.GET(`http://localhost:8080/products/${category}`)
+                    .then(response => {
+                        resolve(response.data);
+                    })
+            }, 300)
+        })
     }
 
     renderCategories(categories) {
@@ -26,88 +42,86 @@ class Shop {
         });
     }
 
-     getProducts(category) {
-        return new Promise((resolve) => {
+    optionListClickHandler() {
+        return new Promise(resolve => {
             setTimeout(() => {
-                const API = new Service();
-                API.GET(`http://localhost:8080/products/${category}`)
-                    .then(response => {
-                        resolve(response.data);
+                const optionsList = document.querySelectorAll(".option");
+                const selected = document.querySelector(".selected");
+                const optionsContainer = document.querySelector("#options-container");
+
+                optionsList.forEach(option => {
+                    option.addEventListener("click", () => {
+                        selected.innerHTML = option.querySelector("label").innerHTML;
+                        optionsContainer.classList.remove("active");
+
+                        this.renderCategoryProduct(selected.innerHTML.trim().toLowerCase());
                     })
+                });
+                resolve();
             }, 300)
         })
     }
 
-    renderProducts() {
-        const optionsList = document.querySelectorAll(".option");
-        const selected = document.querySelector(".selected");
-        let currCategory;
-        const optionsContainer = document.querySelector("#options-container");
-        const container = document.getElementById("products");
+    renderCategoryProduct(category) {
         const template = document.getElementById("product-card");
-        const memoryContainer = template.content.querySelector(".size");
-        const colorContainer = template.content.querySelector(".color");
+        const container = document.getElementById("products");
 
-        optionsList.forEach(option => {
-            option.addEventListener("click", () => {
-                selected.innerHTML = option.querySelector("label").innerHTML;
-                currCategory = selected.innerHTML;
-                optionsContainer.classList.remove("active");
-                this.getProducts(currCategory.trim().toLowerCase())
-                    .then(response => {
-                        container.innerHTML = "";
+        this.getProducts(category)
+            .then(response => {
+                container.innerHTML = "";
 
-                        response.forEach(elem => {
-                            memoryContainer.innerHTML = "<h3>Color:</h3>";
-                            colorContainer.innerHTML = "<h3>Memory Size:</h3>";
+                response.forEach(elem =>  {
+                    const colorContainer = template.content.querySelector(".color");
+                    const memoryContainer = template.content.querySelector(".size");
 
-                            template.content.querySelector(
-                                "img").setAttribute("src", `img/iphone/${elem.imageUrl}`);
+                    memoryContainer.innerHTML = "<h3>Color:</h3>";
+                    colorContainer.innerHTML = "<h3>Memory Size:</h3>";
 
-                            template.content.querySelector(
-                                "h2"
-                            ).textContent = elem.title;
+                    template.content.querySelector(
+                        "img").setAttribute("src", `img/iphone/${elem.imageUrl}`);
 
-                            elem.colors.forEach(color => {
-                                if (color.available === true) {
-                                    const colorSpan = document.createElement("span");
-                                    colorSpan.style.background = `${color.color}`;
-                                    colorContainer.append(colorSpan);
-                                }
-                            });
+                    template.content.querySelector(
+                        "h2"
+                    ).textContent = elem.title;
 
-                            elem.memoryCapacity.forEach(memory => {
-                                if (memory.available === true) {
-                                    const memorySpan = document.createElement("span");
-                                    memorySpan.textContent = `${memory.size}`;
-                                    memoryContainer.append(memorySpan);
-                                }
-                            });
+                    elem.colors.forEach(color => {
+                        if (color.available === true) {
+                            const colorSpan = document.createElement("span");
+                            colorSpan.style.background = `${color.color}`;
+                            colorContainer.append(colorSpan);
+                        }
+                    });
 
-                            const content = template.content.cloneNode(true);
-                            container.append(content);
+                    elem.memoryCapacity.forEach(memory => {
+                        if (memory.available === true) {
+                            const memorySpan = document.createElement("span");
+                            memorySpan.textContent = `${memory.size}`;
+                            memoryContainer.append(memorySpan);
+                        }
+                    });
 
-
-                        });
-                    })
-            });
-        });
+                    template.content.querySelector("a").innerHTML = `${elem.price}$ <i class="material-icons">add_shopping_cart</i>`;
+                    template.content.querySelector("a").setAttribute("data-id", `${elem.id}`);
+                    const content = template.content.cloneNode(true);
+                    container.append(content);
+                });
+            })
     }
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const toggleMenu = new ToggleMenu();
     const style = new StyleManager();
-    const shop = new Shop();
+    const ui = new UI();
 
     toggleMenu.toggleMenu();
-    shop.getCategories()
+    ui.getCategories()
         .then(response => {
-            shop.renderCategories(response);
+            ui.renderCategories(response);
             style.selectBoxHandler();
-            shop.renderProducts();
+            ui.optionListClickHandler();
         });
 
 
-    console.log("rendering done");
 });
