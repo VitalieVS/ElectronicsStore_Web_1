@@ -335,6 +335,10 @@ header ul li a {
     text-align: center;
 }
 
+#products li:hover {
+    cursor: pointer;
+}
+
 @media (max-width: 991px) {
     header {
         padding: 20px;

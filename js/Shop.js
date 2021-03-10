@@ -27,9 +27,10 @@ class UI {
         })
     }
 
-    renderCategories(categories) {
+    async renderCategories() {
         const container = document.getElementById("options-container");
         const template = document.getElementById("div-option");
+        const categories = await this.getCategories();
 
         categories.forEach(elem => {
             template.content.querySelector(
@@ -53,7 +54,6 @@ class UI {
                     option.addEventListener("click", () => {
                         selected.innerHTML = option.querySelector("label").innerHTML;
                         optionsContainer.classList.remove("active");
-
                         this.renderCategoryProduct(selected.innerHTML.trim().toLowerCase());
                     })
                 });
@@ -62,52 +62,52 @@ class UI {
         })
     }
 
-    renderCategoryProduct(category) {
+    async renderCategoryProduct(category) {
         const template = document.getElementById("product-card");
         const container = document.getElementById("products");
+        const response = await this.getProducts(category);
 
-        this.getProducts(category)
-            .then(response => {
-                container.innerHTML = "";
+        container.innerHTML = "";
 
-                response.forEach(elem =>  {
-                    const colorContainer = template.content.querySelector(".color");
-                    const memoryContainer = template.content.querySelector(".size");
+        response.forEach(elem => {
+            const colorContainer = template.content.querySelector(".color");
+            const memoryContainer = template.content.querySelector(".size");
 
-                    memoryContainer.innerHTML = "<h3>Color:</h3>";
-                    colorContainer.innerHTML = "<h3>Memory Size:</h3>";
+            memoryContainer.innerHTML = "<h3>Memory Size:</h3>";
+            colorContainer.innerHTML = "<h3>Color:</h3>";
 
-                    template.content.querySelector(
-                        "img").setAttribute("src", `img/iphone/${elem.imageUrl}`);
+            template.content.querySelector(
+                "img").setAttribute("src", `img/iphone/${elem.imageUrl}`);
 
-                    template.content.querySelector(
-                        "h2"
-                    ).textContent = elem.title;
+            template.content.querySelector(
+                "h2"
+            ).textContent = elem.title;
 
-                    elem.colors.forEach(color => {
-                        if (color.available === true) {
-                            const colorSpan = document.createElement("span");
-                            colorSpan.style.background = `${color.color}`;
-                            colorContainer.append(colorSpan);
-                        }
+            elem.colors.forEach(color => {
+                if (color.available === true) {
+                    const colorSpan = document.createElement("span");
+                    colorSpan.style.background = `${color.color}`;
+                    colorContainer.append(colorSpan);
+                }
+            });
+
+            elem.memoryCapacity.forEach(memory => {
+                if (memory.available === true) {
+                    const memorySpan = document.createElement("span");
+                    memorySpan.textContent = `${memory.size}`;
+                    memorySpan.addEventListener("click", () => {
+                        console.log("miau");
                     });
+                    memoryContainer.append(memorySpan);
+                }
+            });
 
-                    elem.memoryCapacity.forEach(memory => {
-                        if (memory.available === true) {
-                            const memorySpan = document.createElement("span");
-                            memorySpan.textContent = `${memory.size}`;
-                            memoryContainer.append(memorySpan);
-                        }
-                    });
-
-                    template.content.querySelector("a").innerHTML = `${elem.price}$ <i class="material-icons">add_shopping_cart</i>`;
-                    template.content.querySelector("a").setAttribute("data-id", `${elem.id}`);
-                    const content = template.content.cloneNode(true);
-                    container.append(content);
-                });
-            })
+            template.content.querySelector("a").innerHTML = `${elem.price}$ <i class="material-icons">add_shopping_cart</i>`;
+            template.content.querySelector("a").setAttribute("data-id", `${elem.id}`);
+            const content = template.content.cloneNode(true);
+            container.append(content);
+        });
     }
-
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -116,12 +116,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const ui = new UI();
 
     toggleMenu.toggleMenu();
-    ui.getCategories()
-        .then(response => {
-            ui.renderCategories(response);
-            style.selectBoxHandler();
-            ui.optionListClickHandler();
-        });
-
+    ui.renderCategories().then(r => {
+        style.selectBoxHandler();
+        ui.optionListClickHandler();
+    });
 
 });
