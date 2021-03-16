@@ -85,9 +85,10 @@ class UI {
                 }
             }
 
-            for (const memoryKey of key.colors) {
+            for (const memoryKey of key.memoryCapacity) {
                 if (memoryKey.available) {
                     const memorySpan = document.createElement("span");
+                    console.log(memoryKey.size);
                     memorySpan.textContent = `${memoryKey.size}`;
                     memoryContainer.append(memorySpan);
                 }

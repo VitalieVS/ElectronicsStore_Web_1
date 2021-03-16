@@ -28,7 +28,6 @@ class StyleManager {
     selectBoxHandler() {
         const selected = document.querySelector(".selected");
         const optionsContainer = document.querySelector("#options-container");
-        console.log(optionsContainer);
 
         selected.addEventListener("click", () => {
             optionsContainer.classList.toggle("active");
