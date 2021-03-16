@@ -2,7 +2,45 @@ class Shop {
 
 }
 
+class Cart {
+    cart = [];
+
+    addToCart(id) {
+        if (this.isInCart(id)) {
+            for (const value of Object.values(this.cart)) {
+                if (value.id === id) {
+                    value.quantity += 1;
+                }
+            }
+        } else {
+            this.cart.push(
+                {
+                    id: id,
+                    quantity: 1
+                }
+            )
+        }
+    }
+
+    isInCart(id) {
+        for (const value of Object.values(this.cart)) {
+            if (value.id === id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    showCart() {
+        return this.cart;
+    }
+}
+
 class UI {
+    constructor(cart) {
+        this.cart = cart;
+    }
+
     getCategories() {
         return new Promise((resolve) => {
             const API = new Service();
@@ -67,6 +105,7 @@ class UI {
             if (response.hasOwnProperty(key)) {
                 const colorContainer = template.content.querySelector(".color");
                 const memoryContainer = template.content.querySelector(".size");
+                template.content.querySelector("li").setAttribute("data-id", response[key].id);
 
                 memoryContainer.innerHTML = "<h3>Memory Size:</h3>";
                 colorContainer.innerHTML = "<h3>Color:</h3>";
@@ -76,7 +115,7 @@ class UI {
 
                 template.content.querySelector(
                     "h2"
-                ).textContent = key.title;
+                ).textContent = response[key].title;
 
                 for (let keyColor in response[key].colors) {
                     if (response[key].colors.hasOwnProperty(keyColor)) {
@@ -104,13 +143,28 @@ class UI {
                 container.append(content);
             }
         }
+
+        this.getRenderedProducts().forEach(element => {
+            element.addEventListener("click", evt => {
+                this.liClickHandler(evt);
+            })
+        })
+    }
+
+    getRenderedProducts() {
+        return document.querySelectorAll("#products li");
+    }
+
+    liClickHandler(evt) {
+        this.cart.addToCart(evt.currentTarget.getAttribute("data-id"));
+        console.log(this.cart.showCart());
     }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const toggleMenu = new ToggleMenu();
     const style = new StyleManager();
-    const ui = new UI();
+    const ui = new UI(new Cart());
 
     toggleMenu.toggleMenu();
     ui.renderCategories().then(() => {
