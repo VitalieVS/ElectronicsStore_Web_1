@@ -63,41 +63,46 @@ class UI {
 
         container.innerHTML = "";
 
-        for (const key of response) {
-            const colorContainer = template.content.querySelector(".color");
-            const memoryContainer = template.content.querySelector(".size");
+        for (let key in response) {
+            if (response.hasOwnProperty(key)) {
+                const colorContainer = template.content.querySelector(".color");
+                const memoryContainer = template.content.querySelector(".size");
 
-            memoryContainer.innerHTML = "<h3>Memory Size:</h3>";
-            colorContainer.innerHTML = "<h3>Color:</h3>";
+                memoryContainer.innerHTML = "<h3>Memory Size:</h3>";
+                colorContainer.innerHTML = "<h3>Color:</h3>";
 
-            template.content.querySelector(
-                "img").setAttribute("src", `img/iphone/${key.imageUrl}`);
+                template.content.querySelector(
+                    "img").setAttribute("src", `img/iphone/${response[key].imageUrl}`);
 
-            template.content.querySelector(
-                "h2"
-            ).textContent = key.title;
+                template.content.querySelector(
+                    "h2"
+                ).textContent = key.title;
 
-            for (const colorKey of key.colors) {
-                if (colorKey.available) {
-                    const colorSpan = document.createElement("span");
-                    colorSpan.style.background = `${colorKey.color}`;
-                    colorContainer.append(colorSpan);
+                for (let keyColor in response[key].colors) {
+                    if (response[key].colors.hasOwnProperty(keyColor)) {
+                        if (response[key].colors[keyColor].available) {
+                            const colorSpan = document.createElement("span");
+                            colorSpan.style.background = `${response[key].colors[keyColor].color}`;
+                            colorContainer.append(colorSpan);
+                        }
+                    }
                 }
-            }
 
-            for (const memoryKey of key.memoryCapacity) {
-                if (memoryKey.available) {
-                    const memorySpan = document.createElement("span");
-                    console.log(memoryKey.size);
-                    memorySpan.textContent = `${memoryKey.size}`;
-                    memoryContainer.append(memorySpan);
+                for (let memoryKey in response[key].memoryCapacity) {
+                    if (response[key].memoryCapacity.hasOwnProperty(memoryKey)) {
+                        if (response[key].memoryCapacity[memoryKey].available) {
+                            const memorySpan = document.createElement("span");
+                            memorySpan.textContent = `${response[key].memoryCapacity[memoryKey].size}`;
+                            memoryContainer.append(memorySpan);
+                        }
+                    }
                 }
-            }
 
-            template.content.querySelector("a").innerHTML = `${key.price}$ <i class="material-icons">add_shopping_cart</i>`;
-            template.content.querySelector("a").setAttribute("data-id", `${key.id}`);
-            const content = template.content.cloneNode(true);
-            container.append(content);
+                template.content.querySelector("a").innerHTML = `${response[key].price}$ <i class="material-icons">add_shopping_cart</i>`;
+                template.content.querySelector("a").setAttribute("data-id", `${response[key].id}`);
+                const content = template.content.cloneNode(true);
+                container.append(content);
+            }
         }
     }
 }
