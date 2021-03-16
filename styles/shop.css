@@ -362,7 +362,7 @@ header ul li a {
         justify-self: center;
         align-items: center;
         flex-direction: column;
-        background: #131313;
+        background: white;
         z-index: 10;
     }
 

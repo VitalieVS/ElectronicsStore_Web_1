@@ -175,7 +175,7 @@ header ul li a {
         display: none;
     }
 
-    header ul .navigation.active {
+    header ul.navigation.active {
         position: fixed;
         top: 0;
         left: 0;
@@ -207,6 +207,7 @@ header ul li a {
     }
 
     .toggle.active {
+        position: fixed;
         right: 20px;
         background-size: 25px;
         background: url("../img/close.png") no-repeat center;
