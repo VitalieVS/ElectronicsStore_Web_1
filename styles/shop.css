@@ -335,6 +335,28 @@ header ul li a {
     text-align: center;
 }
 
+.notification {
+    background-color: green;
+    padding: .25em;
+    opacity: 0.7;
+    position: absolute;
+    top: 70px;
+    right: 0;
+}
+
+.notification:hover {
+    cursor: pointer;
+}
+
+.notification.disabled {
+
+}
+
+.notification .notification-content {
+   color: #fff;
+    opacity: 0.8;
+}
+
 #products li:hover {
     cursor: pointer;
 }
