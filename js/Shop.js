@@ -120,7 +120,6 @@ class UI {
                         }
                     }
                 }
-
                 for (let memoryKey in response[key].memoryCapacity) {
                     if (response[key].memoryCapacity.hasOwnProperty(memoryKey)) {
                         if (response[key].memoryCapacity[memoryKey].available) {
@@ -155,11 +154,10 @@ class UI {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const toggleMenu = new ToggleMenu();
     const style = new StyleManager();
     const ui = new UI(new Cart());
 
-    toggleMenu.toggleMenu();
+    style.toggleMenu();
     ui.renderCategories().then(() => {
         style.selectBoxHandler();
         ui.optionListClickHandler();
