@@ -3,32 +3,61 @@ class Shop {
 }
 
 class Cart {
-    cart = [];
+    _cart = [];
+    _products = [];
 
     addToCart(id) {
-        if (this.isInCart(id)) {
-            for (const value of Object.values(this.cart)) {
-                if (value.id === id) {
-                    value.quantity += 1;
-                }
+        if (this.isInCart(id))  {
+            if (this.checkQuantity(id)) {
+                this.modifyValue(id);
+            } else {
+                const li = document.querySelectorAll("#products li");
+                li.forEach(elem => {
+                    if (elem.getAttribute("data-id") === id) {
+                        console.log("aista");
+                        elem.classList.add("disabled");
+                    }
+                })
             }
         } else {
-            this.cart.push(
-                {
-                    id: id,
-                    quantity: 1
-                }
-            )
+            this.pushToArray(id);
         }
+        console.log(this._cart);
+
+    }
+
+    setProducts(products) {
+        this._products = products
     }
 
     isInCart(id) {
-        for (const value of Object.values(this.cart)) {
-            if (value.id === id) {
-                return true;
+        return this._cart.find(element => element.id === id);
+    }
+
+    pushToArray(id) {
+        this._cart.push(
+            {
+                id: id,
+                quantity: 1
             }
-        }
-        return false;
+        )
+    }
+
+    checkQuantity(id) {
+        return this._cart.find(
+            item => item.id === id).quantity < this.stockCount(id);
+    }
+
+    stockCount(id) {
+        return this._products.find(product => product.id === Number(id)).quantity;
+    }
+
+    modifyValue(id) {
+        this._cart.map(element => {
+            if (element.id === id ) {
+                element.quantity += 1;
+            }
+        });
     }
 }
 
@@ -42,7 +71,7 @@ class UI {
             API.GET("http://localhost:8080/categories")
                 .then(response => {
                     resolve(response.data)
-                });
+                }).catch();
         });
     }
 
@@ -92,14 +121,17 @@ class UI {
         const template = document.getElementById("product-card");
         const container = document.getElementById("products");
         const response = await this.getProducts(new Service(), category);
-
+        this.cart.setProducts(response);
         container.innerHTML = "";
+
 
         for (let key in response) {
             if (response.hasOwnProperty(key)) {
                 const colorContainer = template.content.querySelector(".color");
                 const memoryContainer = template.content.querySelector(".size");
                 template.content.querySelector("li").setAttribute("data-id", response[key].id);
+                template.content.querySelector("li").setAttribute(
+                    "data-quantity", response[key].quantity);
 
                 memoryContainer.innerHTML = "<h3>Memory Size:</h3>";
                 colorContainer.innerHTML = "<h3>Color:</h3>";

@@ -163,7 +163,7 @@ header ul li a {
     position: relative;
     width: 240px;
     height: 450px;
-    background: #232323;
+    background: black;
     border-radius: 20px;
     overflow: hidden;
 }
@@ -292,6 +292,18 @@ header ul li a {
     z-index: 100000;
 }
 
+.container.disabled .card {
+   background: grey;
+}
+
+.container.disabled:hover {
+    cursor: default;
+}
+
+.container:hover {
+    cursor: pointer;
+}
+
 .container .card .contentBx .color span {
     width: 20px;
     height: 20px;
@@ -357,9 +369,6 @@ header ul li a {
     opacity: 0.8;
 }
 
-#products li:hover {
-    cursor: pointer;
-}
 
 @media (max-width: 991px) {
     header {
