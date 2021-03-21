@@ -51,7 +51,7 @@ class StyleManager {
         }, 1000)
     }
 
-    static  getRenderedProducts() {
+    static getRenderedProducts() {
         return document.querySelectorAll("#products li");
     }
 

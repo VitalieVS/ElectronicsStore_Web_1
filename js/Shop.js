@@ -1,12 +1,9 @@
-
 class Cart {
-    constructor() {
-        this._cart = [];
-        this._products = [];
-    }
+    _cart = [];
+    _products = [];
 
     addToCart(id) {
-        if (this.isInCart(id))  {
+        if (this.isInCart(id)) {
             if (this.checkQuantity(id)) {
                 StyleManager.triggerNotification();
                 this.modifyValue(id);
