@@ -150,6 +150,14 @@ class UI {
 
     liClickHandler(evt) {
         this.cart.addToCart(evt.currentTarget.getAttribute("data-id"));
+        this.triggerNotification();
+    }
+
+    triggerNotification() {
+        document.querySelector(".notification").classList.remove("disabled");
+        setTimeout(() => {
+            document.querySelector(".notification").classList.add("disabled");
+        }, 1000)
     }
 }
 
