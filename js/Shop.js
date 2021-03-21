@@ -3,27 +3,32 @@ class Shop {
 }
 
 class Cart {
+    constructor(products) {
+        this._cart = [];
+        this._products = [];
+    }
+
     _cart = [];
     _products = [];
 
     addToCart(id) {
         if (this.isInCart(id))  {
             if (this.checkQuantity(id)) {
+                this._style.triggerNotification();
                 this.modifyValue(id);
             } else {
                 const li = document.querySelectorAll("#products li");
                 li.forEach(elem => {
                     if (elem.getAttribute("data-id") === id) {
-                        console.log("aista");
                         elem.classList.add("disabled");
                     }
                 })
             }
         } else {
+            this._style.triggerNotification();
             this.pushToArray(id);
         }
         console.log(this._cart);
-
     }
 
     setProducts(products) {
@@ -54,16 +59,15 @@ class Cart {
 
     modifyValue(id) {
         this._cart.map(element => {
-            if (element.id === id ) {
-                element.quantity += 1;
-            }
+            (element.id === id) ? element.quantity += 1 : 0;
         });
     }
 }
 
 class UI {
-    constructor(cart) {
+    constructor(cart, style) {
         this.cart = cart;
+        this.style = style;
     }
 
     getCategories(API) {
@@ -182,20 +186,12 @@ class UI {
 
     liClickHandler(evt) {
         this.cart.addToCart(evt.currentTarget.getAttribute("data-id"));
-        this.triggerNotification();
-    }
-
-    triggerNotification() {
-        document.querySelector(".notification").classList.remove("disabled");
-        setTimeout(() => {
-            document.querySelector(".notification").classList.add("disabled");
-        }, 1000)
     }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const style = new StyleManager();
-    const ui = new UI(new Cart());
+    const ui = new UI(new Cart(), new StyleManager());
 
     style.toggleMenu();
     ui.renderCategories().then(() => {

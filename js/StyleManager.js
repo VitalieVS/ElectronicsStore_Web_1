@@ -43,4 +43,11 @@ class StyleManager {
             navigation.classList.toggle("active");
         })
     };
+
+    static triggerNotification() {
+        document.querySelector(".notification").classList.remove("disabled");
+        setTimeout(() => {
+            document.querySelector(".notification").classList.add("disabled");
+        }, 1000)
+    }
 }

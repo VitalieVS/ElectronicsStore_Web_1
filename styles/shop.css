@@ -293,7 +293,7 @@ header ul li a {
 }
 
 .container.disabled .card {
-   background: grey;
+   border: 3px solid yellow;
 }
 
 .container.disabled:hover {
@@ -365,7 +365,7 @@ header ul li a {
 }
 
 .notification .notification-content {
-   color: #fff;
+    color: #fff;
     opacity: 0.8;
 }
 
