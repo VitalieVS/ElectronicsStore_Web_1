@@ -30,10 +30,6 @@ class Cart {
         }
         return false;
     }
-
-    showCart() {
-        return this.cart;
-    }
 }
 
 class UI {
@@ -41,9 +37,8 @@ class UI {
         this.cart = cart;
     }
 
-    getCategories() {
+    getCategories(API) {
         return new Promise((resolve) => {
-            const API = new Service();
             API.GET("http://localhost:8080/categories")
                 .then(response => {
                     resolve(response.data)
@@ -51,9 +46,8 @@ class UI {
         });
     }
 
-    getProducts(category) {
+    getProducts(API, category) {
         return new Promise((resolve) => {
-            const API = new Service();
             API.GET(`http://localhost:8080/products/${category}`)
                 .then(response => {
                     resolve(response.data);
@@ -64,7 +58,7 @@ class UI {
     async renderCategories() {
         const container = document.getElementById("options-container");
         const template = document.getElementById("div-option");
-        const categories = await this.getCategories();
+        const categories = await this.getCategories(new Service());
 
         categories.forEach(elem => {
             template.content.querySelector(
@@ -97,7 +91,7 @@ class UI {
     async renderCategoryProduct(category) {
         const template = document.getElementById("product-card");
         const container = document.getElementById("products");
-        const response = await this.getProducts(category);
+        const response = await this.getProducts(new Service(), category);
 
         container.innerHTML = "";
 
