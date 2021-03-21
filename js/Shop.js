@@ -157,7 +157,6 @@ class UI {
 
     liClickHandler(evt) {
         this.cart.addToCart(evt.currentTarget.getAttribute("data-id"));
-        console.log(this.cart.showCart());
     }
 }
 
