@@ -50,4 +50,73 @@ class StyleManager {
             document.querySelector(".notification").classList.add("disabled");
         }, 1000)
     }
+
+    static  getRenderedProducts() {
+        return document.querySelectorAll("#products li");
+    }
+
+    static renderCategories(categories) {
+        const container = document.getElementById("options-container");
+        const template = document.getElementById("div-option");
+
+        categories.forEach(elem => {
+            template.content.querySelector(
+                ".option input").setAttribute("id", `${elem.name.toLowerCase()}`);
+            template.content.querySelector(
+                ".option label").setAttribute("for", `${elem.name.toLowerCase()}`);
+            template.content.querySelector(".option label").textContent = elem.name;
+            const content = template.content.cloneNode(true);
+            container.append(content);
+        });
+    }
+
+    static renderProducts(response) {
+        const template = document.getElementById("product-card");
+        const container = document.getElementById("products");
+        container.innerHTML = "";
+
+        for (let key in response) {
+            if (response.hasOwnProperty(key)) {
+                const colorContainer = template.content.querySelector(".color");
+                const memoryContainer = template.content.querySelector(".size");
+                template.content.querySelector("li").setAttribute("data-id", response[key].id);
+                template.content.querySelector("li").setAttribute(
+                    "data-quantity", response[key].quantity);
+
+                memoryContainer.innerHTML = "<h3>Memory Size:</h3>";
+                colorContainer.innerHTML = "<h3>Color:</h3>";
+
+                template.content.querySelector(
+                    "img").setAttribute("src", `img/iphone/${response[key].imageUrl}`);
+
+                template.content.querySelector(
+                    "h2"
+                ).textContent = response[key].title;
+
+                for (let keyColor in response[key].colors) {
+                    if (response[key].colors.hasOwnProperty(keyColor)) {
+                        if (response[key].colors[keyColor].available) {
+                            const colorSpan = document.createElement("span");
+                            colorSpan.style.background = `${response[key].colors[keyColor].color}`;
+                            colorContainer.append(colorSpan);
+                        }
+                    }
+                }
+                for (let memoryKey in response[key].memoryCapacity) {
+                    if (response[key].memoryCapacity.hasOwnProperty(memoryKey)) {
+                        if (response[key].memoryCapacity[memoryKey].available) {
+                            const memorySpan = document.createElement("span");
+                            memorySpan.textContent = `${response[key].memoryCapacity[memoryKey].size}`;
+                            memoryContainer.append(memorySpan);
+                        }
+                    }
+                }
+
+                template.content.querySelector("a").innerHTML = `${response[key].price}$ <i class="material-icons">add_shopping_cart</i>`;
+                template.content.querySelector("a").setAttribute("data-id", `${response[key].id}`);
+                const content = template.content.cloneNode(true);
+                container.append(content);
+            }
+        }
+    }
 }

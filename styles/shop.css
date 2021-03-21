@@ -163,7 +163,7 @@ header ul li a {
     position: relative;
     width: 240px;
     height: 450px;
-    background: black;
+    background: #232323;
     border-radius: 20px;
     overflow: hidden;
 }

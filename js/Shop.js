@@ -1,20 +1,14 @@
-class Shop {
-
-}
 
 class Cart {
-    constructor(products) {
+    constructor() {
         this._cart = [];
         this._products = [];
     }
 
-    _cart = [];
-    _products = [];
-
     addToCart(id) {
         if (this.isInCart(id))  {
             if (this.checkQuantity(id)) {
-                this._style.triggerNotification();
+                StyleManager.triggerNotification();
                 this.modifyValue(id);
             } else {
                 const li = document.querySelectorAll("#products li");
@@ -25,7 +19,7 @@ class Cart {
                 })
             }
         } else {
-            this._style.triggerNotification();
+            StyleManager.triggerNotification();
             this.pushToArray(id);
         }
         console.log(this._cart);
@@ -64,7 +58,7 @@ class Cart {
     }
 }
 
-class UI {
+class Shop {
     constructor(cart, style) {
         this.cart = cart;
         this.style = style;
@@ -88,20 +82,9 @@ class UI {
         })
     }
 
-    async renderCategories() {
-        const container = document.getElementById("options-container");
-        const template = document.getElementById("div-option");
+    async showCategories() {
         const categories = await this.getCategories(new Service());
-
-        categories.forEach(elem => {
-            template.content.querySelector(
-                ".option input").setAttribute("id", `${elem.name.toLowerCase()}`);
-            template.content.querySelector(
-                ".option label").setAttribute("for", `${elem.name.toLowerCase()}`);
-            template.content.querySelector(".option label").textContent = elem.name;
-            const content = template.content.cloneNode(true);
-            container.append(content);
-        });
+        StyleManager.renderCategories(categories);
     }
 
     optionListClickHandler() {
@@ -114,74 +97,23 @@ class UI {
                 option.addEventListener("click", () => {
                     selected.innerHTML = option.querySelector("label").innerHTML;
                     optionsContainer.classList.remove("active");
-                    this.renderCategoryProduct(selected.innerHTML.trim().toLowerCase()).then();
+                    this.showProducts(selected.innerHTML.trim().toLowerCase()).then();
                 })
             }
             resolve();
         })
     }
 
-    async renderCategoryProduct(category) {
-        const template = document.getElementById("product-card");
-        const container = document.getElementById("products");
+    async showProducts(category) {
         const response = await this.getProducts(new Service(), category);
         this.cart.setProducts(response);
-        container.innerHTML = "";
+        StyleManager.renderProducts(response);
 
-
-        for (let key in response) {
-            if (response.hasOwnProperty(key)) {
-                const colorContainer = template.content.querySelector(".color");
-                const memoryContainer = template.content.querySelector(".size");
-                template.content.querySelector("li").setAttribute("data-id", response[key].id);
-                template.content.querySelector("li").setAttribute(
-                    "data-quantity", response[key].quantity);
-
-                memoryContainer.innerHTML = "<h3>Memory Size:</h3>";
-                colorContainer.innerHTML = "<h3>Color:</h3>";
-
-                template.content.querySelector(
-                    "img").setAttribute("src", `img/iphone/${response[key].imageUrl}`);
-
-                template.content.querySelector(
-                    "h2"
-                ).textContent = response[key].title;
-
-                for (let keyColor in response[key].colors) {
-                    if (response[key].colors.hasOwnProperty(keyColor)) {
-                        if (response[key].colors[keyColor].available) {
-                            const colorSpan = document.createElement("span");
-                            colorSpan.style.background = `${response[key].colors[keyColor].color}`;
-                            colorContainer.append(colorSpan);
-                        }
-                    }
-                }
-                for (let memoryKey in response[key].memoryCapacity) {
-                    if (response[key].memoryCapacity.hasOwnProperty(memoryKey)) {
-                        if (response[key].memoryCapacity[memoryKey].available) {
-                            const memorySpan = document.createElement("span");
-                            memorySpan.textContent = `${response[key].memoryCapacity[memoryKey].size}`;
-                            memoryContainer.append(memorySpan);
-                        }
-                    }
-                }
-
-                template.content.querySelector("a").innerHTML = `${response[key].price}$ <i class="material-icons">add_shopping_cart</i>`;
-                template.content.querySelector("a").setAttribute("data-id", `${response[key].id}`);
-                const content = template.content.cloneNode(true);
-                container.append(content);
-            }
-        }
-
-        this.getRenderedProducts().forEach(element => {
+        StyleManager.getRenderedProducts().forEach(element => {
             element.addEventListener("click", evt => {
                 this.liClickHandler(evt);
             })
         })
-    }
-
-    getRenderedProducts() {
-        return document.querySelectorAll("#products li");
     }
 
     liClickHandler(evt) {
@@ -191,11 +123,11 @@ class UI {
 
 document.addEventListener("DOMContentLoaded", () => {
     const style = new StyleManager();
-    const ui = new UI(new Cart(), new StyleManager());
+    const shop = new Shop(new Cart());
 
     style.toggleMenu();
-    ui.renderCategories().then(() => {
+    shop.showCategories().then(() => {
         style.selectBoxHandler();
-        ui.optionListClickHandler();
+        shop.optionListClickHandler();
     });
 });
