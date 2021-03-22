@@ -123,6 +123,19 @@ nav {
     background: #414b57;
 }
 
+header i:after {
+    content: attr(value);
+    font-size: 15px;
+    color: black;
+    background: darkgrey;
+    border-radius: 50%;
+    padding: 4px;
+    position: relative;
+    left: -6px;
+    top: 4px;
+    opacity: 0.9;
+}
+
 .select-box label {
     cursor: pointer;
 }
@@ -293,7 +306,7 @@ header ul li a {
 }
 
 .container.disabled .card {
-   border: 3px solid yellow;
+    border: 3px solid yellow;
 }
 
 .container.disabled:hover {
@@ -393,7 +406,7 @@ header ul li a {
         justify-self: center;
         align-items: center;
         flex-direction: column;
-        background: white;
+        background: #232323;
         z-index: 10;
     }
 

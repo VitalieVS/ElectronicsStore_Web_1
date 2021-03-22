@@ -70,6 +70,22 @@ class StyleManager {
         });
     }
 
+    static renderCartCount() {
+        const cartIcon = document.querySelector("header i");
+        let currentCount = parseInt(cartIcon.getAttribute("value")) + 1;
+        cartIcon.setAttribute("value", String(currentCount));
+    }
+
+    static disableCard(id) {
+        const li = document.querySelectorAll("#products li");
+        li.forEach(elem => {
+            if (elem.getAttribute("data-id") === id) {
+                elem.classList.add("disabled");
+            }
+        })
+    }
+
+
     static renderProducts(response) {
         const template = document.getElementById("product-card");
         const container = document.getElementById("products");
@@ -112,7 +128,7 @@ class StyleManager {
                     }
                 }
 
-                template.content.querySelector("a").innerHTML = `${response[key].price}$ <i class="material-icons">add_shopping_cart</i>`;
+                template.content.querySelector("a").innerHTML = `${response[key].price}$ <i class="fas fa-credit-card"></i>`;
                 template.content.querySelector("a").setAttribute("data-id", `${response[key].id}`);
                 const content = template.content.cloneNode(true);
                 container.append(content);
