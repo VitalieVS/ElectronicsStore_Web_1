@@ -7,20 +7,21 @@ class Cart {
             if (this.checkQuantity(id)) {
               StyleManager.triggerNotification();
               this.modifyValue(id);
-                StyleManager.renderCartCount();
+              StyleManager.renderCartCount();
             } else {
                StyleManager.disableCard(id);
             }
-
         } else {
            StyleManager.triggerNotification();
-            StyleManager.renderCartCount();
+           StyleManager.renderCartCount();
            this.pushToArray(id);
         }
+        this.setCartToLocalStorage();
+    }
 
-
-
-        console.log(this._cart);
+    setCartToLocalStorage() {
+        localStorage.clear();
+        localStorage.setItem("cart", JSON.stringify(this._cart));
     }
 
     setProducts(products) {
@@ -37,8 +38,7 @@ class Cart {
                 id: id,
                 quantity: 1
             }
-        );
-        console.log("am facut push");
+        )
     }
 
     checkQuantity(id) {
@@ -51,7 +51,6 @@ class Cart {
     }
 
     modifyValue(id) {
-        console.log("s-o apelat?");
         this._cart.map(element => {
             (element.id === id) ? element.quantity += 1 : 0;
         });
