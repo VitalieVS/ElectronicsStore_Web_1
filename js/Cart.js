@@ -1,0 +1,53 @@
+class Cart {
+
+    _products = [];
+
+    constructor(cart) {
+        this._cart = cart;
+    }
+
+    addToCart(id) {
+        (this.isInCart(id)) ? (this.checkQuantity(id) ? StyleManager.increaseCartCount() : 0) : StyleManager.increaseCartCount();
+        const canTriggerNotification = (this.isInCart(id) && this.checkQuantity(id)) || !this.isInCart(id);
+        this.isInCart(id) ? this.checkQuantity(id) ? this.modifyValue(id) : StyleManager.disableCard(id) : this.pushToArray(id);
+        canTriggerNotification ? StyleManager.triggerNotification() : 0;
+        this.setCartToLocalStorage();
+    }
+
+    setCartToLocalStorage() {
+        localStorage.clear();
+        localStorage.setItem("cart", JSON.stringify(this._cart));
+    }
+
+    setProducts(products) {
+        this._products = products
+    }
+
+    isInCart(id) {
+        return this._cart.find(element => element.id === id);
+    }
+
+    pushToArray(id) {
+        this._cart.push(
+            {
+                id: id,
+                quantity: 1
+            }
+        )
+    }
+
+    checkQuantity(id) {
+        return this._cart.find(
+            item => item.id === id).quantity < this.stockCount(id);
+    }
+
+    stockCount(id) {
+        return this._products.find(product => product.id === Number(id)).quantity;
+    }
+
+    modifyValue(id) {
+        this._cart.map(element => {
+            (element.id === id) ? element.quantity += 1 : 0;
+        });
+    }
+}

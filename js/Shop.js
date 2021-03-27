@@ -1,53 +1,3 @@
-class Cart {
-    _cart = [];
-    _products = [];
-
-    addToCart(id) {
-        (this.isInCart(id)) ? (this.checkQuantity(id) ? StyleManager.increaseCartCount() : 0) : StyleManager.increaseCartCount();
-        const canTriggerNotification = (this.isInCart(id) && this.checkQuantity(id)) || !this.isInCart(id);
-        this.isInCart(id) ? this.checkQuantity(id) ? this.modifyValue(id) : StyleManager.disableCard(id) : this.pushToArray(id);
-        canTriggerNotification ? StyleManager.triggerNotification() : 0;
-        this.setCartToLocalStorage();
-    }
-
-    setCartToLocalStorage() {
-        localStorage.clear();
-        localStorage.setItem("cart", JSON.stringify(this._cart));
-    }
-
-    setProducts(products) {
-        this._products = products
-    }
-
-    isInCart(id) {
-        return this._cart.find(element => element.id === id);
-    }
-
-    pushToArray(id) {
-        this._cart.push(
-            {
-                id: id,
-                quantity: 1
-            }
-        )
-    }
-
-    checkQuantity(id) {
-        return this._cart.find(
-            item => item.id === id).quantity < this.stockCount(id);
-    }
-
-    stockCount(id) {
-        return this._products.find(product => product.id === Number(id)).quantity;
-    }
-
-    modifyValue(id) {
-        this._cart.map(element => {
-            (element.id === id) ? element.quantity += 1 : 0;
-        });
-    }
-}
-
 class Shop {
     constructor(cart, style) {
         this.cart = cart;
@@ -113,7 +63,16 @@ class Shop {
 
 document.addEventListener("DOMContentLoaded", () => {
     const style = new StyleManager();
-    const shop = new Shop(new Cart());
+    const localStorageCart = localStorage.getItem("cart");
+    let shop;
+
+    if (localStorageCart.length > 0) {
+        shop = new Shop(new Cart(JSON.parse(localStorageCart)));
+    } else {
+        shop = new Shop(new Cart());
+    }
+
+    StyleManager.renderCartCount();
 
     style.toggleMenu();
     shop.showCategories().then(() => {
