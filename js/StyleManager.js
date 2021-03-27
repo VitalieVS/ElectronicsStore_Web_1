@@ -70,10 +70,15 @@ class StyleManager {
         });
     }
 
-    static renderCartCount() {
+    static increaseCartCount() {
         const cartIcon = document.querySelector("header i");
         let currentCount = parseInt(cartIcon.getAttribute("value")) + 1;
         cartIcon.setAttribute("value", String(currentCount));
+    }
+
+    static renderCartCount() {
+        const cartIcon = document.querySelector("header i");
+
     }
 
     static disableCard(id) {
@@ -84,7 +89,6 @@ class StyleManager {
             }
         })
     }
-
 
     static renderProducts(response) {
         const template = document.getElementById("product-card");

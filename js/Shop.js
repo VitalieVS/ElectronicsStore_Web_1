@@ -3,19 +3,10 @@ class Cart {
     _products = [];
 
     addToCart(id) {
-        if (this.isInCart(id)) {
-            if (this.checkQuantity(id)) {
-              StyleManager.triggerNotification();
-              this.modifyValue(id);
-              StyleManager.renderCartCount();
-            } else {
-               StyleManager.disableCard(id);
-            }
-        } else {
-           StyleManager.triggerNotification();
-           StyleManager.renderCartCount();
-           this.pushToArray(id);
-        }
+        (this.isInCart(id)) ? (this.checkQuantity(id) ? StyleManager.increaseCartCount() : 0) : StyleManager.increaseCartCount();
+        const canTriggerNotification = (this.isInCart(id) && this.checkQuantity(id)) || !this.isInCart(id);
+        this.isInCart(id) ? this.checkQuantity(id) ? this.modifyValue(id) : StyleManager.disableCard(id) : this.pushToArray(id);
+        canTriggerNotification ? StyleManager.triggerNotification() : 0;
         this.setCartToLocalStorage();
     }
 
