@@ -1,5 +1,4 @@
 class Cart {
-
     _products = [];
 
     constructor(cart) {
@@ -7,6 +6,7 @@ class Cart {
     }
 
     addToCart(id) {
+        (typeof this._cart === "undefined") ? this._cart = [] : 0;
         (this.isInCart(id)) ? (this.checkQuantity(id) ? StyleManager.increaseCartCount() : 0) : StyleManager.increaseCartCount();
         const canTriggerNotification = (this.isInCart(id) && this.checkQuantity(id)) || !this.isInCart(id);
         this.isInCart(id) ? this.checkQuantity(id) ? this.modifyValue(id) : StyleManager.disableCard(id) : this.pushToArray(id);
@@ -24,6 +24,10 @@ class Cart {
     }
 
     isInCart(id) {
+        if (typeof this._cart === "undefined") {
+            return false;
+        }
+
         return this._cart.find(element => element.id === id);
     }
 
