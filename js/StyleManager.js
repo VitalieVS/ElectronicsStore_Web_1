@@ -1,8 +1,11 @@
 class StyleManager {
-    mainImage = document.querySelector(".imgBox .iphone");
-    h2Text = document.querySelector(".content .textBox h2 span");
-    circle = document.querySelector(".circle");
-    learnMore = document.querySelector(".content .textBox a");
+    constructor() {
+        this.mainImage = document.querySelector(".imgBox .iphone");
+        this.h2Text = document.querySelector(".content .textBox h2 span");
+        this.circle = document.querySelector(".circle");
+        this.learnMore = document.querySelector(".content .textBox a");
+    }
+
 
     setStyle(imageSource, color) {
         this.mainImage.src = imageSource;

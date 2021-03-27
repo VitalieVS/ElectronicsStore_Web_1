@@ -1,8 +1,7 @@
 class Cart {
-    _products = [];
-
     constructor(cart) {
-        this._cart = (typeof  cart === "undefined") ? [] : cart;
+        this._cart = (typeof cart === "undefined") ? [] : cart;
+        this._products = [];
     }
 
     addToCart(id) {
