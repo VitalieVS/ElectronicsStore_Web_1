@@ -23,9 +23,7 @@ class Cart {
     }
 
     isInCart(id) {
-        if (typeof this._cart === "undefined") {
-            return false;
-        }
+        if (typeof this._cart === "undefined") return false;
 
         return this._cart.find(element => element.id === id);
     }
