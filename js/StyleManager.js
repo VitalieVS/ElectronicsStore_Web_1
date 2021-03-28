@@ -100,14 +100,12 @@ class StyleManager {
 
         for (let key in response) {
             if (response.hasOwnProperty(key)) {
-                const colorContainer = template.content.querySelector(".color");
                 const memoryContainer = template.content.querySelector(".size");
+                const colorContainer = template.content.querySelector(".color");
+
                 template.content.querySelector("li").setAttribute("data-id", response[key].id);
                 template.content.querySelector("li").setAttribute(
                     "data-quantity", response[key].quantity);
-
-                memoryContainer.innerHTML = "<h3>Memory Size:</h3>";
-                colorContainer.innerHTML = "<h3>Color:</h3>";
 
                 template.content.querySelector(
                     "img").setAttribute("src", `img/iphone/${response[key].imageUrl}`);
@@ -116,6 +114,7 @@ class StyleManager {
                     "h2"
                 ).textContent = response[key].title;
 
+                colorContainer.innerHTML = "<h3>Color:</h3>";
                 for (let keyColor in response[key].colors) {
                     if (response[key].colors.hasOwnProperty(keyColor)) {
                         if (response[key].colors[keyColor].available) {
@@ -125,6 +124,12 @@ class StyleManager {
                         }
                     }
                 }
+
+                memoryContainer.innerHTML = "<h3>Memory Size:</h3>";
+                if (response[key].memoryCapacity == null) {
+                    memoryContainer.innerHTML = "";
+                }
+
                 for (let memoryKey in response[key].memoryCapacity) {
                     if (response[key].memoryCapacity.hasOwnProperty(memoryKey)) {
                         if (response[key].memoryCapacity[memoryKey].available) {
@@ -139,6 +144,7 @@ class StyleManager {
                 template.content.querySelector("a").setAttribute("data-id", `${response[key].id}`);
                 const content = template.content.cloneNode(true);
                 container.append(content);
+
             }
         }
     }
