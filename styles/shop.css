@@ -42,7 +42,7 @@ header {
 }
 
 nav {
-    position: fixed;
+    position: absolute;
     top: 150px;
     left: 0;
     width: 100%;
@@ -50,6 +50,11 @@ nav {
     align-items: center;
     z-index: 0;
     color: #fff;
+}
+
+section {
+    display: block;
+    margin-top: 20%;
 }
 
 .select-box {
@@ -261,7 +266,9 @@ header ul li a {
 
 header i:after {
     content: attr(value);
-    font-size: 15px;
+    font-family: Poppins, serif;
+    font-weight: 400;
+    font-size: 12px;
     color: black;
     background: darkgrey;
     border-radius: 50%;
@@ -334,12 +341,11 @@ header i:after {
     padding: 10px 20px;
     background: #fff;
     border-radius: 4px;
-    margin-top: 10px;
     text-decoration: none;
     font-weight: 600;
     color: #111;
     opacity: 0;
-    transform: translateY(50px);
+    transform: translateY(-150px);
     transition: 0.5s;
 }
 
