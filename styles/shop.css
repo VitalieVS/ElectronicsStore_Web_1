@@ -361,3 +361,17 @@ header i:after {
         z-index: 50;
     }
 }
+
+@media (max-width: 670px) {
+    #products {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+
+}
+
+@media (max-width: 525px) {
+    section {
+        margin-top: 60%;
+    }
+}
