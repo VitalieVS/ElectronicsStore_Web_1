@@ -1,5 +1,5 @@
 section .cart__container {
-   margin: auto;
+    margin: auto;
     width: 80%;
     height: 500px;
 }
