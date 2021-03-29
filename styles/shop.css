@@ -207,21 +207,6 @@ section {
     transition-delay: 0.6s;
 }
 
-header i:after {
-    content: attr(value);
-    font-family: Poppins, serif;
-    font-weight: 400;
-    font-size: 12px;
-    color: black;
-    background: darkgrey;
-    border-radius: 50%;
-    padding: 4px;
-    position: relative;
-    left: -6px;
-    top: 4px;
-    opacity: 0.9;
-}
-
 .container .card .contentBx .size h3,
 .container .card .contentBx .color h3 {
     color: #fff;
