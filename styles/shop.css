@@ -440,7 +440,7 @@ header i:after {
     }
 }
 
-@media(max-width: 1115px) {
+@media (max-width: 1115px) {
     #products {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -450,7 +450,7 @@ header i:after {
     }
 }
 
-@media(max-width: 850px) {
+@media (max-width: 850px) {
     #products {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -460,7 +460,7 @@ header i:after {
     }
 }
 
-@media(max-width: 700px) {
+@media (max-width: 700px) {
     section {
         margin-top: 40%;
     }

@@ -81,7 +81,7 @@ class StyleManager {
 
     static renderCartCount() {
         const cartIcon = document.querySelector("header i");
-        cartIcon.setAttribute("value", String(LocalStorage.quantity));
+        cartIcon.setAttribute("value", String(LocalStorage.quantity || 0));
     }
 
     static disableCard(id) {

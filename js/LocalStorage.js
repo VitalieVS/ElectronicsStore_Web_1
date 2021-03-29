@@ -1,6 +1,6 @@
 class LocalStorage {
     static get cart() {
-        return JSON.parse(localStorage.getItem("cart"));
+        return JSON.parse(localStorage.getItem("cart")) || "empty";
     }
 
     static get quantity() {
