@@ -63,6 +63,7 @@ class Shop {
 
 document.addEventListener("DOMContentLoaded", () => {
     const style = new StyleManager();
+
     const localStorageCart = localStorage.getItem("cart") || 0;
     const shop = (localStorageCart.length > 0) ?
         new Shop(new Cart(JSON.parse(localStorageCart))) : new Shop(new Cart());

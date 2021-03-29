@@ -1,0 +1,30 @@
+section .cart__container {
+   margin: auto;
+    width: 80%;
+    height: 500px;
+}
+
+section .cart__container h3 {
+    font-size: 26px;
+    color: #fff;
+    font-weight: 900;
+}
+
+section .cart__container h2 {
+    color: #fff;
+    font-weight: 200;
+    font-size: 1.2em;
+}
+
+section .cart__container a {
+    text-decoration: none;
+    color: #000;
+    border-radius: 12px;
+    margin-top: 20px;
+    background-color: yellow;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
