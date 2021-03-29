@@ -48,7 +48,7 @@ nav {
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    z-index: 0;
+    z-index: 10;
     color: #fff;
 }
 
@@ -170,6 +170,7 @@ header ul li a {
     background: #232323;
     border-radius: 20px;
     overflow: hidden;
+    z-index: 1;
 }
 
 .container .card:before {
@@ -302,12 +303,12 @@ header i:after {
     transition: 0.5s;
     border-radius: 4px;
     cursor: pointer;
-    z-index: 10000;
+    z-index: 1;
 }
 
 .container .card .contentBx .size span:hover {
     background: #9bdc28;
-    z-index: 100000;
+    z-index: 1;
 }
 
 .container.disabled .card {
@@ -328,12 +329,12 @@ header i:after {
     border-radius: 50%;
     margin: 0 5px;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 1;
 }
 
 .container .card .contentBx .color span:hover {
     border-radius: 20%;
-    z-index: 100000;
+    z-index: 1;
 }
 
 .container .card .contentBx a {
@@ -368,7 +369,7 @@ header i:after {
     background-color: green;
     padding: .25em;
     opacity: 0.7;
-    position: absolute;
+    position: fixed;
     top: 70px;
     right: 0;
 }
@@ -385,7 +386,6 @@ header i:after {
     color: #fff;
     opacity: 0.8;
 }
-
 
 @media (max-width: 991px) {
     header {
@@ -411,7 +411,7 @@ header i:after {
         align-items: center;
         flex-direction: column;
         background: #232323;
-        z-index: 10;
+        z-index: 1;
     }
 
     header ul li a {
@@ -436,6 +436,39 @@ header i:after {
         cursor: pointer;
         background-size: 30px;
         background: url("../img/menu.png") no-repeat center;
-        z-index: 11;
+        z-index: 10;
+    }
+}
+
+@media(max-width: 1115px) {
+    #products {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    section {
+        margin-top: 25%;
+    }
+}
+
+@media(max-width: 850px) {
+    #products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    section {
+        margin-top: 30%;
+    }
+}
+
+@media(max-width: 700px) {
+    section {
+        margin-top: 40%;
+    }
+}
+
+@media (max-width: 1470px) {
+    .select-box #options-container.active {
+        position: static;
+        z-index: 50;
     }
 }
