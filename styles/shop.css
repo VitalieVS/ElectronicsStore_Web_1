@@ -66,6 +66,8 @@ section {
     max-height: 240px;
     opacity: 1;
     overflow-y: scroll;
+    position: static;
+    z-index: 50;
 }
 
 .select-box #options-container.active + .selected::after {
@@ -340,18 +342,10 @@ section {
     }
 }
 
-@media (max-width: 1470px) {
-    .select-box #options-container.active {
-        position: static;
-        z-index: 50;
-    }
-}
-
 @media (max-width: 670px) {
     #products {
         grid-template-columns: repeat(1, 1fr);
     }
-
 
 }
 
