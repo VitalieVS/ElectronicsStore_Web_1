@@ -129,6 +129,26 @@ li {
     text-align: center;
 }
 
+.colors__container {
+    display: flex;
+    flex-direction: row;
+}
+
+.colors__container li {
+    padding: 30px;
+}
+
+.colors__container li:hover {
+    cursor: pointer;
+}
+
+.circle {
+    height: 35px;
+    width: 35px;
+    background-color: red;
+    border-radius: 50%;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -181,4 +201,6 @@ input[type=number] {
 .form__field:required, .form__field:invalid {
     box-shadow: none;
 }
+
+
 
