@@ -291,7 +291,8 @@ section {
     grid-column-gap: 30px;
     grid-row-gap: 50px;
     list-style: none;
-    text-align: center;
+    justify-items: center;
+    align-items: center;
 }
 
 .notification {
