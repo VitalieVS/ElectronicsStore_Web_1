@@ -16,7 +16,7 @@
         <li><a href="shop.html">Products</a></li>
         <li><a href="#">News</a></li>
         <li><a href="#">Contact</a></li>
-        <li><a href="cart.html"><i class="fas fa-shopping-cart fa-lg" value=0></i></a></li>
+        <li><a href="cart.html"><em class="fas fa-shopping-cart fa-lg" value=0></em></a></li>
     </ul>
 </header>
 
@@ -34,34 +34,36 @@
         <p>Free delivery and free returns.</p>
 
         <ul id="cart__products">
-            <li>
-                <div class="cart__item">
-                    <div class="div1">
-                        <img src="img/iphone/iph12_purple_mini.png" align="">
+            <template id="item__template">
+                <li>
+                    <div class="cart__item">
+                        <div class="item__image">
+                            <img src="img/iphone/iph12_purple_mini.png" alt="">
+                        </div>
+                        <div class="item__title">
+                            <h2>
+                                Iphone 12 Pro Max
+                            </h2>
+                            <a href="#">Configure</a>
+                        </div>
+                        <div class="item__quantity">
+                            <h2>
+                                <a>+</a> <span id="item__count">1</span> <a>-</a>
+                            </h2>
+                        </div>
+                        <div class="item__price">
+                            <h2>
+                                $750.00
+                            </h2>
+                        </div>
+                        <div class="item__configure">
+                            <a href="#"><i class="far fa-times-circle"></i></a>
+                        </div>
                     </div>
-                    <div class="div2">
-                        <h2>
-                            Iphone 12 Pro Max
-                        </h2>
-                        <a href="#">Configure</a>
-                    </div>
-                    <div class="div3">
-                        <h2>
-                            <a>+</a> <span id="item__count">1</span> <a>-</a>
-                        </h2>
-                    </div>
-                    <div class="div4">
-                        <h2>
-                            $750.00
-                        </h2>
+                    <hr>
+                </li>
+            </template>
 
-                    </div>
-                    <div class="div5">
-                        <a href="#"><i class="far fa-times-circle"></i></a>
-                    </div>
-                </div>
-                <hr>
-            </li>
 
         </ul>
     </div>

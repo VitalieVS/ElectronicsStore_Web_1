@@ -45,7 +45,7 @@ class StyleManager {
             toggle.classList.toggle("active");
             navigation.classList.toggle("active");
         })
-    };
+    }
 
     static triggerNotification() {
         document.querySelector(".notification").classList.remove("disabled");
@@ -91,6 +91,10 @@ class StyleManager {
                 elem.classList.add("disabled");
             }
         })
+    }
+
+    static renderCart(products) {
+        console.log(products);
     }
 
     static renderProducts(response) {

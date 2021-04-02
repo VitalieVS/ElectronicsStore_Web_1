@@ -76,7 +76,7 @@ header ul li a {
     text-decoration: none;
 }
 
-header i:after {
+header em:after {
     content: attr(value);
     font-size: 15px;
     color: black;

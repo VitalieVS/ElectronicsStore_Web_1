@@ -5,10 +5,15 @@ class Cart {
     }
 
     addToCart(id) {
-        (this.isInCart(id)) ? (this.checkQuantity(id) ? StyleManager.increaseCartCount() : 0) : StyleManager.increaseCartCount();
+        if (this.isInCart(id)) {
+            if (this.checkQuantity(id)) StyleManager.increaseCartCount();
+        } else {
+            StyleManager.increaseCartCount();
+        }
         const canTriggerNotification = (this.isInCart(id) && this.checkQuantity(id)) || !this.isInCart(id);
         this.isInCart(id) ? this.checkQuantity(id) ? this.modifyValue(id) : StyleManager.disableCard(id) : this.pushToArray(id);
-        canTriggerNotification ? StyleManager.triggerNotification() : 0;
+        if (canTriggerNotification) StyleManager.triggerNotification();
+
         this.setCartToLocalStorage();
     }
 
@@ -47,7 +52,9 @@ class Cart {
 
     modifyValue(id) {
         this._cart.map(element => {
-            (element.id === id) ? element.quantity += 1 : 0;
-        });
+            if (element.id === id) {
+                element.quantity += 1;
+            }
+    });
     }
 }
