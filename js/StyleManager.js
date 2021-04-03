@@ -74,7 +74,7 @@ class StyleManager {
     }
 
     static increaseCartCount() {
-        const cartIcon = document.querySelector("header i");
+        const cartIcon = document.querySelector("header em");
         let currentCount = parseInt(cartIcon.getAttribute("value")) + 1;
         cartIcon.setAttribute("value", String(currentCount));
     }
