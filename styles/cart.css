@@ -4,7 +4,7 @@ section .cart__container {
     height: 500px;
 }
 
-section .cart__container .cart__empty {
+section .cart__container .cart__empty.disabled {
     display: none;
 }
 
@@ -18,6 +18,10 @@ p {
     color: #fff;
     font-weight: 200;
     font-size: 1.2em;
+}
+
+a:hover {
+    cursor: pointer;
 }
 
 h2 {

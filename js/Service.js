@@ -24,4 +24,14 @@ class Service {
                 }).catch();
         });
     }
+
+    getProduct(id) {
+         return new Promise((resolve) => {
+             this.GET(`http://localhost:8080/product/${id}`)
+                 .then(response => {
+                     resolve(response.data)
+                 }).catch();
+         });
+    }
+
 }

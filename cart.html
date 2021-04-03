@@ -22,7 +22,7 @@
 
 <section>
     <div class="cart__container">
-        <div class="cart__empty">
+        <div class="cart__empty disabled">
             <div class="cart__title">
                 <h3>Your bag is empty.</h3>
                 <p>Continue shopping by adding some items in your bag.</p>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="item__quantity">
                             <h2>
-                                <a>+</a> <span id="item__count">1</span> <a>-</a>
+                                <a id="increment__btn">+</a> <span id="item__count">1</span> <a id="decrement__btn">-</a>
                             </h2>
                         </div>
                         <div class="item__price">
@@ -63,16 +63,15 @@
                     <hr>
                 </li>
             </template>
-
-
         </ul>
     </div>
-
 </section>
-
 
 <script src="js/LocalStorage.js"></script>
 <script src="js/StyleManager.js"></script>
+<script src="js/Service.js"></script>
+<script src="js/CheckOut.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="js/CartImplementation.js"></script>
 </body>
 </html>

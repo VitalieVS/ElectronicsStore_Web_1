@@ -6,7 +6,6 @@ class StyleManager {
         this.learnMore = document.querySelector(".content .textBox a");
     }
 
-
     setStyle(imageSource, color) {
         this.mainImage.src = imageSource;
         this.h2Text.style.color = color;
@@ -93,8 +92,24 @@ class StyleManager {
         })
     }
 
-    static renderCart(products) {
-        console.log(products);
+    static renderCart(response) {
+        const template = document.getElementById("item__template");
+        const container = document.getElementById("cart__products");
+
+        const cart = LocalStorage.cart;
+
+        for (const key in response) {
+            if (response.hasOwnProperty(key)) {
+                template.content.querySelector("li").setAttribute("data-id", response[key].id);
+                template.content.querySelector(
+                    "img").setAttribute("src", `img/${response[key].category}/${response[key].imageUrl}`);
+                template.content.querySelector(".item__title h2").textContent = response[key].title;
+                template.content.querySelector(".item__quantity #item__count").textContent = cart[key].quantity;
+                template.content.querySelector(".item__price h2").textContent = response[key].price;
+                const content = template.content.cloneNode(true);
+                container.append(content);
+            }
+        }
     }
 
     static renderProducts(response) {
