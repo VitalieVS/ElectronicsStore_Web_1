@@ -80,7 +80,7 @@ class StyleManager {
     }
 
     static renderCartCount() {
-        const cartIcon = document.querySelector("header i");
+        const cartIcon = document.querySelector("header em");
         cartIcon.setAttribute("value", String(LocalStorage.quantity || 0));
     }
 
