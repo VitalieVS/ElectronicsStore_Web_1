@@ -1,29 +1,11 @@
 class Shop {
-    constructor(cart, style) {
-        this.cart = cart;
-        this.style = style;
-    }
-
-    getCategories(API) {
-        return new Promise((resolve) => {
-            API.GET("http://localhost:8080/categories")
-                .then(response => {
-                    resolve(response.data)
-                }).catch();
-        });
-    }
-
-    getProducts(API, category) {
-        return new Promise((resolve) => {
-            API.GET(`http://localhost:8080/products/${category}`)
-                .then(response => {
-                    resolve(response.data);
-                })
-        })
+    constructor(cart, service) {
+        this._cart = cart;
+        this._service = service;
     }
 
     async showCategories() {
-        const categories = await this.getCategories(new Service());
+        const categories = await this._service.getCategories();
         StyleManager.renderCategories(categories);
     }
 
@@ -45,8 +27,9 @@ class Shop {
     }
 
     async showProducts(category) {
-        const response = await this.getProducts(new Service(), category);
-        this.cart.setProducts(response);
+        const response = await this._service.getProducts(category);
+
+        this._cart.setProducts(response);
         StyleManager.renderProducts(response);
 
         StyleManager.getRenderedProducts().forEach(element => {
@@ -57,16 +40,17 @@ class Shop {
     }
 
     liClickHandler(evt) {
-        this.cart.addToCart(evt.currentTarget.getAttribute("data-id"));
+        this._cart.addToCart(evt.currentTarget.getAttribute("data-id"));
     }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const style = new StyleManager();
+    const service = new Service();
 
     const localStorageCart = localStorage.getItem("cart") || 0;
     const shop = (localStorageCart.length > 0) ?
-        new Shop(new Cart(JSON.parse(localStorageCart))) : new Shop(new Cart());
+        new Shop(new Cart(JSON.parse(localStorageCart)), service) : new Shop(new Cart(), service);
 
     StyleManager.renderCartCount();
 

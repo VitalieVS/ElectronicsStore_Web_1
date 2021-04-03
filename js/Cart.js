@@ -55,6 +55,6 @@ class Cart {
             if (element.id === id) {
                 element.quantity += 1;
             }
-    });
+        });
     }
 }

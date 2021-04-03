@@ -6,4 +6,22 @@ class Service {
              return e;
          }
     }
+
+    getProducts(category) {
+        return new Promise((resolve) => {
+            this.GET(`http://localhost:8080/products/${category}`)
+                .then(response => {
+                    resolve(response.data);
+                })
+        })
+    }
+
+    getCategories() {
+        return new Promise((resolve) => {
+            this.GET("http://localhost:8080/categories")
+                .then(response => {
+                    resolve(response.data)
+                }).catch();
+        });
+    }
 }
