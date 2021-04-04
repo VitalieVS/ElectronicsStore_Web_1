@@ -95,20 +95,23 @@ class StyleManager {
     static renderCart(response) {
         const template = document.getElementById("item__template");
         const container = document.getElementById("cart__products");
-
         const cart = LocalStorage.cart;
 
         for (const key in response) {
             if (response.hasOwnProperty(key)) {
-                const imageUrl = `img/${response[key].category}`;
 
-                console.log()
+                const imageURL = response[key].imageUrl.split("_");
+                console.log(cart[key].color);
+                const url = `${imageURL[0]}_${imageURL[1]}_${cart[key].color}.png`;
+                console.log(url);
+
+
                 template.content.querySelector("li").setAttribute("data-id", response[key].id);
                 template.content.querySelector(
-                    "img").setAttribute("src", `img/${response[key].category}/${response[key].imageUrl}`);
+                    "img").setAttribute("src", `img/${response[key].category}/${url}`);
                 template.content.querySelector(".item__title h2").textContent = response[key].title;
                 template.content.querySelector(".item__quantity .item__count").textContent = cart[key].quantity;
-                template.content.querySelector(".item__price h2").textContent = response[key].price;
+                template.content.querySelector(".item__price h2").textContent = `$${response[key].price}`;
                 const content = template.content.cloneNode(true);
                 container.append(content);
             }
