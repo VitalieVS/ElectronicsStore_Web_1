@@ -19,7 +19,7 @@ class StyleManager {
             elem.addEventListener("click", () => {
                 const index = elem.src.indexOf("img/");
                 let imageSource = elem.src.substring(index);
-                let color = imageSource.split("_")[1];
+                let color = imageSource.split("_")[2].split(".")[0];
                 imageSource = imageSource.replace("_mini", "");
                 if (color === "gold") color = "#fedfc6";
                 this.setStyle(imageSource, color);
@@ -100,6 +100,9 @@ class StyleManager {
 
         for (const key in response) {
             if (response.hasOwnProperty(key)) {
+                const imageUrl = `img/${response[key].category}`;
+
+                console.log()
                 template.content.querySelector("li").setAttribute("data-id", response[key].id);
                 template.content.querySelector(
                     "img").setAttribute("src", `img/${response[key].category}/${response[key].imageUrl}`);

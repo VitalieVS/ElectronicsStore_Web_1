@@ -7,49 +7,18 @@ class Cart {
         this._products = [];
     }
 
-    // addToCart(id) {
-    //     if (this.isInCart(id)) {
-    //         if (this.checkQuantity(id)) StyleManager.increaseCartCount();
-    //     } else {
-    //         StyleManager.increaseCartCount();
-    //     }
-    //     const canTriggerNotification = (this.isInCart(id) && this.checkQuantity(id)) || !this.isInCart(id);
-    //     this.isInCart(id) ? this.checkQuantity(id) ? this.modifyValue(id) : StyleManager.disableCard(id) : this.pushToArray(id);
-    //     if (canTriggerNotification) StyleManager.triggerNotification();
-    //
-    //     this.setCartToLocalStorage();
-    // }
-
     addToCart(id) {
 
-        console.log(id);
-        console.log(this.color);
-        console.log(this.size);
+        if (this.isInCart(id)) {
+            if (this.checkQuantity(id)) StyleManager.increaseCartCount();
+        } else {
+            StyleManager.increaseCartCount();
+        }
+        const canTriggerNotification = (this.isInCart(id) && this.checkQuantity(id)) || !this.isInCart(id);
+        this.isInCart(id) ? this.checkQuantity(id) ? this.modifyValue(id) : StyleManager.disableCard(id) : this.pushToArray(id);
+        if (canTriggerNotification) StyleManager.triggerNotification();
 
-
-      //  console.log(this._cart);
-
-
-        // if (this.isInCart(id)) {
-        //     if (this.checkQuantity(id)) {
-        //         this.modifyValue(id);
-        //         StyleManager.increaseCartCount();
-        //     } else {
-        //         StyleManager.disableCard(id);
-        //     }
-        // } else {
-        //     //this.pushToArray(id, memory, size);
-        //     StyleManager.increaseCartCount();
-        // }
-        //
-        // const canTriggerNotification = (this.isInCart(id) && this.checkQuantity(id)) || !this.isInCart(id);
-        // if (canTriggerNotification) StyleManager.triggerNotification();
-
-        //this.setCartToLocalStorage();
-    }
-
-    changeColor(id, color) {
-        this._cart.find(element => element.id === id).color = color;
+        this.setCartToLocalStorage();
     }
 
     set color(color) {
@@ -68,12 +37,6 @@ class Cart {
         return this.size;
     }
 
-
-
-    changeSize(id, size) {
-        this._cart.find(element => element.id === id).size = size;
-    }
-
     setCartToLocalStorage() {
         localStorage.clear();
         localStorage.setItem("cart", JSON.stringify(this._cart));
@@ -86,23 +49,20 @@ class Cart {
     isInCart(id) {
         if (typeof this._cart === "undefined") return false;
 
-        return this._cart.find(element => element.id === id);
+
+        return this._cart.find(element =>
+            element.id === id &&
+            element.color === this.color &&
+            element.size === this.size);
     }
 
-    pushToArray(id, memory, size) {
+    pushToArray(id) {
         this._cart.push({
             id: id,
-            memory: memory,
-            size: size
+            color: this.color,
+            size: this.size,
+            quantity: 1
         });
-
-
-        this._cart.push(
-            {
-                id: id,
-                quantity: 1
-            }
-        )
     }
 
     checkQuantity(id) {

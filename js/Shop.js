@@ -40,7 +40,6 @@ class Shop {
     }
 
     liClickHandler(evt) {
-
         if (evt.target.parentElement.classList[0] === "color") {
             StyleManager.resetColors(evt.target.parentElement);
             this._cart.color = evt.target.style.background;
@@ -53,20 +52,11 @@ class Shop {
             evt.target.style.background = "#9bdc28";
         }
 
-
         if (evt.target.tagName === "A" || evt.target.tagName === "I") {
-            console.log("ea tikal");
             this._cart.addToCart(evt.currentTarget.getAttribute("data-id"));
         }
 
-       // this._cart.addToCart(currentId, evt.target.innerHTML,null);
-
-
-        //console.log(this.cartItem);
-        // this._cart.addToCart(evt.currentTarget.getAttribute("data-id"));
     }
-
-
 }
 
 document.addEventListener("DOMContentLoaded", () => {
