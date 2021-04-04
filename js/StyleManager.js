@@ -104,7 +104,7 @@ class StyleManager {
                 template.content.querySelector(
                     "img").setAttribute("src", `img/${response[key].category}/${response[key].imageUrl}`);
                 template.content.querySelector(".item__title h2").textContent = response[key].title;
-                template.content.querySelector(".item__quantity #item__count").textContent = cart[key].quantity;
+                template.content.querySelector(".item__quantity .item__count").textContent = cart[key].quantity;
                 template.content.querySelector(".item__price h2").textContent = response[key].price;
                 const content = template.content.cloneNode(true);
                 container.append(content);
@@ -127,7 +127,7 @@ class StyleManager {
                     "data-quantity", response[key].quantity);
 
                 template.content.querySelector(
-                    "img").setAttribute("src", `img/iphone/${response[key].imageUrl}`);
+                    "img").setAttribute("src", `img/${response[key].category}/${response[key].imageUrl}`);
 
                 template.content.querySelector(
                     "h2"

@@ -4,7 +4,7 @@ section .cart__container {
     height: 500px;
 }
 
-section .cart__container .cart__empty.disabled {
+.disabled {
     display: none;
 }
 
