@@ -112,6 +112,18 @@ class StyleManager {
         }
     }
 
+    static resetColors(parent) {
+        parent.querySelectorAll("span").forEach(span => {
+            span.style.borderRadius = "50%";
+        })
+    }
+
+    static resetSize(parent) {
+        parent.querySelectorAll("span").forEach(span => {
+            span.style.background = "#fff";
+        })
+    }
+
     static renderProducts(response) {
         const template = document.getElementById("product-card");
         const container = document.getElementById("products");
@@ -158,12 +170,10 @@ class StyleManager {
                         }
                     }
                 }
-
                 template.content.querySelector("a").innerHTML = `${response[key].price}$ <i class="fas fa-credit-card"></i>`;
                 template.content.querySelector("a").setAttribute("data-id", `${response[key].id}`);
                 const content = template.content.cloneNode(true);
                 container.append(content);
-
             }
         }
     }

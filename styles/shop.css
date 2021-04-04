@@ -267,6 +267,7 @@ section {
 }
 
 .container .card .contentBx a {
+    position: absolute;
     display: inline-block;
     padding: 10px 20px;
     background: #fff;
@@ -277,13 +278,19 @@ section {
     opacity: 0;
     transform: translateY(-150px);
     transition: 0.5s;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
 
 .container .card:hover .contentBx a {
-    opacity: 1;
-    transform: translateY(0px);
-    transition-delay: 0.75s;
-}
+     opacity: 1;
+     transform: translateY(0px);
+     transition-delay: 0.75s;
+    z-index: 100;
+ }
 
 #products {
     display: grid;

@@ -40,8 +40,33 @@ class Shop {
     }
 
     liClickHandler(evt) {
-        this._cart.addToCart(evt.currentTarget.getAttribute("data-id"));
+
+        if (evt.target.parentElement.classList[0] === "color") {
+            StyleManager.resetColors(evt.target.parentElement);
+            this._cart.color = evt.target.style.background;
+            evt.target.style.borderRadius = "20%";
+        }
+
+        if (evt.target.parentElement.classList[0] === "size") {
+            StyleManager.resetSize(evt.target.parentElement);
+            this._cart.size = evt.target.innerHTML;
+            evt.target.style.background = "#9bdc28";
+        }
+
+
+        if (evt.target.tagName === "A" || evt.target.tagName === "I") {
+            console.log("ea tikal");
+            this._cart.addToCart(evt.currentTarget.getAttribute("data-id"));
+        }
+
+       // this._cart.addToCart(currentId, evt.target.innerHTML,null);
+
+
+        //console.log(this.cartItem);
+        // this._cart.addToCart(evt.currentTarget.getAttribute("data-id"));
     }
+
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {
