@@ -100,14 +100,25 @@ class StyleManager {
         for (const key in response) {
             if (response.hasOwnProperty(key)) {
                 const imageURL = response[key].imageUrl.split("_");
-                const url = `${imageURL[0]}_${imageURL[1]}_${cart[key].color}.png`;
+                let url = `${imageURL[0]}_${imageURL[1]}${!cart[key].color ? "" : "_" + cart[key].color}`;
+
+                if (!url.includes(".png")) {
+                    url += ".png";
+                }
+
+                if (!cart[key].color) {
+                    url = response[key].imageUrl;
+                }
 
                 template.content.querySelector("li").setAttribute("data-id", response[key].id);
                 template.content.querySelector(
                     "img").setAttribute("src", `img/${response[key].category}/${url}`);
-                template.content.querySelector(".item__title h2").textContent = `${response[key].title} ${cart[key].color}`;
-                template.content.querySelector(".item__quantity .item__count").textContent = cart[key].quantity;
-                template.content.querySelector(".item__price h2").textContent = `$${cart[key].price || response[key].price}`;
+                template.content.querySelector(".item__title h2").textContent =
+                    `${response[key].title} ${ (cart[key].color) ? cart[key].color: ""}`;
+                template.content.querySelector(".item__quantity .item__count").textContent =
+                    cart[key].quantity;
+                template.content.querySelector(".item__price h2").textContent =
+                    `$${cart[key].price || response[key].price}`;
                 const content = template.content.cloneNode(true);
                 container.append(content);
             }
@@ -144,8 +155,9 @@ class StyleManager {
                 template.content.querySelector("li").setAttribute(
                     "data-quantity", response[key].quantity);
 
-                template.content.querySelector(
-                    "img").setAttribute("src", `img/${response[key].category}/${response[key].imageUrl}`);
+
+                template.content.querySelector("img").setAttribute(
+                    "src", `img/${response[key].category}/${response[key].imageUrl}`);
 
                 template.content.querySelector(
                     "h2"
@@ -172,8 +184,17 @@ class StyleManager {
                         }
                     }
                 }
-                template.content.querySelector("a").innerHTML = `${response[key].price}$ <i class="fas fa-credit-card"></i>`;
-                template.content.querySelector("a").setAttribute("data-id", `${response[key].id}`);
+
+                template.content.querySelector("a").innerHTML = `$${response[key].price}`;
+                template.content.querySelector("a").setAttribute("data-id",
+                    `${response[key].id}`);
+
+                template.content.querySelector("li").setAttribute(
+                    "data-configurable",
+                    (response[key].colors && response[key].memoryCapacity) ? "true" :
+                        (response[key].colors && !response[key].memoryCapacity) ? "color-only" : "false"
+                );
+
                 const content = template.content.cloneNode(true);
                 container.append(content);
             }

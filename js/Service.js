@@ -1,10 +1,10 @@
 class Service {
-     GET(url) {
-         try {
-             return axios.get(url);
-         } catch (e) {
-             return e;
-         }
+    GET(url) {
+        try {
+            return axios.get(url);
+        } catch (e) {
+            return e;
+        }
     }
 
     getProducts(category) {
@@ -26,12 +26,12 @@ class Service {
     }
 
     getProduct(id) {
-         return new Promise((resolve) => {
-             this.GET(`http://localhost:8080/product/${id}`)
-                 .then(response => {
-                     resolve(response.data)
-                 }).catch();
-         });
+        return new Promise((resolve) => {
+            this.GET(`http://localhost:8080/product/${id}`)
+                .then(response => {
+                    resolve(response.data)
+                }).catch();
+        });
     }
 
 }

@@ -58,6 +58,11 @@ class Cart {
     isInCart(id) {
         if (typeof this._cart === "undefined") return false;
 
+        console.log(this._cart.find(element =>
+            element.id === id &&
+            element.color === this.color &&
+            element.size === this.size));
+
         return this._cart.find(element =>
             element.id === id &&
             element.color === this.color &&
@@ -85,7 +90,9 @@ class Cart {
 
     modifyValue(id) {
         this._cart.map(element => {
-            if (element.id === id) {
+            if (element.id === id
+            && element.color === this.color
+            && element.size === this.size) {
                 element.quantity += 1;
             }
         });

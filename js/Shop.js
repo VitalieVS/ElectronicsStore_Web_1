@@ -43,6 +43,17 @@ class Shop {
         const currTarget = evt.currentTarget;
         const target = evt.target;
 
+        if (currTarget.getAttribute("data-configurable") === "false") {
+            this._cart.color = null;
+            this._cart.size = null;
+            this._cart.price = null;
+        }
+
+        if (currTarget.getAttribute("data-configurable") === "color-only") {
+            this._cart.size = null;
+            this._cart.price = null;
+        }
+
         if (target.parentElement.classList[0] === "color") {
             StyleManager.resetColors(evt.target.parentElement);
             this._cart.color = target.style.background;
@@ -52,6 +63,7 @@ class Shop {
         if (target.parentElement.classList[0] === "size") {
             const item = await this._service.getProduct(currTarget.getAttribute("data-id"));
             const itemPrice = this.getPrice(item, target.innerHTML);
+
             StyleManager.modifyPrice(itemPrice, currTarget);
             StyleManager.resetSize(target.parentElement);
             this._cart.size = target.innerHTML;
@@ -62,13 +74,11 @@ class Shop {
         if (target.tagName === "A" || target.tagName === "I") {
             this._cart.addToCart(currTarget.getAttribute("data-id"));
         }
-
     }
 
     getPrice(item, price) {
-      return item.memoryCapacity.find(element => element.size === price).price;
+        return item.memoryCapacity.find(element => element.size === price).price;
     }
-
 }
 
 document.addEventListener("DOMContentLoaded", () => {
