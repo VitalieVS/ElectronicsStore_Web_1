@@ -39,24 +39,35 @@ class Shop {
         })
     }
 
-    liClickHandler(evt) {
-        if (evt.target.parentElement.classList[0] === "color") {
+    async liClickHandler(evt) {
+        const currID = evt.currentTarget.getAttribute("data-id");
+        const currTarget = evt.currentTarget;
+        const target = evt.target;
+
+        if (target.parentElement.classList[0] === "color") {
             StyleManager.resetColors(evt.target.parentElement);
-            this._cart.color = evt.target.style.background;
+            this._cart.color = target.style.background;
             evt.target.style.borderRadius = "20%";
         }
 
-        if (evt.target.parentElement.classList[0] === "size") {
-            StyleManager.resetSize(evt.target.parentElement);
-            this._cart.size = evt.target.innerHTML;
-            evt.target.style.background = "#9bdc28";
+        if (target.parentElement.classList[0] === "size") {
+            const item = await this._service.getProduct(currID);
+            StyleManager.modifyPrice(this.getPrice(item, target.innerHTML), currTarget);
+            StyleManager.resetSize(target.parentElement);
+            this._cart.size = target.innerHTML;
+            target.style.background = "#9bdc28";
         }
 
-        if (evt.target.tagName === "A" || evt.target.tagName === "I") {
-            this._cart.addToCart(evt.currentTarget.getAttribute("data-id"));
+        if (target.tagName === "A" || target.tagName === "I") {
+            this._cart.addToCart(currTarget.getAttribute("data-id"));
         }
 
     }
+
+    getPrice(item, price) {
+      return item.memoryCapacity.find(element => element.size === price).price;
+    }
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {

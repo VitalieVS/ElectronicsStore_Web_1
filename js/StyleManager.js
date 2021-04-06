@@ -99,12 +99,8 @@ class StyleManager {
 
         for (const key in response) {
             if (response.hasOwnProperty(key)) {
-
                 const imageURL = response[key].imageUrl.split("_");
-                console.log(cart[key].color);
                 const url = `${imageURL[0]}_${imageURL[1]}_${cart[key].color}.png`;
-                console.log(url);
-
 
                 template.content.querySelector("li").setAttribute("data-id", response[key].id);
                 template.content.querySelector(
@@ -128,6 +124,11 @@ class StyleManager {
         parent.querySelectorAll("span").forEach(span => {
             span.style.background = "#fff";
         })
+    }
+
+    static modifyPrice(price, element) {
+        console.log(element);
+        element.querySelector("a").innerHTML = `$${price}`;
     }
 
     static renderProducts(response) {
