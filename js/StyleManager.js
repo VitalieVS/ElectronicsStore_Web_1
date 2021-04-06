@@ -107,7 +107,7 @@ class StyleManager {
                     "img").setAttribute("src", `img/${response[key].category}/${url}`);
                 template.content.querySelector(".item__title h2").textContent = `${response[key].title} ${cart[key].color}`;
                 template.content.querySelector(".item__quantity .item__count").textContent = cart[key].quantity;
-                template.content.querySelector(".item__price h2").textContent = `$${cart[key].price}`;
+                template.content.querySelector(".item__price h2").textContent = `$${cart[key].price || response[key].price}`;
                 const content = template.content.cloneNode(true);
                 container.append(content);
             }
