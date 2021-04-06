@@ -151,7 +151,7 @@ class StyleManager {
                     "h2"
                 ).textContent = response[key].title;
 
-                colorContainer.innerHTML = "<h3>Color:</h3>";
+                colorContainer.innerHTML = response[key].colors ? "<h3>Color:</h3>" : "";
                 for (let keyColor in response[key].colors) {
                     if (response[key].colors.hasOwnProperty(keyColor)) {
                         if (response[key].colors[keyColor].available) {
@@ -162,11 +162,7 @@ class StyleManager {
                     }
                 }
 
-                memoryContainer.innerHTML = "<h3>Memory Size:</h3>";
-                if (response[key].memoryCapacity == null) {
-                    memoryContainer.innerHTML = "";
-                }
-
+                memoryContainer.innerHTML = response[key].memoryCapacity ? "<h3>Color:</h3>" : "";
                 for (let memoryKey in response[key].memoryCapacity) {
                     if (response[key].memoryCapacity.hasOwnProperty(memoryKey)) {
                         if (response[key].memoryCapacity[memoryKey].available) {
