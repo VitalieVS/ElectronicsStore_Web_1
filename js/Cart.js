@@ -9,15 +9,49 @@ class Cart {
     }
 
     addToCart(id) {
+        const validItem = this.inCart(id) && this.checkQuantity(id);
+        const canIncreaseCount = validItem || !this.inCart(id);
+        const quantityInCart = this.inCart(id) && this.checkQuantity(id);
+        const canNotify = quantityInCart || !this.inCart(id);
+        const canDisable = this.inCart(id) && !this.checkQuantity(id);
 
-        if (this.isInCart(id)) {
-            if (this.checkQuantity(id)) StyleManager.increaseCartCount();
-        } else {
-            StyleManager.increaseCartCount();
-        }
-        const canTriggerNotification = (this.isInCart(id) && this.checkQuantity(id)) || !this.isInCart(id);
-        this.isInCart(id) ? this.checkQuantity(id) ? this.modifyValue(id) : StyleManager.disableCard(id) : this.pushToArray(id);
-        if (canTriggerNotification) StyleManager.triggerNotification();
+        if (canNotify) StyleManager.triggerNotification();
+        if (canIncreaseCount) StyleManager.increaseCartCount();
+        if (canDisable) StyleManager.disableCard(id);
+        if (validItem) this.modifyValue(id);
+        if (!this.inCart(id)) this.pushToArray(id);
+
+        // this.isInCart(id) ? this.checkQuantity(id) ? this.modifyValue(id) : StyleManager.disableCard(id) : this.pushToArray(id);
+
+        // if (this.inCart(id)) {
+        //     if (this.checkQuantity(id)) {
+        //         this.modifyValue(id)
+        //     } else {
+        //        // StyleManager.disableCard(id)
+        //     }
+        // } else  {
+        //     this.pushToArray(id)
+        // }
+
+
+        // this.isInCart(id) ? this.checkQuantity(id) ? this.modifyValue(id) : StyleManager.disableCard(id) : this.pushToArray(id);
+        // if (canTriggerNotification) StyleManager.triggerNotification();
+
+
+        // this.isInCart(id) || this.checkQuantity -> StyleManager.increaseCartCount();
+        // false -> false -> n-as apeleze
+        // true -> false -> se va apela
+
+
+        //
+        // if (this.isInCart(id)) {
+        //     if (this.checkQuantity(id)) StyleManager.increaseCartCount();
+        // } else {
+        //     StyleManager.increaseCartCount();
+        // }
+        // const canTriggerNotification = (this.isInCart(id) && this.checkQuantity(id)) || !this.isInCart(id);
+        // this.isInCart(id) ? this.checkQuantity(id) ? this.modifyValue(id) : StyleManager.disableCard(id) : this.pushToArray(id);
+        // if (canTriggerNotification) StyleManager.triggerNotification();
 
         this.setCartToLocalStorage();
     }
@@ -55,13 +89,8 @@ class Cart {
         this._products = products
     }
 
-    isInCart(id) {
+    inCart(id) {
         if (typeof this._cart === "undefined") return false;
-
-        console.log(this._cart.find(element =>
-            element.id === id &&
-            element.color === this.color &&
-            element.size === this.size));
 
         return this._cart.find(element =>
             element.id === id &&
@@ -82,17 +111,18 @@ class Cart {
     checkQuantity(id) {
         return this._cart.find(
             item => item.id === id).quantity < this.stockCount(id);
+
     }
 
     stockCount(id) {
-        return this._products.find(product => product.id === Number(id)).quantity;
+        return this._products.find(product => product.id === Number(id)); // to rework here
     }
 
     modifyValue(id) {
         this._cart.map(element => {
             if (element.id === id
-            && element.color === this.color
-            && element.size === this.size) {
+                && element.color === this.color
+                && element.size === this.size) {
                 element.quantity += 1;
             }
         });
