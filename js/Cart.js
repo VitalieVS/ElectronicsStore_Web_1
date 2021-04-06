@@ -1,6 +1,7 @@
 class Cart {
-    color;
-    size;
+    _color;
+    _size;
+    _price;
 
     constructor(cart) {
         this._cart = (typeof cart === "undefined") ? [] : cart;
@@ -22,19 +23,27 @@ class Cart {
     }
 
     set color(color) {
-        this.color = color;
+        this._color = color;
     }
 
     set size(size) {
-        this.size = size;
+        this._size = size;
+    }
+
+    set price(price) {
+        this._price = price;
     }
 
     get color() {
-        return this.color;
+        return this._color;
     }
 
     get size() {
-        return this.size;
+        return this._size;
+    }
+
+    get price() {
+        return this._price;
     }
 
     setCartToLocalStorage() {
@@ -61,7 +70,8 @@ class Cart {
             id: id,
             color: this.color,
             size: this.size,
-            quantity: 1
+            quantity: 1,
+            price: this.price
         });
     }
 

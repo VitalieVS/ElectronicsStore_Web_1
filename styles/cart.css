@@ -52,6 +52,7 @@ section .cart__container a {
     grid-column-gap: 0;
     grid-row-gap: 0;
     list-style: none;
+    text-transform: capitalize;
 }
 
 .cart__item {
@@ -63,6 +64,8 @@ section .cart__container a {
     justify-items: center;
     align-items: center;
 }
+
+
 
 hr {
     border: 1px solid white;

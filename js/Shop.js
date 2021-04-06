@@ -40,7 +40,6 @@ class Shop {
     }
 
     async liClickHandler(evt) {
-        const currID = evt.currentTarget.getAttribute("data-id");
         const currTarget = evt.currentTarget;
         const target = evt.target;
 
@@ -51,10 +50,12 @@ class Shop {
         }
 
         if (target.parentElement.classList[0] === "size") {
-            const item = await this._service.getProduct(currID);
-            StyleManager.modifyPrice(this.getPrice(item, target.innerHTML), currTarget);
+            const item = await this._service.getProduct(currTarget.getAttribute("data-id"));
+            const itemPrice = this.getPrice(item, target.innerHTML);
+            StyleManager.modifyPrice(itemPrice, currTarget);
             StyleManager.resetSize(target.parentElement);
             this._cart.size = target.innerHTML;
+            this._cart.price = itemPrice;
             target.style.background = "#9bdc28";
         }
 
