@@ -42,6 +42,7 @@ class Shop {
     async liClickHandler(evt) {
         const currTarget = evt.currentTarget;
         const target = evt.target;
+        const item = await this._service.getProduct(currTarget.getAttribute("data-id"));
 
         if (currTarget.getAttribute("data-configurable") === "false") {
             this._cart.color = null;
@@ -61,7 +62,6 @@ class Shop {
         }
 
         if (target.parentElement.classList[0] === "size") {
-            const item = await this._service.getProduct(currTarget.getAttribute("data-id"));
             const itemPrice = this.getPrice(item, target.innerHTML);
 
             StyleManager.modifyPrice(itemPrice, currTarget);
@@ -71,12 +71,13 @@ class Shop {
             target.style.background = "#9bdc28";
         }
 
+        if (this._cart.price === null) {
+            this._cart.price = item.price;
+        }
+
         if (target.tagName === "A" || target.tagName === "I") {
             if (this._cart.size !== undefined) {
-                console.log(this._cart.size);
                 this._cart.addToCart(currTarget.getAttribute("data-id"))
-            } else {
-                console.log("miau");
             }
         }
     }
