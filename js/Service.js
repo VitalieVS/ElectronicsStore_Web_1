@@ -33,5 +33,4 @@ class Service {
                 }).catch();
         });
     }
-
 }

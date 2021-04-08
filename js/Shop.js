@@ -72,7 +72,12 @@ class Shop {
         }
 
         if (target.tagName === "A" || target.tagName === "I") {
-            this._cart.addToCart(currTarget.getAttribute("data-id"));
+            if (this._cart.size !== undefined) {
+                console.log(this._cart.size);
+                this._cart.addToCart(currTarget.getAttribute("data-id"))
+            } else {
+                console.log("miau");
+            }
         }
     }
 

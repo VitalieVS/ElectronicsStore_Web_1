@@ -174,7 +174,7 @@ class StyleManager {
                     }
                 }
 
-                memoryContainer.innerHTML = response[key].memoryCapacity ? "<h3>Color:</h3>" : "";
+                memoryContainer.innerHTML = response[key].memoryCapacity ? "<h3>Capacity:</h3>" : "";
                 for (let memoryKey in response[key].memoryCapacity) {
                     if (response[key].memoryCapacity.hasOwnProperty(memoryKey)) {
                         if (response[key].memoryCapacity[memoryKey].available) {
