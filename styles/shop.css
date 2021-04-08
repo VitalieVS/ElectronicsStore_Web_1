@@ -311,19 +311,24 @@ section {
     right: 0;
 }
 
-.notification:hover {
-    cursor: pointer;
+.notification__out__of__stock {
+    background-color: red;
+    padding: .25em;
+    opacity: 0.7;
+    position: fixed;
+    top: 70px;
+    right: 0;
 }
 
-.notification.disabled {
+.notification.disabled,
+.notification__out__of__stock.disabled {
     display: none;
 }
 
-.notification .notification-content {
+.notification-content {
     color: #fff;
     opacity: 0.8;
 }
-
 
 @media (max-width: 1115px) {
     #products {

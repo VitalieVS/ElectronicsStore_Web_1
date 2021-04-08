@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const manager = new StyleManager();
-    manager.toggleMenu();
+    StyleManager.toggleMenu();
     manager.liClickHandler();
     StyleManager.renderCartCount();
 });

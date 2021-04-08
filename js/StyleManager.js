@@ -13,7 +13,7 @@ class StyleManager {
         this.learnMore.style.background = color;
     }
 
-    liClickHandler() {
+     liClickHandler() {
         const thumbItems = document.querySelectorAll(".thumb li img");
         thumbItems.forEach(elem => {
             elem.addEventListener("click", () => {
@@ -27,7 +27,7 @@ class StyleManager {
         });
     }
 
-    selectBoxHandler() {
+    static selectBoxHandler() {
         const selected = document.querySelector(".selected");
         const optionsContainer = document.querySelector("#options-container");
 
@@ -36,7 +36,7 @@ class StyleManager {
         });
     }
 
-    toggleMenu() {
+    static toggleMenu() {
         const toggle = document.querySelector(".toggle");
         const navigation = document.querySelector(".navigation");
 
@@ -84,12 +84,17 @@ class StyleManager {
     }
 
     static disableCard(id) {
-        const li = document.querySelectorAll("#products li");
-        li.forEach(elem => {
-            if (elem.getAttribute("data-id") === id) {
-                elem.classList.add("disabled");
-            }
-        })
+        // const li = document.querySelectorAll("#products li");
+        // li.forEach(elem => {
+        //     if (elem.getAttribute("data-id") === id) {
+        //         elem.classList.add("disabled");
+        //     }
+        // })
+
+        document.querySelector(".notification__out__of__stock").classList.remove("disabled");
+        setTimeout(() => {
+            document.querySelector(".notification__out__of__stock").classList.add("disabled");
+        }, 1000)
     }
 
     static renderCart(response) {

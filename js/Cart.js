@@ -13,11 +13,11 @@ class Cart {
         const canIncreaseCount = validItem || !this.inCart(id);
         const quantityInCart = this.inCart(id) && this.checkQuantity(id);
         const canNotify = quantityInCart || !this.inCart(id);
-        const canDisable = this.inCart(id) && !this.checkQuantity(id);
+        const stockOut = this.inCart(id) && !this.checkQuantity(id);
 
+        if (stockOut) StyleManager.disableCard(id);
         if (canNotify) StyleManager.triggerNotification();
         if (canIncreaseCount) StyleManager.increaseCartCount();
-        if (canDisable) StyleManager.disableCard(id);
         if (validItem) this.modifyValue(id);
         if (!this.inCart(id)) this.pushToArray(id);
 
@@ -110,12 +110,40 @@ class Cart {
 
     checkQuantity(id) {
         return this._cart.find(
-            item => item.id === id).quantity < this.stockCount(id);
+            item => item.id === id &&
+                item.color === this.color &&
+                item.size === this.size
+        ).quantity < this.stockCount(id);
 
     }
 
     stockCount(id) {
-        return this._products.find(product => product.id === Number(id)); // to rework here
+        let colorQuantity = null;
+        let memoryQuantity = null;
+
+        const element = this._products.find(element => element.id === Number(id));
+
+        if (element.colors) {
+            colorQuantity = element.colors.find(element => element.color === this.color).quantity;
+        }
+
+        if (element.memoryCapacity) {
+            memoryQuantity = element.memoryCapacity.find(element => element.size === this.size).quantity;
+        }
+
+        if (memoryQuantity && colorQuantity) {
+            return Math.min(colorQuantity, memoryQuantity)
+        }
+
+        if (!memoryQuantity && colorQuantity) {
+            return colorQuantity
+        }
+
+        if (memoryQuantity && !colorQuantity) {
+            return memoryQuantity
+        }
+
+        return element.quantity;
     }
 
     modifyValue(id) {

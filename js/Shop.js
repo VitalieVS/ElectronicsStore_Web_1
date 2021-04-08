@@ -88,7 +88,6 @@ class Shop {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const style = new StyleManager();
     const service = new Service();
     const localStorageCart = localStorage.getItem("cart") || 0;
     const cartInstance =
@@ -97,9 +96,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     StyleManager.renderCartCount();
 
-    style.toggleMenu();
+    StyleManager.toggleMenu();
     shop.showCategories().then(() => {
-        style.selectBoxHandler();
+        StyleManager.selectBoxHandler();
         shop.optionListClickHandler();
     });
 });
