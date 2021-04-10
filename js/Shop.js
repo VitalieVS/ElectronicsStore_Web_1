@@ -84,7 +84,7 @@ class Shop {
     }
 
     getPrice(item, price) {
-        return item.memoryCapacity.find(element => element.size === price).price;
+        return item.memoryCapacity.find(({ size }) => size === price).price;
     }
 }
 
