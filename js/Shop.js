@@ -75,16 +75,14 @@ class Shop {
             this._cart.price = item.price;
         }
 
-        if (target.tagName === "A" || target.tagName === "I") {
-            if (this._cart.size !== undefined) {
-                this._cart.id = currTarget.getAttribute("data-id");
-                this._cart.addToCart();
-            }
+        if ((target.tagName === "A" || target.tagName === "I") && this._cart.size !== undefined) {
+            this._cart.id = currTarget.getAttribute("data-id");
+            this._cart.addToCart();
         }
     }
 
     getPrice(item, price) {
-        return item.memoryCapacity.find(({ size }) => size === price).price;
+        return item.memoryCapacity.find(({size}) => size === price).price;
     }
 }
 
