@@ -1,4 +1,5 @@
 class Cart {
+    _id;
     _color;
     _size;
     _price;
@@ -8,18 +9,18 @@ class Cart {
         this._products = [];
     }
 
-    addToCart(id) {
-        const validItem = this.inCart(id) && this.checkQuantity(id);
-        const canIncreaseCount = validItem || !this.inCart(id);
-        const quantityInCart = this.inCart(id) && this.checkQuantity(id);
-        const canAddItem = quantityInCart || !this.inCart(id);
-        const stockOut = this.inCart(id) && !this.checkQuantity(id);
+    addToCart() {
+        const validItem = this.inCart() && this.checkQuantity();
+        const canIncreaseCount = validItem || !this.inCart();
+        const quantityInCart = this.inCart() && this.checkQuantity();
+        const canAddItem = quantityInCart || !this.inCart();
+        const stockOut = this.inCart() && !this.checkQuantity();
 
         if (stockOut) StyleManager.triggerOutOfStockNotifcation();
         if (canAddItem) StyleManager.triggerNotification();
         if (canIncreaseCount) StyleManager.increaseCartCount();
-        if (validItem) this.modifyValue(id);
-        if (!this.inCart(id)) this.pushToArray(id);
+        if (validItem) this.modifyValue();
+        if (!this.inCart()) this.pushToArray();
 
         this.setCartToLocalStorage();
     }
@@ -34,6 +35,14 @@ class Cart {
 
     set price(price) {
         this._price = price;
+    }
+
+    set id(id) {
+        this._id = id;
+    }
+
+    get id() {
+        return this._id;
     }
 
     get color() {
@@ -57,18 +66,21 @@ class Cart {
         this._products = products
     }
 
-    inCart(id) {
+    inCart() {
         if (typeof this._cart === "undefined") return false;
 
-        return this._cart.find(element =>
-            element.id === id &&
-            element.color === this.color &&
-            element.size === this.size);
+        return this._cart.find(this.itemSearch, this);
     }
 
-    pushToArray(id) {
+    itemSearch(item) {
+        return item.id === this.id &&
+            item.color === this.color &&
+            item.size === this.size
+    }
+
+    pushToArray() {
         this._cart.push({
-            id: id,
+            id: this.id,
             color: this.color,
             size: this.size,
             quantity: 1,
@@ -76,26 +88,22 @@ class Cart {
         });
     }
 
-    checkQuantity(id) {
-        return this._cart.find(
-            item => item.id === id &&
-                item.color === this.color &&
-                item.size === this.size).quantity < this.stockCount(id);
-
+    checkQuantity() {
+        return this._cart.find(this.itemSearch, this).quantity < this.stockCount();
     }
 
-    stockCount(id) {
+    stockCount() {
         let colorQuantity = null;
         let memoryQuantity = null;
 
-        const element = this._products.find(element => element.id === Number(id));
+        const element = this._products.find(({ id }) => id === Number(this.id));
 
         if (element.colors) {
-            colorQuantity = element.colors.find(element => element.color === this.color).quantity;
+            colorQuantity = element.colors.find(({ color }) => color === this.color).quantity;
         }
 
         if (element.memoryCapacity) {
-            memoryQuantity = element.memoryCapacity.find(element => element.size === this.size).quantity;
+            memoryQuantity = element.memoryCapacity.find(({ size }) => size === this.size).quantity;
         }
 
         if (memoryQuantity && colorQuantity) {
@@ -113,13 +121,10 @@ class Cart {
         return element.quantity;
     }
 
-    modifyValue(id) {
-        this._cart.map(element => {
-            if (element.id === id
-                && element.color === this.color
-                && element.size === this.size) {
-                element.quantity += 1;
-            }
+    modifyValue() {
+        this._cart.forEach(item => {
+            if (this.itemSearch(item)) item.quantity += 1;
         });
+
     }
 }

@@ -77,7 +77,8 @@ class Shop {
 
         if (target.tagName === "A" || target.tagName === "I") {
             if (this._cart.size !== undefined) {
-                this._cart.addToCart(currTarget.getAttribute("data-id"))
+                this._cart.id = currTarget.getAttribute("data-id");
+                this._cart.addToCart();
             }
         }
     }
