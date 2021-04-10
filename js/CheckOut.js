@@ -11,6 +11,7 @@ class CheckOut {
                 toRender.push(await this._service.getProduct(cart[key].id));
             }
         }
+
         StyleManager.renderCart(toRender);
     }
 }

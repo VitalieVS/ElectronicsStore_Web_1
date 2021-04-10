@@ -80,8 +80,7 @@ class Cart {
         return this._cart.find(
             item => item.id === id &&
                 item.color === this.color &&
-                item.size === this.size
-        ).quantity < this.stockCount(id);
+                item.size === this.size).quantity < this.stockCount(id);
 
     }
 
