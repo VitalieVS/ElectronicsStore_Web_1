@@ -12,46 +12,14 @@ class Cart {
         const validItem = this.inCart(id) && this.checkQuantity(id);
         const canIncreaseCount = validItem || !this.inCart(id);
         const quantityInCart = this.inCart(id) && this.checkQuantity(id);
-        const canNotify = quantityInCart || !this.inCart(id);
+        const canAddItem = quantityInCart || !this.inCart(id);
         const stockOut = this.inCart(id) && !this.checkQuantity(id);
 
-        if (stockOut) StyleManager.disableCard(id);
-        if (canNotify) StyleManager.triggerNotification();
+        if (stockOut) StyleManager.triggerOutOfStockNotifcation();
+        if (canAddItem) StyleManager.triggerNotification();
         if (canIncreaseCount) StyleManager.increaseCartCount();
         if (validItem) this.modifyValue(id);
         if (!this.inCart(id)) this.pushToArray(id);
-
-        // this.isInCart(id) ? this.checkQuantity(id) ? this.modifyValue(id) : StyleManager.disableCard(id) : this.pushToArray(id);
-
-        // if (this.inCart(id)) {
-        //     if (this.checkQuantity(id)) {
-        //         this.modifyValue(id)
-        //     } else {
-        //        // StyleManager.disableCard(id)
-        //     }
-        // } else  {
-        //     this.pushToArray(id)
-        // }
-
-
-        // this.isInCart(id) ? this.checkQuantity(id) ? this.modifyValue(id) : StyleManager.disableCard(id) : this.pushToArray(id);
-        // if (canTriggerNotification) StyleManager.triggerNotification();
-
-
-        // this.isInCart(id) || this.checkQuantity -> StyleManager.increaseCartCount();
-        // false -> false -> n-as apeleze
-        // true -> false -> se va apela
-
-
-        //
-        // if (this.isInCart(id)) {
-        //     if (this.checkQuantity(id)) StyleManager.increaseCartCount();
-        // } else {
-        //     StyleManager.increaseCartCount();
-        // }
-        // const canTriggerNotification = (this.isInCart(id) && this.checkQuantity(id)) || !this.isInCart(id);
-        // this.isInCart(id) ? this.checkQuantity(id) ? this.modifyValue(id) : StyleManager.disableCard(id) : this.pushToArray(id);
-        // if (canTriggerNotification) StyleManager.triggerNotification();
 
         this.setCartToLocalStorage();
     }

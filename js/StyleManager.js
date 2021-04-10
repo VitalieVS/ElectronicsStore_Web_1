@@ -83,14 +83,7 @@ class StyleManager {
         cartIcon.setAttribute("value", String(LocalStorage.quantity || 0));
     }
 
-    static disableCard(id) {
-        // const li = document.querySelectorAll("#products li");
-        // li.forEach(elem => {
-        //     if (elem.getAttribute("data-id") === id) {
-        //         elem.classList.add("disabled");
-        //     }
-        // })
-
+    static triggerOutOfStockNotifcation() {
         document.querySelector(".notification__out__of__stock").classList.remove("disabled");
         setTimeout(() => {
             document.querySelector(".notification__out__of__stock").classList.add("disabled");
