@@ -13,4 +13,9 @@ class LocalStorage {
         }
         return sum;
     }
+
+    static setCart(cart) {
+        localStorage.clear();
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }
 }

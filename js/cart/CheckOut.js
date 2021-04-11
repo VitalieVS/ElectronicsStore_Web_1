@@ -1,14 +1,16 @@
 class CheckOut {
+    cart = LocalStorage.cart;
+
     constructor(service) {
         this._service = service;
     }
 
     async showCheckOut() {
-        const cart = LocalStorage.cart;
+
         const toRender = [];
-        for (const key in cart) {
-            if (cart.hasOwnProperty(key)) {
-                toRender.push(await this._service.getProduct(cart[key].id));
+        for (const key in this.cart) {
+            if (this.cart.hasOwnProperty(key)) {
+                toRender.push(await this._service.getProduct(this.cart[key].id));
             }
         }
 
@@ -23,10 +25,15 @@ class CheckOut {
     }
 
     removeFromCart(e) {
-        const node = e.target.parentNode.parentNode.parentNode;
-       // console.log(e.target);
-        console.log(e.target.closest("li"));
-     //   console.log(e.target.parentNode.parentNode.parentNode);
-        //e.target.parentNode.parentNode.parentNode.removeChild);
+        const node = e.target.closest("li");
+        const color = node.querySelector(".item__color").innerHTML;
+        const size = node.querySelector(".item__size").innerHTML;
+        const id = node.getAttribute("data-id");
+
+        this.cart.splice(this.cart.findIndex(el => el.id === id && el.color === color && el.size === size), 1);
+        LocalStorage.setCart(this.cart);
+        node.remove();
     }
+
+
 }

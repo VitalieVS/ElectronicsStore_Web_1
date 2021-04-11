@@ -22,7 +22,7 @@ class Cart {
         if (validItem) this.modifyValue();
         if (!this.inCart()) this.pushToArray();
 
-        this.setCartToLocalStorage();
+        LocalStorage.setCart(this._cart);
     }
 
     set color(color) {
@@ -55,11 +55,6 @@ class Cart {
 
     get price() {
         return this._price;
-    }
-
-    setCartToLocalStorage() {
-        localStorage.clear();
-        localStorage.setItem("cart", JSON.stringify(this._cart));
     }
 
     setProducts(products) {
@@ -125,6 +120,5 @@ class Cart {
         this._cart.forEach(item => {
             if (this.itemSearch(item)) item.quantity += 1;
         });
-
     }
 }
