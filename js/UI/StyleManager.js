@@ -108,11 +108,22 @@ class StyleManager {
                     url = response[key].imageUrl;
                 }
 
+                template.content.querySelector(".item__color").textContent = "";
+                template.content.querySelector(".item__size").textContent = "";
+
+                if (cart[key].color) {
+                    template.content.querySelector(".item__color").textContent = cart[key].color;
+                }
+
+                if (cart[key].size) {
+                    template.content.querySelector(".item__size").textContent = cart[key].size;
+                }
+
                 template.content.querySelector("li").setAttribute("data-id", response[key].id);
                 template.content.querySelector(
                     "img").setAttribute("src", `img/${response[key].category}/${url}`);
                 template.content.querySelector(".item__title h2").textContent =
-                    `${response[key].title} ${ (cart[key].color) ? cart[key].color: ""}`;
+                    `${response[key].title}`;
                 template.content.querySelector(".item__quantity .item__count").textContent =
                     cart[key].quantity;
                 template.content.querySelector(".item__price h2").textContent =

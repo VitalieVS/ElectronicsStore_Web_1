@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("section .cart__container .cart__empty").classList.remove("disabled");
         document.querySelector("section .cart__container .cart__review").classList.add("disabled");
     } else {
-        checkOut.showCheckOut().then();
+        checkOut.showCheckOut().then(() => {
+                checkOut.removeHandler();
+            }
+        );
     }
 });

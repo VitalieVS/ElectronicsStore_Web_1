@@ -24,6 +24,16 @@ a:hover {
     cursor: pointer;
 }
 
+.total__price__container em {
+    filter: invert(1);
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+.total__price__container em:hover {
+    cursor: pointer;
+}
+
 h2 {
     color: #fff;
     letter-spacing: 2px;
@@ -65,6 +75,10 @@ section .cart__container a {
     align-items: center;
 }
 
+#cart__products .item__title span {
+    color: #fff;
+    display: block;
+}
 
 hr {
     border: 1px solid white;
