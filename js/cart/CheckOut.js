@@ -18,8 +18,8 @@ class CheckOut {
     }
 
     removeHandler() {
-        const removeBtns = document.querySelectorAll(".remove__btn");
-        removeBtns.forEach(btn => {
+        const removeButtons = document.querySelectorAll(".remove__btn");
+        removeButtons.forEach(btn => {
             btn.addEventListener('click', e => this.removeFromCart(e));
         })
     }
