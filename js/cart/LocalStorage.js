@@ -4,13 +4,11 @@ class LocalStorage {
     }
 
     static get quantity() {
-        let quantity = 0;
-        for (const property in this.cart) {
-            if (this.cart.hasOwnProperty(property)) {
-                quantity += this.cart[property].quantity;
-            }
-        }
-        return quantity;
+        if (this.cart === "empty") return 0;
+
+        return this.cart.reduce((prev, cur) => {
+            return prev + cur.quantity;
+        }, 0);
     }
 
     static setCart(cart) {
