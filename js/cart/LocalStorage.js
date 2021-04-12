@@ -4,14 +4,13 @@ class LocalStorage {
     }
 
     static get quantity() {
-        const currentCart = this.cart;
-        let sum = 0;
-        for (const property in currentCart) {
-            if (currentCart.hasOwnProperty(property)) {
-                sum += currentCart[property].quantity;
+        let quantity = 0;
+        for (const property in this.cart) {
+            if (this.cart.hasOwnProperty(property)) {
+                quantity += this.cart[property].quantity;
             }
         }
-        return sum;
+        return quantity;
     }
 
     static setCart(cart) {
