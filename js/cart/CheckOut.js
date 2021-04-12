@@ -6,7 +6,6 @@ class CheckOut {
     }
 
     async showCheckOut() {
-
         const toRender = [];
         for (const key in this.cart) {
             if (this.cart.hasOwnProperty(key)) {
@@ -32,6 +31,12 @@ class CheckOut {
 
         this.cart.splice(this.cart.findIndex(item => item.id === id && item.color === color && item.size === size), 1);
         LocalStorage.setCart(this.cart);
+        StyleManager.renderCartCount();
         node.remove();
+
+        if (LocalStorage.cart === "empty") {
+
+        }
+
     }
 }

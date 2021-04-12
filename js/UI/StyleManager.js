@@ -83,7 +83,7 @@ class StyleManager {
         cartIcon.setAttribute("value", String(LocalStorage.quantity || 0));
     }
 
-    static triggerOutOfStockNotifcation() {
+    static triggerOutOfStockNotification() {
         document.querySelector(".notification__out__of__stock").classList.remove("disabled");
         setTimeout(() => {
             document.querySelector(".notification__out__of__stock").classList.add("disabled");

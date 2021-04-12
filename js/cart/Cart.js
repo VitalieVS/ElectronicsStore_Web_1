@@ -16,7 +16,7 @@ class Cart {
         const canAddItem = quantityInCart || !this.inCart();
         const stockOut = this.inCart() && !this.checkQuantity();
 
-        if (stockOut) StyleManager.triggerOutOfStockNotifcation();
+        if (stockOut) StyleManager.triggerOutOfStockNotification();
         if (canAddItem) StyleManager.triggerNotification();
         if (canIncreaseCount) StyleManager.increaseCartCount();
         if (validItem) this.modifyValue();
