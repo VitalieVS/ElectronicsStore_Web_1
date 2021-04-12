@@ -17,6 +17,28 @@ class CheckOut {
         StyleManager.renderCart(toRender);
     }
 
+    quantityHandler() {
+        const incrementBtns = document.querySelectorAll(".increment__btn");
+        const decrement = document.querySelectorAll(".decrement__btn");
+
+        incrementBtns.forEach(btn => {
+            btn.addEventListener("click", evt => this.increaseQuantity(evt))
+        });
+
+        decrement.forEach(btn => {
+            btn.addEventListener("click", evt => this.decreaseQuantity(evt))
+        })
+    }
+
+    increaseQuantity(e) {
+        console.log(e.target.parentNode.querySelector("span"));
+        e.target.parentNode.querySelector("span").innerHTML += 1; // rework here
+    }
+
+    decreaseQuantity(e) {
+        console.log(e.target.closest(".item__count"));
+    }
+
     removeHandler() {
         const removeButtons = document.querySelectorAll(".remove__btn");
         removeButtons.forEach(btn => {

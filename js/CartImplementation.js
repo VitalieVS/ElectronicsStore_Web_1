@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     checkOut.showCheckOut().then(() => {
             checkOut.removeHandler();
+            checkOut.quantityHandler();
+
         }
     );
 });
