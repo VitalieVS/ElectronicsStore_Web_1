@@ -97,7 +97,7 @@ class StyleManager {
             document.querySelector(".total__price__container").classList.add("disabled");
             return;
         }
-
+        // 0 -> cart is not empty
         document.querySelector("section .cart__container .cart__empty").classList.add("disabled");
         document.querySelector("section .cart__container .cart__review").classList.remove("disabled");
         document.querySelector(".total__price__container").classList.remove("disabled");
