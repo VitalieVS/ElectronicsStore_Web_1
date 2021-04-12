@@ -30,10 +30,8 @@ class CheckOut {
         const size = node.querySelector(".item__size").innerHTML;
         const id = node.getAttribute("data-id");
 
-        this.cart.splice(this.cart.findIndex(el => el.id === id && el.color === color && el.size === size), 1);
+        this.cart.splice(this.cart.findIndex(item => item.id === id && item.color === color && item.size === size), 1);
         LocalStorage.setCart(this.cart);
         node.remove();
     }
-
-
 }

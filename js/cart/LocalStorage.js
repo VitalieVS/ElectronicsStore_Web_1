@@ -16,6 +16,6 @@ class LocalStorage {
 
     static setCart(cart) {
         localStorage.clear();
-        localStorage.setItem("cart", JSON.stringify(cart));
+        if (cart.length > 0) localStorage.setItem("cart", JSON.stringify(cart));
     }
 }

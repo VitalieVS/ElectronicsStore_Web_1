@@ -32,3 +32,5 @@ G
 js/cart/Cart.js,2\a\2ad13d54b75bfa95c307877261847f5db1771835
 C
 js/cart/CheckOut.js,b\a\ba209d9784ed70cc6eeb4380c4f33bf71330860b
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
