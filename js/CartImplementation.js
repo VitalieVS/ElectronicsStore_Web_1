@@ -5,13 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
     StyleManager.toggleMenu();
     StyleManager.renderCartCount();
 
-    if (LocalStorage.cart === "empty") {
-        document.querySelector("section .cart__container .cart__empty").classList.remove("disabled");
-        document.querySelector("section .cart__container .cart__review").classList.add("disabled");
-    } else {
-        checkOut.showCheckOut().then(() => {
-                checkOut.removeHandler();
-            }
-        );
-    }
+    // if (LocalStorage.cart === "empty") {
+    //     document.querySelector("section .cart__container .cart__empty").classList.remove("disabled");
+    //     document.querySelector("section .cart__container .cart__review").classList.add("disabled");
+    // }
+
+    StyleManager.cartStateHandler(LocalStorage.cart === "empty");
+
+    checkOut.showCheckOut().then(() => {
+            checkOut.removeHandler();
+        }
+    );
 });

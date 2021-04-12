@@ -8,6 +8,10 @@ section .cart__container {
     display: none;
 }
 
+.total__price__container.disabled {
+    display: none;
+}
+
 h3 {
     font-size: 26px;
     color: #fff;

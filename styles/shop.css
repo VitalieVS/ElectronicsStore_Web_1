@@ -321,7 +321,7 @@ section {
 }
 
 .notification.disabled,
-.notification__out__of__stock.disabled {
+.notification__out__of__stock.disabled{
     display: none;
 }
 

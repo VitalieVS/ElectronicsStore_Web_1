@@ -13,7 +13,7 @@ class StyleManager {
         this.learnMore.style.background = color;
     }
 
-     liClickHandler() {
+    liClickHandler() {
         const thumbItems = document.querySelectorAll(".thumb li img");
         thumbItems.forEach(elem => {
             elem.addEventListener("click", () => {
@@ -88,6 +88,19 @@ class StyleManager {
         setTimeout(() => {
             document.querySelector(".notification__out__of__stock").classList.add("disabled");
         }, 1000)
+    }
+
+    static cartStateHandler(state) {
+        if (state) { // 1 -> cart is empty
+            document.querySelector("section .cart__container .cart__empty").classList.remove("disabled");
+            document.querySelector("section .cart__container .cart__review").classList.add("disabled");
+            document.querySelector(".total__price__container").classList.add("disabled");
+            return;
+        }
+
+        document.querySelector("section .cart__container .cart__empty").classList.add("disabled");
+        document.querySelector("section .cart__container .cart__review").classList.remove("disabled");
+        document.querySelector(".total__price__container").classList.remove("disabled");
     }
 
     static renderCart(response) {

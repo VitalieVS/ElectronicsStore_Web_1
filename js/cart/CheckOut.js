@@ -6,6 +6,7 @@ class CheckOut {
     }
 
     async showCheckOut() {
+        if (this.cart === "empty") return;
         const toRender = [];
         for (const key in this.cart) {
             if (this.cart.hasOwnProperty(key)) {
@@ -33,10 +34,6 @@ class CheckOut {
         LocalStorage.setCart(this.cart);
         StyleManager.renderCartCount();
         node.remove();
-
-        if (LocalStorage.cart === "empty") {
-
-        }
-
+        StyleManager.cartStateHandler(LocalStorage.cart === "empty");
     }
 }
