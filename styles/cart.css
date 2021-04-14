@@ -240,6 +240,8 @@ hr {
 .discount__container .webflow__style__input {
     position: relative;
     display: flex;
+    width: 300px;
+    float: right;
     flex-direction: row;
     border-radius: 50px;
     padding: 0.5rem 0.5rem 0.5rem;
@@ -256,7 +258,7 @@ hr {
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
     background-position: 0% 0%;
-    background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6);
+    background: linear-gradient(to right, #ffa600, #57E6E6, #d60a03, #57E6E6, #B294FF, #d6bb03);
     background-size: 500% auto;
     -webkit-animation: gradient 3s linear infinite;
     animation: gradient 3s linear infinite;
