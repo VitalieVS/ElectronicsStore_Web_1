@@ -91,13 +91,13 @@ class Cart {
         let colorQuantity = null;
         let memoryQuantity = null;
 
-        const element = this._products.find(({ id }) => id === Number(this.id));
+        const element = this._products.find(({id}) => id === Number(this.id));
 
         if (element.colors)
-            colorQuantity = element.colors.find(({ color }) => color === this.color).quantity;
+            colorQuantity = element.colors.find(({color}) => color === this.color).quantity;
 
         if (element.memoryCapacity)
-            memoryQuantity = element.memoryCapacity.find(({ size }) => size === this.size).quantity;
+            memoryQuantity = element.memoryCapacity.find(({size}) => size === this.size).quantity;
 
         if (memoryQuantity && colorQuantity) return Math.min(colorQuantity, memoryQuantity);
 

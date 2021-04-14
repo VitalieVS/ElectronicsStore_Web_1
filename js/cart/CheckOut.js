@@ -25,21 +25,29 @@ class CheckOut {
         const decrement = document.querySelectorAll(".decrement__btn");
 
         incrementBtns.forEach(btn => {
-            btn.addEventListener("click", evt => this.increaseQuantity(evt))
+            btn.addEventListener("click", e => {
+                this.setSpecs(e.target.closest("li"));
+                this.increaseQuantity(e);
+            })
         });
 
         decrement.forEach(btn => {
-            btn.addEventListener("click", evt => this.decreaseQuantity(evt))
-        })
+            btn.addEventListener("click", e => {
+                this.setSpecs(e.target.closest("li"));
+                this.decreaseQuantity(e);
+            })
+        });
     }
 
     increaseQuantity(e) {
         const increase = e.target.parentNode.querySelector("span");
         let count = parseInt(increase.innerHTML) + 1;
 
-
-
-        increase.innerHTML = `${count}`;
+        if (this.searchProducts() >= count) {
+            this.modifyValue(1);
+            increase.innerHTML = `${count}`;
+        }
+        LocalStorage.setCart(this._cart);
     }
 
     searchPredicate(item) {
@@ -49,7 +57,33 @@ class CheckOut {
     decreaseQuantity(e) {
         const decrease = e.target.parentNode.querySelector("span");
         let count = parseInt(decrease.innerHTML) - 1;
-        decrease.innerHTML = `${count}`;
+
+        if (this.searchProducts() > count && count > 0) {
+            this.modifyValue();
+            decrease.innerHTML = `${count}`;
+        }
+        LocalStorage.setCart(this._cart);
+    }
+
+    searchProducts() { // to fix -> DRY
+        let colorQuantity = null;
+        let memoryQuantity = null;
+
+        const product = this._products.find(({id}) => id === Number(this._id));
+
+        if (product.colors)
+            colorQuantity = product.colors.find(({color}) => color === this._color).quantity;
+
+        if (product.memoryCapacity)
+            memoryQuantity = product.memoryCapacity.find(({size}) => size === this._size).quantity;
+
+        if (memoryQuantity && colorQuantity) return Math.min(colorQuantity, memoryQuantity);
+
+        if (!memoryQuantity && colorQuantity) return colorQuantity;
+
+        if (memoryQuantity && !colorQuantity) return memoryQuantity;
+
+        return product.quantity;
     }
 
     removeHandler() {
@@ -60,9 +94,21 @@ class CheckOut {
     }
 
     setSpecs(node) {
-        this._color = node.querySelector(".item__color").innerHTML;
-        this._size = node.querySelector(".item__size").innerHTML;
+        this._color = node.querySelector(".item__color").innerHTML || null;
+        this._size = node.querySelector(".item__size").innerHTML || null;
         this._id = node.getAttribute("data-id");
+    }
+
+    modifyValue(value) {
+        if (value === 1) {
+            this._cart.forEach(item => {
+                if (this.searchPredicate(item)) item.quantity += 1;
+            });
+            return;
+        }
+        this._cart.forEach(item => {
+            if (this.searchPredicate(item)) item.quantity -= 1;
+        });
     }
 
     removeFromCart(e) {
