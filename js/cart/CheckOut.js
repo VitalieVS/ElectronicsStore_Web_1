@@ -1,20 +1,23 @@
 class CheckOut {
-    cart = LocalStorage.cart;
+    _cart = LocalStorage.cart;
+    _products = [];
+    _id;
+    _color;
+    _size;
 
     constructor(service) {
         this._service = service;
     }
 
     async showCheckOut() {
-        if (this.cart === "empty") return;
-        const toRender = [];
-        for (const key in this.cart) {
-            if (this.cart.hasOwnProperty(key)) {
-                toRender.push(await this._service.getProduct(this.cart[key].id));
+        if (this._cart === "empty") return;
+        for (const key in this._cart) {
+            if (this._cart.hasOwnProperty(key)) {
+                this._products.push(await this._service.getProduct(this._cart[key].id));
             }
         }
 
-        StyleManager.renderCart(toRender);
+        StyleManager.renderCart(this._products);
     }
 
     quantityHandler() {
@@ -31,12 +34,22 @@ class CheckOut {
     }
 
     increaseQuantity(e) {
-        console.log(e.target.parentNode.querySelector("span"));
-        e.target.parentNode.querySelector("span").innerHTML += 1; // rework here
+        const increase = e.target.parentNode.querySelector("span");
+        let count = parseInt(increase.innerHTML) + 1;
+
+
+
+        increase.innerHTML = `${count}`;
+    }
+
+    searchPredicate(item) {
+        return item.id === this._id && item.color === this._color && item.size === this._size;
     }
 
     decreaseQuantity(e) {
-        console.log(e.target.closest(".item__count"));
+        const decrease = e.target.parentNode.querySelector("span");
+        let count = parseInt(decrease.innerHTML) - 1;
+        decrease.innerHTML = `${count}`;
     }
 
     removeHandler() {
@@ -46,14 +59,18 @@ class CheckOut {
         })
     }
 
+    setSpecs(node) {
+        this._color = node.querySelector(".item__color").innerHTML;
+        this._size = node.querySelector(".item__size").innerHTML;
+        this._id = node.getAttribute("data-id");
+    }
+
     removeFromCart(e) {
         const node = e.target.closest("li");
-        const color = node.querySelector(".item__color").innerHTML;
-        const size = node.querySelector(".item__size").innerHTML;
-        const id = node.getAttribute("data-id");
+        this.setSpecs(node);
 
-        this.cart.splice(this.cart.findIndex(item => item.id === id && item.color === color && item.size === size), 1);
-        LocalStorage.setCart(this.cart);
+        this._cart.splice(this._cart.findIndex(this.searchPredicate, this), 1);
+        LocalStorage.setCart(this._cart);
         StyleManager.renderCartCount();
         node.remove();
         StyleManager.cartStateHandler(LocalStorage.cart === "empty");

@@ -93,25 +93,17 @@ class Cart {
 
         const element = this._products.find(({ id }) => id === Number(this.id));
 
-        if (element.colors) {
+        if (element.colors)
             colorQuantity = element.colors.find(({ color }) => color === this.color).quantity;
-        }
 
-        if (element.memoryCapacity) {
+        if (element.memoryCapacity)
             memoryQuantity = element.memoryCapacity.find(({ size }) => size === this.size).quantity;
-        }
 
-        if (memoryQuantity && colorQuantity) {
-            return Math.min(colorQuantity, memoryQuantity)
-        }
+        if (memoryQuantity && colorQuantity) return Math.min(colorQuantity, memoryQuantity);
 
-        if (!memoryQuantity && colorQuantity) {
-            return colorQuantity
-        }
+        if (!memoryQuantity && colorQuantity) return colorQuantity;
 
-        if (memoryQuantity && !colorQuantity) {
-            return memoryQuantity
-        }
+        if (memoryQuantity && !colorQuantity) return memoryQuantity;
 
         return element.quantity;
     }
