@@ -222,4 +222,18 @@ class StyleManager {
             }
         }
     }
+
+    static shippingHandler() {
+        const shippingBtn = document.getElementById("show__shipping");
+        const shippingList = document.querySelector(".shipping__companies");
+
+        shippingBtn.addEventListener("click", () => {
+            if (shippingList.classList.contains("disabled")) {
+                shippingList.classList.remove("disabled");
+            } else {
+                shippingList.classList.add("disabled");
+            }
+        })
+
+    }
 }

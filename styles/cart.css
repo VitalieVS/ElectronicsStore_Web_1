@@ -116,12 +116,29 @@ hr {
     padding: 10px;
 }
 
+.shipping__companies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 1fr);
+    grid-template-rows: repeat(auto-fit, 1fr);
+    grid-row-gap: 10px;
+    list-style: none;
+    color: #fff;
+}
+
+.shipping__companies.disabled {
+    display: none;
+}
+
+.shipping__companies li:hover {
+    cursor: pointer;
+}
+
 .total__price__container {
     margin-top: 5%;
     text-align: right;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, 1fr);
+    grid-template-rows: repeat(auto-fit, 1fr);
     grid-column-gap: 0;
     grid-row-gap: 20px;
 }

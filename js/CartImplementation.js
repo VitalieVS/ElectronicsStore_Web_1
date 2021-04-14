@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
     StyleManager.cartStateHandler(LocalStorage.cart === "empty");
 
     checkOut.showCheckOut().then(() => {
+            StyleManager.shippingHandler();
             checkOut.removeHandler();
             checkOut.quantityHandler();
-
         }
     );
 });
