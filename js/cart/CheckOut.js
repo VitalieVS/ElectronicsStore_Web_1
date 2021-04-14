@@ -139,8 +139,6 @@ class CheckOut {
     }
 
     calculateTotal() {
-        console.log(this._cart.reduce((accumulator, value) => accumulator + value.quantity * value.price, 0)
-            + this._shippingPrice);
         return this._cart.reduce((accumulator, value) => accumulator + value.quantity * value.price, 0)
             + this._shippingPrice
     }

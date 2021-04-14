@@ -238,7 +238,6 @@ class StyleManager {
 
     static renderTotal(price) {
         document.querySelector(".check__out__total span").innerHTML = `$${price}`;
-
     }
 
     static renderSubTotal(price) {
