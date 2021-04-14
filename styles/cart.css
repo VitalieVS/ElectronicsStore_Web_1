@@ -28,7 +28,7 @@ a:hover {
     cursor: pointer;
 }
 
-.total__price__container em {
+.shipping em, #show__discount {
     filter: invert(1);
     margin-right: 15px;
     font-size: 20px;
@@ -206,3 +206,81 @@ hr {
     }
 }
 
+.discount__container input {
+    border-style: none;
+    background: transparent;
+    outline: none;
+}
+
+.discount__container button {
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+@-webkit-keyframes gradient {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.discount__container .webflow__style__input {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    border-radius: 50px;
+    padding: 0.5rem 0.5rem 0.5rem;
+}
+
+.discount__container .webflow__style__input:after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    bottom: 0;
+    z-index: 999;
+    height: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    background-position: 0% 0%;
+    background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6);
+    background-size: 500% auto;
+    -webkit-animation: gradient 3s linear infinite;
+    animation: gradient 3s linear infinite;
+}
+
+.discount__container .webflow__style__input input {
+    flex-grow: 1;
+    color: #BFD2FF;
+    font-size: 20px;
+    line-height: 20px;
+    vertical-align: middle;
+}
+
+.discount__container .webflow__style__input input::-webkit-input-placeholder {
+    color: #7881A1;
+}
+
+.discount__container .webflow__style__input button {
+    color: #7881A1;
+    font-size: 20px;
+    line-height: 20px;
+    vertical-align: middle;
+    transition: color 0.25s;
+}
+.discount__container .webflow-style-input button:hover {
+    color: #BFD2FF;
+}
