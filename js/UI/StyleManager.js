@@ -234,6 +234,14 @@ class StyleManager {
                 shippingList.classList.add("disabled");
             }
         })
+    }
 
+    static renderTotal(price) {
+        document.querySelector(".check__out__total span").innerHTML = `$${price}`;
+
+    }
+
+    static renderSubTotal(price) {
+        document.querySelector(".total__price span").innerHTML = `$${price}`;
     }
 }

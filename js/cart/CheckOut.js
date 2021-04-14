@@ -19,6 +19,8 @@ class CheckOut {
         }
 
         StyleManager.renderCart(this._products);
+        StyleManager.renderSubTotal(this.calculateSubTotal());
+        StyleManager.renderTotal(this.calculateTotal());
     }
 
     quantityHandler() {
@@ -47,6 +49,8 @@ class CheckOut {
         if (this.searchProducts() >= count) {
             this.modifyValue(1);
             increase.innerHTML = `${count}`;
+            StyleManager.renderSubTotal(this.calculateSubTotal());
+            StyleManager.renderTotal(this.calculateTotal());
         }
         LocalStorage.setCart(this._cart);
     }
@@ -62,6 +66,8 @@ class CheckOut {
         if (this.searchProducts() > count && count > 0) {
             this.modifyValue();
             decrease.innerHTML = `${count}`;
+            StyleManager.renderSubTotal(this.calculateSubTotal());
+            StyleManager.renderTotal(this.calculateTotal());
         }
         LocalStorage.setCart(this._cart);
     }
@@ -110,6 +116,8 @@ class CheckOut {
         this._cart.forEach(item => {
             if (this.searchPredicate(item)) item.quantity -= 1;
         });
+        StyleManager.renderSubTotal(this.calculateSubTotal());
+        StyleManager.renderTotal(this.calculateTotal());
     }
 
     removeFromCart(e) {
@@ -117,10 +125,24 @@ class CheckOut {
         this.setSpecs(node);
 
         this._cart.splice(this._cart.findIndex(this.searchPredicate, this), 1);
+        StyleManager.renderSubTotal(this.calculateSubTotal());
+        StyleManager.renderTotal(this.calculateTotal());
         LocalStorage.setCart(this._cart);
         StyleManager.renderCartCount();
         node.remove();
         StyleManager.cartStateHandler(LocalStorage.cart === "empty");
+
+    }
+
+    calculateSubTotal() {
+        return this._cart.reduce((accumulator, value) => accumulator + value.quantity * value.price, 0)
+    }
+
+    calculateTotal() {
+        console.log(this._cart.reduce((accumulator, value) => accumulator + value.quantity * value.price, 0)
+            + this._shippingPrice);
+        return this._cart.reduce((accumulator, value) => accumulator + value.quantity * value.price, 0)
+            + this._shippingPrice
     }
 
     shippingListHandler() {
@@ -129,6 +151,8 @@ class CheckOut {
             listElement.addEventListener("click", (e) => {
                 this._shippingPrice = parseFloat(e.target.getAttribute("data-price"));
                 document.querySelector(".shipping__price span").innerHTML = `$${this._shippingPrice}`;
+                StyleManager.renderSubTotal(this.calculateSubTotal());
+                StyleManager.renderTotal(this.calculateTotal());
             })
         }
     }
