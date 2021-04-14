@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     StyleManager.cartStateHandler(LocalStorage.cart === "empty");
 
     checkOut.showCheckOut().then(() => {
+            checkOut.shippingListHandler();
             StyleManager.shippingHandler();
             checkOut.removeHandler();
             checkOut.quantityHandler();

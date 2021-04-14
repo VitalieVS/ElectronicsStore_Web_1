@@ -4,6 +4,7 @@ class CheckOut {
     _id;
     _color;
     _size;
+    _shippingPrice = 0;
 
     constructor(service) {
         this._service = service;
@@ -120,5 +121,15 @@ class CheckOut {
         StyleManager.renderCartCount();
         node.remove();
         StyleManager.cartStateHandler(LocalStorage.cart === "empty");
+    }
+
+    shippingListHandler() {
+        const list = document.querySelector(".shipping__companies").children;
+        for (let listElement of list) {
+            listElement.addEventListener("click", (e) => {
+                this._shippingPrice = parseFloat(e.target.getAttribute("data-price"));
+                document.querySelector(".shipping__price span").innerHTML = `$${this._shippingPrice}`;
+            })
+        }
     }
 }
