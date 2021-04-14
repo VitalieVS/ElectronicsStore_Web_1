@@ -5,6 +5,7 @@ class CheckOut {
     _color;
     _size;
     _shippingPrice = 0;
+    _discount = 0;
 
     constructor(service) {
         this._service = service;

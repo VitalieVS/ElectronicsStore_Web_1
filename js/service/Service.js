@@ -33,4 +33,13 @@ class Service {
                 }).catch();
         });
     }
+
+    getDiscount(code) {
+        return new Promise((resolve) => {
+            this.GET(`http://localhost:8080/discount/${code}`)
+                .then(response => {
+                    resolve(response.data)
+                }).catch();
+        });
+    }
 }
