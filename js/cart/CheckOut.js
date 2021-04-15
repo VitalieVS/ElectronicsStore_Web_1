@@ -54,6 +54,7 @@ class CheckOut {
             StyleManager.renderTotal(this.calculateTotal());
         }
         LocalStorage.setCart(this._cart);
+        StyleManager.renderCartCount();
     }
 
     searchPredicate(item) {
@@ -71,6 +72,7 @@ class CheckOut {
             StyleManager.renderTotal(this.calculateTotal());
         }
         LocalStorage.setCart(this._cart);
+        StyleManager.renderCartCount();
     }
 
     searchProducts() { // to fix -> DRY
@@ -132,7 +134,6 @@ class CheckOut {
         StyleManager.renderCartCount();
         node.remove();
         StyleManager.cartStateHandler(LocalStorage.cart === "empty");
-
     }
 
     calculateSubTotal() {

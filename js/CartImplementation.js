@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const checkOut = new CheckOut(service);
 
     StyleManager.toggleMenu();
+    StyleManager.discountHandler();
     StyleManager.renderCartCount();
     StyleManager.cartStateHandler(LocalStorage.cart === "empty");
 

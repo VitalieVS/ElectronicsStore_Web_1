@@ -236,6 +236,19 @@ class StyleManager {
         })
     }
 
+    static discountHandler() {
+        const shippingBtn = document.getElementById("show__discount");
+        const discountContainer = document.querySelector(".discount__container");
+
+        shippingBtn.addEventListener("click", () => {
+            if (discountContainer.classList.contains("disabled")) {
+                discountContainer.classList.remove("disabled");
+            } else {
+                discountContainer.classList.add("disabled");
+            }
+        })
+    }
+
     static renderTotal(price) {
         document.querySelector(".check__out__total span").innerHTML = `$${price}`;
     }
