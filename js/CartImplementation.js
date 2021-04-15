@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
             StyleManager.shippingHandler();
             checkOut.removeHandler();
             checkOut.quantityHandler();
+            checkOut.discount();
         }
     );
 });

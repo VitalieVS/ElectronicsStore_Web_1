@@ -249,6 +249,11 @@ class StyleManager {
         })
     }
 
+    static discountHide() {
+        document.getElementById("show__discount").style.display = "none";
+        document.querySelector(".discount__container").style.display = "none";
+    }
+
     static renderTotal(price) {
         document.querySelector(".check__out__total span").innerHTML = `$${price}`;
     }

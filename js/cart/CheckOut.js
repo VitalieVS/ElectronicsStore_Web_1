@@ -142,7 +142,7 @@ class CheckOut {
 
     calculateTotal() {
         return this._cart.reduce((accumulator, value) => accumulator + value.quantity * value.price, 0)
-            + this._shippingPrice
+            + this._shippingPrice - this._discount
     }
 
     shippingListHandler() {
@@ -156,4 +156,25 @@ class CheckOut {
             })
         }
     }
+
+    discount() {
+        const discount = document.getElementById("discount__btn");
+        discount.addEventListener("click", async () => {
+            const discountCode = document.getElementById("discount__holder");
+            let discountResponse = null;
+
+            if (discountCode.value.length === 12) {
+                discountResponse = await this._service.getDiscount(discountCode.value);
+            } else {
+                discountCode.value = "";
+            }
+
+            if (discountResponse !== null) {
+                this._discount = discountResponse.value;
+                StyleManager.renderTotal(this.calculateTotal());
+                StyleManager.discountHide();
+            }
+        })
+    }
+
 }
