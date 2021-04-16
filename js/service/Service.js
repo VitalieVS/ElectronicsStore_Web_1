@@ -7,6 +7,14 @@ class Service {
         }
     }
 
+    DELETE(url) {
+        try {
+            return axios.delete(url)
+        } catch (e) {
+            return e;
+        }
+    }
+
     getProducts(category) {
         return new Promise((resolve) => {
             this.GET(`http://localhost:8080/products/${category}`)
@@ -41,5 +49,14 @@ class Service {
                     resolve(response.data)
                 }).catch();
         });
+    }
+
+    deleteDiscount(id) {
+        return new Promise((resolve => {
+            this.DELETE(`http://localhost:8080/discount/${id}`)
+                .then(response => {
+                    resolve(response.data)
+                }).catch();
+        }))
     }
 }

@@ -171,6 +171,9 @@ class CheckOut {
 
             if (discountResponse !== null) {
                 this._discount = discountResponse.value;
+                console.log(discountResponse);
+                const response = await this._service.deleteDiscount(discountResponse.id);
+                console.log(response);
                 StyleManager.renderTotal(this.calculateTotal());
                 StyleManager.discountHide();
             }
