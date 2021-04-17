@@ -50,10 +50,9 @@ class CheckOut {
         if (this.searchProducts() >= count) {
             this.modifyValue(1);
             increase.innerHTML = `${count}`;
-            this.renderPrice();
+            this.renderPrice("calculate");
         }
-        LocalStorage.setCart(this._cart);
-        StyleManager.renderCartCount();
+        this.renderPrice("renderSetCart");
     }
 
     searchPredicate(item) {
@@ -67,10 +66,9 @@ class CheckOut {
         if (this.searchProducts() > count && count > 0) {
             this.modifyValue();
             decrease.innerHTML = `${count}`;
-            this.renderPrice();
+            this.renderPrice("calculate");
         }
-        LocalStorage.setCart(this._cart);
-        StyleManager.renderCartCount();
+        this.renderPrice("renderSetCart");
     }
 
     searchProducts() { // to fix -> DRY
@@ -120,18 +118,28 @@ class CheckOut {
         this.renderPrice();
     }
 
-    renderPrice() {
-        StyleManager.renderSubTotal(this.calculateSubTotal());
-        StyleManager.renderTotal(this.calculateTotal());
+    renderPrice(state) {
+        switch (state) {
+            case "calculate" : {
+                StyleManager.renderSubTotal(this.calculateSubTotal());
+                StyleManager.renderTotal(this.calculateTotal());
+                break;
+            }
+            case "renderSetCart" : {
+                LocalStorage.setCart(this._cart);
+                StyleManager.renderCartCount();
+                break;
+            }
+        }
+
     }
 
     removeFromCart(e) {
         const node = e.target.closest("li");
         this.setSpecs(node);
         this._cart.splice(this._cart.findIndex(this.searchPredicate, this), 1);
-        this.renderPrice();
-        LocalStorage.setCart(this._cart);
-        StyleManager.renderCartCount();
+        this.renderPrice("calculate");
+        this.renderPrice("renderSetCart");
         node.remove();
         StyleManager.cartStateHandler(LocalStorage.cart === "empty");
     }
@@ -151,7 +159,7 @@ class CheckOut {
             listElement.addEventListener("click", (e) => {
                 this._shippingPrice = parseFloat(e.target.getAttribute("data-price"));
                 document.querySelector(".shipping__price span").innerHTML = `$${this._shippingPrice}`;
-                this.renderPrice();
+                this.renderPrice("calculate");
             })
         }
     }
@@ -173,7 +181,7 @@ class CheckOut {
                 this._discount = discountResponse.value;
                 await this._service.deleteDiscount(discountResponse.id);
                 this._cartObject.addDiscount(discountResponse.id, discountResponse.value, discountResponse.code);
-                this.renderPrice();
+                this.renderPrice("calculate");
                 LocalStorage.setDiscount(discountResponse);
                 StyleManager.discountStateHandler(true);
             }
