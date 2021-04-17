@@ -103,6 +103,25 @@ class StyleManager {
         document.querySelector(".total__price__container").classList.remove("disabled");
     }
 
+    static discountStateHandler(state) {
+        if (!state) {
+            const shippingBtn = document.getElementById("show__discount");
+            const discountContainer = document.querySelector(".discount__container");
+
+            shippingBtn.addEventListener("click", () => {
+                if (discountContainer.classList.contains("disabled")) {
+                    discountContainer.classList.remove("disabled");
+                } else {
+                    discountContainer.classList.add("disabled");
+                }
+            });
+            return;
+        }
+
+        document.getElementById("show__discount").style.display = "none";
+        document.querySelector(".discount__container").style.display = "none";
+    }
+
     static renderCart(response) {
         const template = document.getElementById("item__template");
         const container = document.getElementById("cart__products");
@@ -236,23 +255,6 @@ class StyleManager {
         })
     }
 
-    static discountHandler() {
-        const shippingBtn = document.getElementById("show__discount");
-        const discountContainer = document.querySelector(".discount__container");
-
-        shippingBtn.addEventListener("click", () => {
-            if (discountContainer.classList.contains("disabled")) {
-                discountContainer.classList.remove("disabled");
-            } else {
-                discountContainer.classList.add("disabled");
-            }
-        })
-    }
-
-    static discountHide() {
-        document.getElementById("show__discount").style.display = "none";
-        document.querySelector(".discount__container").style.display = "none";
-    }
 
     static renderTotal(price) {
         document.querySelector(".check__out__total span").innerHTML = `$${price}`;

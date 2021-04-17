@@ -15,4 +15,13 @@ class LocalStorage {
         localStorage.clear();
         if (cart.length > 0) localStorage.setItem("cart", JSON.stringify(cart));
     }
+
+    static setDiscount(discount) {
+        localStorage.setItem("discount", JSON.stringify(discount));
+    }
+
+    static get discount() {
+        return JSON.parse(localStorage.getItem("discount")) || null;
+    }
+
 }

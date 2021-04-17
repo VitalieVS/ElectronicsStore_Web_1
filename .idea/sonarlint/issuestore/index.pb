@@ -34,3 +34,7 @@ C
 js/cart/CheckOut.js,b\a\ba209d9784ed70cc6eeb4380c4f33bf71330860b
 S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+<
+package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
+A
+package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47

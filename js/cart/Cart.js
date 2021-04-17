@@ -29,6 +29,14 @@ class Cart {
         this._color = color;
     }
 
+    addDiscount(id, value, code) {
+        this._cart.push({
+            id: id,
+            value: value,
+            code: code
+        })
+    }
+
     set size(size) {
         this._size = size;
     }

@@ -5,10 +5,11 @@ class CheckOut {
     _color;
     _size;
     _shippingPrice = 0;
-    _discount = 0;
+    _discount = LocalStorage.discount || 0;
 
-    constructor(service) {
+    constructor(service, cart) {
         this._service = service;
+        this._cartObject = cart;
     }
 
     async showCheckOut() {
@@ -126,7 +127,6 @@ class CheckOut {
     removeFromCart(e) {
         const node = e.target.closest("li");
         this.setSpecs(node);
-
         this._cart.splice(this._cart.findIndex(this.searchPredicate, this), 1);
         StyleManager.renderSubTotal(this.calculateSubTotal());
         StyleManager.renderTotal(this.calculateTotal());
@@ -142,7 +142,7 @@ class CheckOut {
 
     calculateTotal() {
         return this._cart.reduce((accumulator, value) => accumulator + value.quantity * value.price, 0)
-            + this._shippingPrice - this._discount
+            - this._shippingPrice - this._discount.value
     }
 
     shippingListHandler() {
@@ -171,11 +171,11 @@ class CheckOut {
 
             if (discountResponse !== null) {
                 this._discount = discountResponse.value;
-                console.log(discountResponse);
-                const response = await this._service.deleteDiscount(discountResponse.id);
-                console.log(response);
+                await this._service.deleteDiscount(discountResponse.id);
+                this._cartObject.addDiscount(discountResponse.id, discountResponse.value, discountResponse.code);
                 StyleManager.renderTotal(this.calculateTotal());
-                StyleManager.discountHide();
+                LocalStorage.setDiscount(discountResponse);
+                StyleManager.discountStateHandler(true);
             }
         })
     }

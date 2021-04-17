@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
     const service = new Service();
-    const checkOut = new CheckOut(service);
+    const cart = new Cart();
+    const checkOut = new CheckOut(service, cart);
 
     StyleManager.toggleMenu();
-    StyleManager.discountHandler();
     StyleManager.renderCartCount();
     StyleManager.cartStateHandler(LocalStorage.cart === "empty");
+    StyleManager.discountStateHandler(LocalStorage.discount);
 
     checkOut.showCheckOut().then(() => {
             checkOut.shippingListHandler();
