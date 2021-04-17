@@ -5,7 +5,7 @@ class CheckOut {
     _color;
     _size;
     _shippingPrice = 0;
-    _discount = LocalStorage.discount || 0;
+    _discount = (LocalStorage.discount) ? LocalStorage.discount.value : 0;
 
     constructor(service, cart) {
         this._service = service;
@@ -142,7 +142,7 @@ class CheckOut {
 
     calculateTotal() {
         return this._cart.reduce((accumulator, value) => accumulator + value.quantity * value.price, 0)
-            - this._shippingPrice - this._discount.value
+            - this._shippingPrice - this._discount
     }
 
     shippingListHandler() {
