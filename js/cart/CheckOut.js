@@ -169,22 +169,20 @@ class CheckOut {
 
         discount.addEventListener("click", async () => {
             const discountCode = document.getElementById("discount__holder");
-            let discountResponse = null;
+            const discountResponse = (discountCode.value.length === 12) ?
+                await this._service.getDiscount(discountCode.value) : null;
 
-            if (discountCode.value.length === 12) {
-                discountResponse = await this._service.getDiscount(discountCode.value);
-            } else {
+            if (discountResponse === null || discountResponse.code === null) {
                 discountCode.value = "";
+                return;
             }
 
-            if (discountResponse !== null) {
-                this._discount = discountResponse.value;
-                await this._service.deleteDiscount(discountResponse.id);
-                this._cartObject.addDiscount(discountResponse.id, discountResponse.value, discountResponse.code);
-                this.renderPrice("calculate");
-                LocalStorage.setDiscount(discountResponse);
-                StyleManager.discountStateHandler(true);
-            }
+            this._discount = discountResponse.value;
+            await this._service.deleteDiscount(discountResponse.id);
+            this._cartObject.addDiscount(discountResponse.id, discountResponse.value, discountResponse.code);
+            this.renderPrice("calculate");
+            LocalStorage.setDiscount(discountResponse);
+            StyleManager.discountStateHandler(true);
         })
     }
 

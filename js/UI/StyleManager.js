@@ -117,7 +117,6 @@ class StyleManager {
             });
             return;
         }
-
         document.getElementById("show__discount").style.display = "none";
         document.querySelector(".discount__container").style.display = "none";
     }
