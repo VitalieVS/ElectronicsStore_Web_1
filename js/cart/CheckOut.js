@@ -159,6 +159,7 @@ class CheckOut {
 
     discount() {
         const discount = document.getElementById("discount__btn");
+
         discount.addEventListener("click", async () => {
             const discountCode = document.getElementById("discount__holder");
             let discountResponse = null;
