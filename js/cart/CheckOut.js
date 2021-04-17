@@ -21,7 +21,7 @@ class CheckOut {
         }
 
         StyleManager.renderCart(this._products);
-        this.renderPrice();
+        this.renderPrice("calculate");
     }
 
     quantityHandler() {
