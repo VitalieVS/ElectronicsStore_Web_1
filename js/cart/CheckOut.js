@@ -21,8 +21,7 @@ class CheckOut {
         }
 
         StyleManager.renderCart(this._products);
-        StyleManager.renderSubTotal(this.calculateSubTotal());
-        StyleManager.renderTotal(this.calculateTotal());
+        this.renderPrice();
     }
 
     quantityHandler() {
@@ -51,8 +50,7 @@ class CheckOut {
         if (this.searchProducts() >= count) {
             this.modifyValue(1);
             increase.innerHTML = `${count}`;
-            StyleManager.renderSubTotal(this.calculateSubTotal());
-            StyleManager.renderTotal(this.calculateTotal());
+            this.renderPrice();
         }
         LocalStorage.setCart(this._cart);
         StyleManager.renderCartCount();
@@ -69,8 +67,7 @@ class CheckOut {
         if (this.searchProducts() > count && count > 0) {
             this.modifyValue();
             decrease.innerHTML = `${count}`;
-            StyleManager.renderSubTotal(this.calculateSubTotal());
-            StyleManager.renderTotal(this.calculateTotal());
+            this.renderPrice();
         }
         LocalStorage.setCart(this._cart);
         StyleManager.renderCartCount();
@@ -120,6 +117,10 @@ class CheckOut {
         this._cart.forEach(item => {
             if (this.searchPredicate(item)) item.quantity -= 1;
         });
+        this.renderPrice();
+    }
+
+    renderPrice() {
         StyleManager.renderSubTotal(this.calculateSubTotal());
         StyleManager.renderTotal(this.calculateTotal());
     }
@@ -128,8 +129,7 @@ class CheckOut {
         const node = e.target.closest("li");
         this.setSpecs(node);
         this._cart.splice(this._cart.findIndex(this.searchPredicate, this), 1);
-        StyleManager.renderSubTotal(this.calculateSubTotal());
-        StyleManager.renderTotal(this.calculateTotal());
+        this.renderPrice();
         LocalStorage.setCart(this._cart);
         StyleManager.renderCartCount();
         node.remove();
@@ -151,8 +151,7 @@ class CheckOut {
             listElement.addEventListener("click", (e) => {
                 this._shippingPrice = parseFloat(e.target.getAttribute("data-price"));
                 document.querySelector(".shipping__price span").innerHTML = `$${this._shippingPrice}`;
-                StyleManager.renderSubTotal(this.calculateSubTotal());
-                StyleManager.renderTotal(this.calculateTotal());
+                this.renderPrice();
             })
         }
     }
@@ -174,7 +173,7 @@ class CheckOut {
                 this._discount = discountResponse.value;
                 await this._service.deleteDiscount(discountResponse.id);
                 this._cartObject.addDiscount(discountResponse.id, discountResponse.value, discountResponse.code);
-                StyleManager.renderTotal(this.calculateTotal());
+                this.renderPrice();
                 LocalStorage.setDiscount(discountResponse);
                 StyleManager.discountStateHandler(true);
             }
