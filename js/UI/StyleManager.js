@@ -194,16 +194,14 @@ class StyleManager {
                 template.content.querySelector("li").setAttribute("data-id", response[key].id);
                 template.content.querySelector("li").setAttribute(
                     "data-quantity", response[key].quantity);
-
-
                 template.content.querySelector("img").setAttribute(
                     "src", `img/${response[key].category}/${response[key].imageUrl}`);
-
                 template.content.querySelector(
                     "h2"
                 ).textContent = response[key].title;
-
                 colorContainer.innerHTML = response[key].colors ? "<h3>Color:</h3>" : "";
+                memoryContainer.innerHTML = response[key].memoryCapacity ? "<h3>Capacity:</h3>" : "";
+
                 for (let keyColor in response[key].colors) {
                     if (response[key].colors.hasOwnProperty(keyColor)) {
                         if (response[key].colors[keyColor].available) {
@@ -214,7 +212,6 @@ class StyleManager {
                     }
                 }
 
-                memoryContainer.innerHTML = response[key].memoryCapacity ? "<h3>Capacity:</h3>" : "";
                 for (let memoryKey in response[key].memoryCapacity) {
                     if (response[key].memoryCapacity.hasOwnProperty(memoryKey)) {
                         if (response[key].memoryCapacity[memoryKey].available) {
@@ -228,7 +225,6 @@ class StyleManager {
                 template.content.querySelector("a").innerHTML = `$${response[key].price}`;
                 template.content.querySelector("a").setAttribute("data-id",
                     `${response[key].id}`);
-
                 template.content.querySelector("li").setAttribute(
                     "data-configurable",
                     (response[key].colors && response[key].memoryCapacity) ? "true" :

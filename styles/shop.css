@@ -110,7 +110,7 @@ section {
 
 .container .card {
     position: relative;
-    width: 240px;
+    width: 255px;
     height: 450px;
     background: #232323;
     border-radius: 20px;
@@ -330,7 +330,7 @@ section {
     opacity: 0.8;
 }
 
-@media (max-width: 1115px) {
+@media (max-width: 1180px) {
     #products {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -340,7 +340,7 @@ section {
     }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 880px) {
     #products {
         grid-template-columns: repeat(2, 1fr);
     }
