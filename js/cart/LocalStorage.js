@@ -12,6 +12,7 @@ class LocalStorage {
     }
 
     static setCart(cart) {
+        localStorage.removeItem("cart");
         if (cart.length > 0) localStorage.setItem("cart", JSON.stringify(cart));
     }
 
@@ -21,6 +22,10 @@ class LocalStorage {
 
     static get discount() {
         return JSON.parse(localStorage.getItem("discount")) || null;
+    }
+
+    static setShipping(text, value) {
+        localStorage.setItem("shipping", JSON.stringify({text: text, value: value}));
     }
 
 }

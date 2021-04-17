@@ -53,6 +53,13 @@ class StyleManager {
         }, 1000)
     }
 
+    static triggerOutOfStockNotification() {
+        document.querySelector(".notification__out__of__stock").classList.remove("disabled");
+        setTimeout(() => {
+            document.querySelector(".notification__out__of__stock").classList.add("disabled");
+        }, 1000)
+    }
+
     static getRenderedProducts() {
         return document.querySelectorAll("#products li");
     }
@@ -83,21 +90,13 @@ class StyleManager {
         cartIcon.setAttribute("value", String(LocalStorage.quantity || 0));
     }
 
-    static triggerOutOfStockNotification() {
-        document.querySelector(".notification__out__of__stock").classList.remove("disabled");
-        setTimeout(() => {
-            document.querySelector(".notification__out__of__stock").classList.add("disabled");
-        }, 1000)
-    }
-
     static cartStateHandler(state) {
         if (state) { // 1 -> cart is empty
             document.querySelector("section .cart__container .cart__empty").classList.remove("disabled");
             document.querySelector("section .cart__container .cart__review").classList.add("disabled");
             document.querySelector(".total__price__container").classList.add("disabled");
             return;
-        }
-        // 0 -> cart is not empty
+        }  // 0 -> cart is not empty
         document.querySelector("section .cart__container .cart__empty").classList.add("disabled");
         document.querySelector("section .cart__container .cart__review").classList.remove("disabled");
         document.querySelector(".total__price__container").classList.remove("disabled");
@@ -109,11 +108,8 @@ class StyleManager {
             const discountContainer = document.querySelector(".discount__container");
 
             shippingBtn.addEventListener("click", () => {
-                if (discountContainer.classList.contains("disabled")) {
-                    discountContainer.classList.remove("disabled");
-                } else {
-                    discountContainer.classList.add("disabled");
-                }
+                (discountContainer.classList.contains("disabled")) ?
+                    discountContainer.classList.remove("disabled") : discountContainer.classList.add("disabled");
             });
             return;
         }
@@ -131,24 +127,20 @@ class StyleManager {
                 const imageURL = response[key].imageUrl.split("_");
                 let url = `${imageURL[0]}_${imageURL[1]}${!cart[key].color ? "" : "_" + cart[key].color}`;
 
-                if (!url.includes(".png")) {
-                    url += ".png";
-                }
+                if (!url.includes(".png")) url += ".png";
 
-                if (!cart[key].color) {
-                    url = response[key].imageUrl;
-                }
+
+                if (!cart[key].color) url = response[key].imageUrl;
+
 
                 template.content.querySelector(".item__color").textContent = "";
                 template.content.querySelector(".item__size").textContent = "";
 
-                if (cart[key].color) {
+                if (cart[key].color)
                     template.content.querySelector(".item__color").textContent = cart[key].color;
-                }
 
-                if (cart[key].size) {
-                    template.content.querySelector(".item__size").textContent = cart[key].size;
-                }
+                if (cart[key].size) template.content.querySelector(".item__size").textContent = cart[key].size;
+
 
                 template.content.querySelector("li").setAttribute("data-id", response[key].id);
                 template.content.querySelector(
@@ -242,14 +234,10 @@ class StyleManager {
         const shippingList = document.querySelector(".shipping__companies");
 
         shippingBtn.addEventListener("click", () => {
-            if (shippingList.classList.contains("disabled")) {
-                shippingList.classList.remove("disabled");
-            } else {
-                shippingList.classList.add("disabled");
-            }
+            shippingList.classList.contains("disabled") ?
+                shippingList.classList.remove("disabled") : shippingList.classList.add("disabled");
         })
     }
-
 
     static renderTotal(price) {
         document.querySelector(".check__out__total span").innerHTML = `$${price}`;
