@@ -3,10 +3,10 @@ class Cart {
     _color;
     _size;
     _price;
+    _products = [];
 
     constructor(cart) {
-        this._cart = (typeof cart === "undefined") ? [] : cart;
-        this._products = [];
+        this._cart = (cart === "empty") ? [] : cart;
     }
 
     addToCart() {
@@ -26,7 +26,7 @@ class Cart {
     }
 
     set color(color) {
-        this._color = color;
+        this._color = color
     }
 
     addDiscount(id, value, code) {
@@ -38,31 +38,31 @@ class Cart {
     }
 
     set size(size) {
-        this._size = size;
+        this._size = size
     }
 
     set price(price) {
-        this._price = price;
+        this._price = price
     }
 
     set id(id) {
-        this._id = id;
+        this._id = id
     }
 
     get id() {
-        return this._id;
+        return this._id
     }
 
     get color() {
-        return this._color;
+        return this._color
     }
 
     get size() {
-        return this._size;
+        return this._size
     }
 
     get price() {
-        return this._price;
+        return this._price
     }
 
     setProducts(products) {
@@ -70,7 +70,7 @@ class Cart {
     }
 
     inCart() {
-        if (typeof this._cart === "undefined") return false;
+        if (this._cart === "empty") return false;
 
         return this._cart.find(this.itemSearch, this);
     }
