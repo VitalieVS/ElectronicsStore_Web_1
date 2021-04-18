@@ -27,6 +27,11 @@ class StyleManager {
         });
     }
 
+    static renderShipping() {
+       document.querySelector(".shipping__price span").innerHTML =
+           (LocalStorage.shipping) ? `$${LocalStorage.shipping.value}` : `$0`;
+    }
+
     static selectBoxHandler() {
         const selected = document.querySelector(".selected");
         const optionsContainer = document.querySelector("#options-container");

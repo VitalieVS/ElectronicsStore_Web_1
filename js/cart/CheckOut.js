@@ -4,7 +4,7 @@ class CheckOut {
     _id;
     _color;
     _size;
-    _shippingPrice = 0;
+    _shippingPrice = LocalStorage.shipping.value;
     _discount = (LocalStorage.discount) ? LocalStorage.discount.value : 0;
 
     constructor(service, cart) {
@@ -22,6 +22,7 @@ class CheckOut {
 
         StyleManager.renderCart(this._products);
         this.renderPrice("calculate");
+        this.renderPrice("shipping");
     }
 
     quantityHandler() {
@@ -130,6 +131,10 @@ class CheckOut {
                 StyleManager.renderCartCount();
                 break;
             }
+            case "shipping" : {
+                StyleManager.renderShipping();
+                break;
+            }
         }
     }
 
@@ -149,7 +154,7 @@ class CheckOut {
 
     calculateTotal() {
         return this._cart.reduce((accumulator, value) => accumulator + value.quantity * value.price, 0)
-            - this._shippingPrice - this._discount
+            + this._shippingPrice - this._discount
     }
 
     shippingListHandler() {
@@ -157,9 +162,9 @@ class CheckOut {
         for (let listElement of list) {
             listElement.addEventListener("click", (e) => {
                 this._shippingPrice = parseFloat(e.target.getAttribute("data-price"));
-                document.querySelector(".shipping__price span").innerHTML = `$${this._shippingPrice}`;
                 this.renderPrice("calculate");
                 LocalStorage.setShipping(e.target.innerHTML, this._shippingPrice);
+                StyleManager.renderShipping();
             })
         }
     }
