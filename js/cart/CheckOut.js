@@ -52,7 +52,7 @@ class CheckOut {
         const increase = e.target.parentNode.querySelector("span");
         let count = parseInt(increase.innerHTML) + 1;
 
-        if (this.searchProducts() >= count) {
+        if (Cart.stockCount(this._products,this._id, this._color, this._size) >= count) {
             this.modifyValue(1);
             increase.innerHTML = `${count}`;
             this.renderPrice("calculate");
@@ -68,33 +68,12 @@ class CheckOut {
         const decrease = e.target.parentNode.querySelector("span");
         let count = parseInt(decrease.innerHTML) - 1;
 
-        if (this.searchProducts() > count && count > 0) {
+        if (Cart.stockCount(this._products,this._id, this._color, this._size) > count && count > 0) {
             this.modifyValue();
             decrease.innerHTML = `${count}`;
             this.renderPrice("calculate");
         }
         this.renderPrice("renderSetCart");
-    }
-
-    searchProducts() { // to fix -> DRY
-        let colorQuantity = null;
-        let memoryQuantity = null;
-
-        const product = this._products.find(({id}) => id === Number(this._id));
-
-        if (product.colors)
-            colorQuantity = product.colors.find(({color}) => color === this._color).quantity;
-
-        if (product.memoryCapacity)
-            memoryQuantity = product.memoryCapacity.find(({size}) => size === this._size).quantity;
-
-        if (memoryQuantity && colorQuantity) return Math.min(colorQuantity, memoryQuantity);
-
-        if (!memoryQuantity && colorQuantity) return colorQuantity;
-
-        if (memoryQuantity && !colorQuantity) return memoryQuantity;
-
-        return product.quantity;
     }
 
     removeHandler() {
