@@ -10,6 +10,17 @@ class CheckOut {
     constructor(service, cart) {
         this._service = service;
         this._cartObject = cart;
+        this.init();
+    }
+
+     init() {
+        this.showCheckOut().then(() => {
+            this.shippingListHandler();
+            StyleManager.shippingHandler();
+            this.removeHandler();
+            this.quantityHandler();
+            this.discount();
+        });
         StyleManager.toggleMenu();
         StyleManager.renderCartCount();
         StyleManager.cartStateHandler(LocalStorage.cart === "empty");
@@ -52,7 +63,7 @@ class CheckOut {
         const increase = e.target.parentNode.querySelector("span");
         let count = parseInt(increase.innerHTML) + 1;
 
-        if (Cart.stockCount(this._products,this._id, this._color, this._size) >= count) {
+        if (Cart.stockCount(this._products, this._id, this._color, this._size) >= count) {
             this.modifyValue(1);
             increase.innerHTML = `${count}`;
             this.renderPrice("calculate");
@@ -68,7 +79,7 @@ class CheckOut {
         const decrease = e.target.parentNode.querySelector("span");
         let count = parseInt(decrease.innerHTML) - 1;
 
-        if (Cart.stockCount(this._products,this._id, this._color, this._size) > count && count > 0) {
+        if (Cart.stockCount(this._products, this._id, this._color, this._size) > count && count > 0) {
             this.modifyValue();
             decrease.innerHTML = `${count}`;
             this.renderPrice("calculate");
@@ -167,7 +178,7 @@ class CheckOut {
             }
 
             this._discount = discountResponse.value;
-            await this._service.deleteDiscount(discountResponse.id);
+            // await this._service.deleteDiscount(discountResponse.id);
             this._cartObject.addDiscount(discountResponse.id, discountResponse.value, discountResponse.code);
             this.renderPrice("calculate");
             LocalStorage.setDiscount(discountResponse);
