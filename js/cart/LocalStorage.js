@@ -3,6 +3,10 @@ class LocalStorage {
         return JSON.parse(localStorage.getItem("cart")) || "empty";
     }
 
+    static get shipping() {
+        return JSON.parse(localStorage.getItem("shipping")) || null;
+    }
+
     static get quantity() {
         if (this.cart === "empty") return 0;
 
@@ -27,5 +31,4 @@ class LocalStorage {
     static setShipping(text, value) {
         localStorage.setItem("shipping", JSON.stringify({text: text, value: value}));
     }
-
 }

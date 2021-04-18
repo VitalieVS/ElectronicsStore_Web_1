@@ -131,7 +131,6 @@ class CheckOut {
                 break;
             }
         }
-
     }
 
     removeFromCart(e) {
@@ -160,6 +159,7 @@ class CheckOut {
                 this._shippingPrice = parseFloat(e.target.getAttribute("data-price"));
                 document.querySelector(".shipping__price span").innerHTML = `$${this._shippingPrice}`;
                 this.renderPrice("calculate");
+                LocalStorage.setShipping(e.target.innerHTML, this._shippingPrice);
             })
         }
     }
