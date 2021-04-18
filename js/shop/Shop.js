@@ -49,20 +49,28 @@ class Shop {
         })
     }
 
+    resetFields(state) {
+        if (state) {
+            this._cart.color = null;
+            this._cart.size = null;
+            this._cart.price = null;
+            return;
+        }
+        this._cart.size = null;
+        this._cart.price = null;
+    }
+
     async liClickHandler(evt) {
         const currTarget = evt.currentTarget;
         const target = evt.target;
         const item = await this._service.getProduct(currTarget.getAttribute("data-id"));
 
         if (currTarget.getAttribute("data-configurable") === "false") {
-            this._cart.color = null;
-            this._cart.size = null;
-            this._cart.price = null;
+           this.resetFields(true);
         }
 
         if (currTarget.getAttribute("data-configurable") === "color-only") {
-            this._cart.size = null;
-            this._cart.price = null;
+            this.resetFields(false);
         }
 
         if (target.parentElement.classList[0] === "color") {
