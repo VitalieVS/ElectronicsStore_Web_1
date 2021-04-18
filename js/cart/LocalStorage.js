@@ -31,4 +31,8 @@ class LocalStorage {
     static setShipping(text, value) {
         localStorage.setItem("shipping", JSON.stringify({text: text, value: value}));
     }
+
+    static clearStorage() {
+        localStorage.clear();
+    }
 }

@@ -4,13 +4,12 @@ class CheckOut {
     _id;
     _color;
     _size;
-    _shippingPrice = LocalStorage.shipping.value;
+    _shippingPrice = (LocalStorage.shipping) ? LocalStorage.shipping.value : 0;
     _discount = (LocalStorage.discount) ? LocalStorage.discount.value : 0;
 
     constructor(service, cart) {
         this._service = service;
         this._cartObject = cart;
-
         StyleManager.toggleMenu();
         StyleManager.renderCartCount();
         StyleManager.cartStateHandler(LocalStorage.cart === "empty");
