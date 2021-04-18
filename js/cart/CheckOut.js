@@ -10,6 +10,11 @@ class CheckOut {
     constructor(service, cart) {
         this._service = service;
         this._cartObject = cart;
+
+        StyleManager.toggleMenu();
+        StyleManager.renderCartCount();
+        StyleManager.cartStateHandler(LocalStorage.cart === "empty");
+        StyleManager.discountStateHandler(LocalStorage.discount);
     }
 
     async showCheckOut() {
@@ -190,5 +195,4 @@ class CheckOut {
             StyleManager.discountStateHandler(true);
         })
     }
-
 }
