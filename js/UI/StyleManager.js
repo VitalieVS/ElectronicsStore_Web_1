@@ -4,6 +4,13 @@ class StyleManager {
         this.h2Text = document.querySelector(".content .textBox h2 span");
         this.circle = document.querySelector(".circle");
         this.learnMore = document.querySelector(".content .textBox a");
+        this.init();
+    }
+
+    init() {
+        StyleManager.toggleMenu();
+        this.liClickHandler();
+        StyleManager.renderCartCount();
     }
 
     setStyle(imageSource, color) {

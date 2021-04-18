@@ -65,15 +65,12 @@ class Shop {
         const target = evt.target;
         const item = await this._service.getProduct(currTarget.getAttribute("data-id"));
 
-        if (currTarget.getAttribute("data-configurable") === "false") {
-           this.resetFields(true);
-        }
+        if (currTarget.getAttribute("data-configurable") === "false") this.resetFields(true);
 
-        if (currTarget.getAttribute("data-configurable") === "color-only") {
-            this.resetFields(false);
-        }
 
-        if (target.parentElement.classList[0] === "color") {
+        if (currTarget.getAttribute("data-configurable") === "color-only") this.resetFields(false);
+
+        if (target.parentElement.classList[0] === "color") { // too lazy to refactor :)
             StyleManager.resetColors(evt.target.parentElement);
             this._cart.color = target.style.background;
             evt.target.style.borderRadius = "20%";
