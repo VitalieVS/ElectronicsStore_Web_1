@@ -1,13 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const service = new Service();
-    const localStorageCart = localStorage.getItem("cart") || 0;
-    const cartInstance =
-        (localStorageCart.length > 0) ? new Cart(JSON.parse(localStorageCart)) : new Cart();
-    const shop = new Shop(cartInstance, service);
+    const cartInstance = ((localStorage.getItem("cart") || 0).length > 0) ?
+        new Cart(JSON.parse(localStorage.getItem("cart") || 0)) : new Cart();
 
-    StyleManager.renderCartCount();
+    const shop = new Shop(cartInstance, new Service());
 
-    StyleManager.toggleMenu();
     shop.showCategories().then(() => {
         StyleManager.selectBoxHandler();
         shop.optionListClickHandler();

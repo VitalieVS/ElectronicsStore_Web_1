@@ -2,6 +2,8 @@ class Shop {
     constructor(cart, service) {
         this._cart = cart;
         this._service = service;
+        StyleManager.renderCartCount();
+        StyleManager.toggleMenu();
     }
 
     async showCategories() {

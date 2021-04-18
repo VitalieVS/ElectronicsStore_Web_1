@@ -149,6 +149,7 @@ class CheckOut {
         this.renderPrice("calculate");
         this.renderPrice("renderSetCart");
         node.remove();
+        if (LocalStorage.cart === "empty") LocalStorage.clearStorage();
         StyleManager.cartStateHandler(LocalStorage.cart === "empty");
     }
 
