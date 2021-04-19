@@ -188,15 +188,33 @@ class CheckOut {
 
     checkOutHandler() {
         const checkOutBtn = document.getElementById("check__out__btn");
-        const closeBtn = document.getElementById("check__out__close");
-        const popup = document.querySelector(".check__out__window");
+        const popUp = document.querySelector(".check__out__window");
         checkOutBtn.addEventListener("click", () => {
             //await this._service.deleteDiscount(LocalStorage.discount.id);
-            popup.classList.remove("disabled");
+            popUp.classList.remove("disabled");
+            this.popUpHandler(popUp);
         });
+    }
+
+    popUpHandler(poUup) {
+        const closeBtn = document.getElementById("check__out__close");
+
+        const listener = (event) => {
+            const withinBoundaries = event.target.id === "order";
+            if (!withinBoundaries) {
+                window.preventDefault();
+                event.stopImmediatePropagation();
+                return;
+            }
+            console.log("clicked");
+        };
+
+        window.addEventListener("click", listener);
 
         closeBtn.addEventListener("click", () => {
-            popup.classList.add("disabled");
+            poUup.classList.add("disabled");
+            window.removeEventListener("click", listener, false);
         })
     }
+
 }
