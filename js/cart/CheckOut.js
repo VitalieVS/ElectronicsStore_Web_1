@@ -13,7 +13,7 @@ class CheckOut {
         this.init();
     }
 
-     init() {
+    init() {
         this.showCheckOut().then(() => {
             this.shippingListHandler();
             StyleManager.shippingHandler();
@@ -25,6 +25,7 @@ class CheckOut {
         StyleManager.renderCartCount();
         StyleManager.cartStateHandler(LocalStorage.cart === "empty");
         StyleManager.discountStateHandler(LocalStorage.discount);
+        this.checkOutHandler();
     }
 
     async showCheckOut() {
@@ -178,11 +179,24 @@ class CheckOut {
             }
 
             this._discount = discountResponse.value;
-            // await this._service.deleteDiscount(discountResponse.id);
             this._cartObject.addDiscount(discountResponse.id, discountResponse.value, discountResponse.code);
             this.renderPrice("calculate");
             LocalStorage.setDiscount(discountResponse);
             StyleManager.discountStateHandler(true);
+        })
+    }
+
+    checkOutHandler() {
+        const checkOutBtn = document.getElementById("check__out__btn");
+        const closeBtn = document.getElementById("check__out__close");
+        const popup = document.querySelector(".check__out__window");
+        checkOutBtn.addEventListener("click", () => {
+            //await this._service.deleteDiscount(LocalStorage.discount.id);
+            popup.classList.remove("disabled");
+        });
+
+        closeBtn.addEventListener("click", () => {
+            popup.classList.add("disabled");
         })
     }
 }

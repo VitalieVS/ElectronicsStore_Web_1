@@ -35,8 +35,8 @@ class StyleManager {
     }
 
     static renderShipping() {
-       document.querySelector(".shipping__price span").innerHTML =
-           (LocalStorage.shipping) ? `$${LocalStorage.shipping.value}` : `$0`;
+        document.querySelector(".shipping__price span").innerHTML =
+            (LocalStorage.shipping) ? `$${LocalStorage.shipping.value}` : `$0`;
     }
 
     static selectBoxHandler() {
@@ -117,7 +117,7 @@ class StyleManager {
     static discountStateHandler(state) {
         if (!state) {
             const shippingBtn = document.getElementById("show__discount");
-            const discountContainer = document.querySelector(".discount__container");
+            const discountContainer = document.querySelector(".input__container");
 
             shippingBtn.addEventListener("click", () => {
                 (discountContainer.classList.contains("disabled")) ?
@@ -140,10 +140,7 @@ class StyleManager {
                 let url = `${imageURL[0]}_${imageURL[1]}${!cart[key].color ? "" : "_" + cart[key].color}`;
 
                 if (!url.includes(".png")) url += ".png";
-
-
                 if (!cart[key].color) url = response[key].imageUrl;
-
 
                 template.content.querySelector(".item__color").textContent = "";
                 template.content.querySelector(".item__size").textContent = "";
@@ -152,7 +149,6 @@ class StyleManager {
                     template.content.querySelector(".item__color").textContent = cart[key].color;
 
                 if (cart[key].size) template.content.querySelector(".item__size").textContent = cart[key].size;
-
 
                 template.content.querySelector("li").setAttribute("data-id", response[key].id);
                 template.content.querySelector(
@@ -170,15 +166,11 @@ class StyleManager {
     }
 
     static resetColors(parent) {
-        parent.querySelectorAll("span").forEach(span => {
-            span.style.borderRadius = "50%";
-        })
+        parent.querySelectorAll("span").forEach(span => span.style.borderRadius = "50%")
     }
 
     static resetSize(parent) {
-        parent.querySelectorAll("span").forEach(span => {
-            span.style.background = "#fff";
-        })
+        parent.querySelectorAll("span").forEach(span => span.style.background = "#fff");
     }
 
     static modifyPrice(price, element) {

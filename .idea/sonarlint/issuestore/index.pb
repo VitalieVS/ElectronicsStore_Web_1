@@ -9,9 +9,6 @@ G
 styles/header-style.css,3\5\35455b448fe7f2902b197d44437891dd328f843a
 :
 
-js/Shop.js,6\e\6e264e8166476963009641f7ffafeef26dff79d9
-:
-
 js/main.js,d\a\dae13fd6f331d1c91ab58b06e81d05cb8958bfb1
 ?
 styles/shop.css,a\7\a77817da2319b836e63b9e25ce0fba473df8918b
@@ -38,3 +35,9 @@ S
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 A
 package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47
+=
+API_Promo.txt,2\f\2fd320c436b0fa1cc9a8003dab5a1c72526c5f33
+?
+js/shop/Shop.js,f\8\f8cb93fc9c3a9de209b6063cb68e093d3c05bfaa
+H
+js/ShopImplementation.js,5\9\59adbb62b0017634943b273ad8f20e3011587295

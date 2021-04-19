@@ -174,22 +174,9 @@ hr {
     grid-area: 3 / 2 / 4 / 3;
 }
 
-.check__out__btn {
+.check__out__container {
     letter-spacing: 3px;
     grid-area: 4 / 2 / 5 / 3;
-}
-
-.discount__container input {
-    border-style: none;
-    background: transparent;
-    outline: none;
-}
-
-.discount__container button {
-    padding: 0;
-    background: none;
-    border: none;
-    outline: none;
 }
 
 @-webkit-keyframes gradient {
@@ -210,7 +197,20 @@ hr {
     }
 }
 
-.discount__container .webflow__style__input {
+.input__container input {
+    border-style: none;
+    background: transparent;
+    outline: none;
+}
+
+.input__container button {
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.input__container .style__input {
     position: relative;
     display: flex;
     width: 300px;
@@ -220,7 +220,7 @@ hr {
     padding: 0.5rem 0.5rem 0.5rem;
 }
 
-.discount__container .webflow__style__input:after {
+.input__container .style__input:after {
     content: "";
     position: absolute;
     left: 5px;
@@ -237,7 +237,7 @@ hr {
     animation: gradient 3s linear infinite;
 }
 
-.discount__container .webflow__style__input input {
+.input__container .style__input input {
     flex-grow: 1;
     color: #BFD2FF;
     font-size: 20px;
@@ -245,20 +245,90 @@ hr {
     vertical-align: middle;
 }
 
-.discount__container .webflow__style__input input::-webkit-input-placeholder {
+.input__container .style__input input::-webkit-input-placeholder {
     color: #7881A1;
 }
 
-.discount__container .webflow__style__input button {
+.input__container .style__input button {
     color: #7881A1;
     font-size: 20px;
     line-height: 20px;
     vertical-align: middle;
     transition: color 0.25s;
 }
-.discount__container .webflow-style-input button:hover {
+
+.input__container .style__input button:hover {
     color: #BFD2FF;
 }
+
+.check__out__window {
+    width: 80%;
+    height: 80%;
+    background-color: whitesmoke;
+    opacity: 0.96;
+    border-radius: 30px;
+    position: fixed;
+    padding: 30px 30px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 100000;
+}
+
+.check__out__address__container span {
+    display: block;
+}
+
+.check__out__exit em {
+    float: right;
+    font-size: 25px;
+}
+
+.address__input__container .style__input {
+    position: relative;
+    display: flex;
+    width: 300px;
+    float: right;
+    flex-direction: row;
+    border-radius: 50px;
+    padding: 0.5rem 0.5rem 0.5rem;
+}
+
+.information__container input {
+    background: transparent;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 35px;
+    padding: .5rem .5rem .3rem .3rem;
+}
+
+.information__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: 0;
+    grid-row-gap: 30px;
+}
+
+.information__container span {
+    display: block;
+}
+
+#address {
+    width: 700px;
+}
+
+.name__container { grid-area: 1 / 1 / 2 / 2; }
+.surname__container { grid-area: 1 / 2 / 2 / 3; }
+.address__container { grid-area: 2 / 1 / 3 / 3; }
+.city__container { grid-area: 3 / 1 / 4 / 2; }
+.country__container { grid-area: 3 / 2 / 4 / 3; }
+.phone__container { grid-area: 4 / 1 / 5 / 2; }
+.order__container { grid-area: 4 / 2 / 5 / 3; }
+
+
+
+
 
 @media (max-width: 845px) {
     .cart__item {
