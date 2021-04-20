@@ -233,9 +233,6 @@ class CheckOut {
             if (!(new RegExp(phoneRegexp).test(phone.value)))
                 errorContainer.innerHTML =  "Wrong phone";
             errorContainer.innerHTML = "";
-            console.log(LocalStorage.discount);
-            console.log(LocalStorage.cart);
-            console.log(LocalStorage.shipping);
         });
 
     }
