@@ -250,4 +250,26 @@ class StyleManager {
     static renderSubTotal(price) {
         document.querySelector(".total__price span").innerHTML = `$${price}`;
     }
+
+    static popupHandler() {
+        const deliver = document.getElementById("deliver");
+        const deliverContainer = document.querySelector(".deliver__container");
+        const pickUp = document.getElementById("take");
+        const pickUpContainer = document.querySelector(".pickup__container");
+
+        deliver.addEventListener("click", () => {
+            pickUpContainer.classList.add("disabled");
+            deliverContainer.classList.remove("disabled");
+            pickUp.classList.remove("active");
+            deliver.classList.add("active");
+
+        });
+
+        pickUp.addEventListener("click", () => {
+            deliver.classList.remove("active");
+            pickUpContainer.classList.remove("disabled");
+            deliverContainer.classList.add("disabled");
+            pickUp.classList.add("active");
+        })
+    }
 }

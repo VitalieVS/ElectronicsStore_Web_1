@@ -199,21 +199,9 @@ class CheckOut {
     popUpHandler(poUup) {
         const closeBtn = document.getElementById("check__out__close");
 
-        const listener = (event) => {
-            const withinBoundaries = event.target.id === "order";
-            if (!withinBoundaries) {
-                window.preventDefault();
-                event.stopImmediatePropagation();
-                return;
-            }
-            console.log("clicked");
-        };
-
-        window.addEventListener("click", listener);
-
+        StyleManager.popupHandler();
         closeBtn.addEventListener("click", () => {
             poUup.classList.add("disabled");
-            window.removeEventListener("click", listener, false);
         })
     }
 
