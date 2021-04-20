@@ -109,17 +109,18 @@
         </div>
 
         <div class="deliver__container">
+            <span id="error__container"></span>
             <div class="information__container">
                 <div class="name__container">
                     <span>Name</span>
                     <label for="name">
-                        <input type="text" id="name">
+                        <input type="text" id="name" pattern="[a-zA-Z]*">
                     </label>
                 </div>
                 <div class="surname__container">
                     <span>Surname</span>
                     <label for="surname">
-                        <input type="text" id="surname">
+                        <input type="text" id="surname" pattern="[a-zA-Z]*">
                     </label>
                 </div>
                 <div class="address__container">
@@ -155,8 +156,8 @@
             </div>
         </div>
 
-        <div class="pickup__container">
-            <span>My Pick Up</span>
+        <div class="pickup__container disabled">
+            <span>Not in conditions, lazy to implement :)</span>
         </div>
 
     </div>

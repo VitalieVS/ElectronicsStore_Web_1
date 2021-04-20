@@ -202,7 +202,42 @@ class CheckOut {
         StyleManager.popupHandler();
         closeBtn.addEventListener("click", () => {
             poUup.classList.add("disabled");
-        })
+        });
+
+         this.validatePopup();
+    }
+
+    validatePopup() {
+        const errorContainer = document.getElementById("error__container");
+        const address = document.getElementById("address");
+        const addressRegexp = /^[a-zA-Z0-9\s,'-]{4,}$/;
+        const validate = document.getElementById("order");
+        const phone = document.getElementById("phone");
+        const phoneRegexp = /^[\+373|373]*[0]*[0-9]{7,8}$/;
+        const forms = [
+            document.getElementById("name"),
+            document.getElementById("surname"),
+            document.getElementById("city"),
+            document.getElementById("country")
+        ];
+
+        forms.forEach(element => {
+            element.addEventListener("keyup", () => {
+                element.value = element.value.replace(/[^a-zA-Z]/g, '');
+            })
+        });
+
+        validate.addEventListener("click", () => {
+            if (!(new RegExp(addressRegexp).test(address.value) && address.value.length < 20))
+                errorContainer.innerHTML =  "Wrong address";
+            if (!(new RegExp(phoneRegexp).test(phone.value)))
+                errorContainer.innerHTML =  "Wrong phone";
+            errorContainer.innerHTML = "";
+            console.log(LocalStorage.discount);
+            console.log(LocalStorage.cart);
+            console.log(LocalStorage.shipping);
+        });
+
     }
 
 }
