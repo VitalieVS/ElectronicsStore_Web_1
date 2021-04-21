@@ -9,7 +9,6 @@ class CheckOut {
 
     constructor(service, cart) {
         this._service = service;
-        this._cartObject = cart;
         this.init();
     }
 
@@ -179,7 +178,6 @@ class CheckOut {
             }
 
             this._discount = discountResponse.value;
-            this._cartObject.addDiscount(discountResponse.id, discountResponse.value, discountResponse.code);
             this.renderPrice("calculate");
             LocalStorage.setDiscount(discountResponse);
             StyleManager.discountStateHandler(true);
@@ -204,7 +202,21 @@ class CheckOut {
             poUup.classList.add("disabled");
         });
 
-         this.validatePopup();
+        this.validatePopup();
+    }
+
+    async sendOrder(userInfo) {
+        const result = {
+            "products" : LocalStorage.cart,
+            "contact" : userInfo,
+            "shippingPrice": LocalStorage.shipping.value,
+            "discount": LocalStorage.discount,
+            "totalPrice": this.calculateTotal()
+        };
+        console.log(result);
+        await this._service.addOrder(result).then(response => {
+            console.log(response);
+        });
     }
 
     validatePopup() {
@@ -228,11 +240,27 @@ class CheckOut {
         });
 
         validate.addEventListener("click", () => {
-            if (!(new RegExp(addressRegexp).test(address.value) && address.value.length < 20))
-                errorContainer.innerHTML =  "Wrong address";
-            if (!(new RegExp(phoneRegexp).test(phone.value)))
-                errorContainer.innerHTML =  "Wrong phone";
+            if (!(new RegExp(addressRegexp).test(address.value) && address.value.length < 20)) {
+                errorContainer.innerHTML = "Wrong address";
+                return;
+            }
+
+            if (!(new RegExp(phoneRegexp).test(phone.value))) {
+                errorContainer.innerHTML = "Wrong phone";
+                return;
+            }
             errorContainer.innerHTML = "";
+
+            const userInfo = {
+                "name": forms[0].value,
+                "surname": forms[1].value,
+                "address": address.value,
+                "phone": phone.value,
+                "city": forms[2].value,
+                "country": forms[3].value
+            };
+
+            this.sendOrder(userInfo).then(_=>_);
         });
 
     }

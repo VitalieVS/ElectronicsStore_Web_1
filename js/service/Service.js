@@ -15,6 +15,14 @@ class Service {
         }
     }
 
+    POST(url, data) {
+        try {
+            return axios.post(url, data);
+        } catch (e) {
+            return e;
+        }
+    }
+
     getProducts(category) {
         return new Promise((resolve) => {
             this.GET(`http://localhost:8080/products/${category}`)
@@ -54,6 +62,15 @@ class Service {
     deleteDiscount(id) {
         return new Promise((resolve => {
             this.DELETE(`http://localhost:8080/discount/${id}`)
+                .then(response => {
+                    resolve(response.data)
+                }).catch();
+        }))
+    }
+
+    addOrder(order) {
+        return new Promise((resolve => {
+            this.POST(`http://localhost:8080/orders/`, order)
                 .then(response => {
                     resolve(response.data)
                 }).catch();
