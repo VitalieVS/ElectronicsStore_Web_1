@@ -274,7 +274,6 @@ hr {
 
 .check__out__window {
     width: 80%;
-    height: 80%;
     background-color: whitesmoke;
     opacity: 0.96;
     border-radius: 30px;
@@ -295,13 +294,11 @@ hr {
     font-size: 25px;
 }
 
-.address__input__container .style__input {
+.address__container input {
     position: relative;
     display: flex;
     width: 300px;
-    float: right;
     flex-direction: row;
-    border-radius: 50px;
     padding: 0.5rem 0.5rem 0.5rem;
 }
 
@@ -318,15 +315,11 @@ hr {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, 1fr);
     grid-column-gap: 0;
-    grid-row-gap: 30px;
+    grid-row-gap: 10px;
 }
 
 .information__container span {
     display: block;
-}
-
-#address {
-    width: 700px;
 }
 
 .name__container { grid-area: 1 / 1 / 2 / 2; }
@@ -335,11 +328,28 @@ hr {
 .city__container { grid-area: 3 / 1 / 4 / 2; }
 .country__container { grid-area: 3 / 2 / 4 / 3; }
 .phone__container { grid-area: 4 / 1 / 5 / 2; }
-.order__container { grid-area: 4 / 2 / 5 / 3; }
+.payment__container { grid-area: 4 / 2 / 5 / 3; }
 
 
 .check__out__method__container {
     text-align: center;
+}
+
+.payment__container a, #order {
+    text-decoration: none;
+    color: #000;
+    border-radius: 12px;
+    margin-top: 20px;
+    background-color: white;
+    padding: 10px 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#order {
+    border: 1px solid blue;
+
 }
 
 .check__out__method__container a {
@@ -357,7 +367,6 @@ hr {
 .active {
     border: 2px solid blue;
 }
-
 
 @media (max-width: 845px) {
     .cart__item {

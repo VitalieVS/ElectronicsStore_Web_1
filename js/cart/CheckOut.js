@@ -6,8 +6,9 @@ class CheckOut {
     _size;
     _shippingPrice = (LocalStorage.shipping) ? LocalStorage.shipping.value : 0;
     _discount = (LocalStorage.discount) ? LocalStorage.discount.value : 0;
+    _paymentMethod = "Cash";
 
-    constructor(service, cart) {
+    constructor(service) {
         this._service = service;
         this.init();
     }
@@ -24,6 +25,7 @@ class CheckOut {
         StyleManager.renderCartCount();
         StyleManager.cartStateHandler(LocalStorage.cart === "empty");
         StyleManager.discountStateHandler(LocalStorage.discount);
+        this.paymentMethodHandler();
         this.checkOutHandler();
     }
 
@@ -201,22 +203,19 @@ class CheckOut {
         closeBtn.addEventListener("click", () => {
             poUup.classList.add("disabled");
         });
-
         this.validatePopup();
     }
 
     async sendOrder(userInfo) {
         const result = {
-            "products" : LocalStorage.cart,
-            "contact" : userInfo,
-            "shippingPrice": LocalStorage.shipping.value,
+            "products": this._cart,
+            "contact": userInfo,
+            "shippingPrice": this._shippingPrice,
             "discount": LocalStorage.discount,
-            "totalPrice": this.calculateTotal()
+            "totalPrice": this.calculateTotal(),
+            "paymentMethod": this._paymentMethod
         };
-        console.log(result);
-        await this._service.addOrder(result).then(response => {
-            console.log(response);
-        });
+        await this._service.addOrder(result);
     }
 
     validatePopup() {
@@ -250,6 +249,7 @@ class CheckOut {
                 return;
             }
             errorContainer.innerHTML = "";
+            const popUp = document.querySelector(".check__out__window");
 
             const userInfo = {
                 "name": forms[0].value,
@@ -260,9 +260,23 @@ class CheckOut {
                 "country": forms[3].value
             };
 
-            this.sendOrder(userInfo).then(_=>_);
+            this.sendOrder(userInfo).then(_ => _);
+            LocalStorage.clearStorage();
+            popUp.classList.add("disabled");
+            StyleManager.cartStateHandler(true);
+            document.getElementById("cart__products").innerHTML = "";
         });
 
     }
 
+    paymentMethodHandler() {
+        const paymentSelectorBtns = document.querySelectorAll(".payment__container a");
+        paymentSelectorBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                StyleManager.resetPaymentMethodBtns();
+                btn.style.border = '1px solid blue';
+                this._paymentMethod = btn.innerHTML;
+            })
+        })
+    }
 }

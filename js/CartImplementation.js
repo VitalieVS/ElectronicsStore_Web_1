@@ -1,3 +1,3 @@
 document.addEventListener("DOMContentLoaded", () => {
-    new CheckOut(new Service(), new Cart());
+    new CheckOut(new Service());
 });

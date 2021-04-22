@@ -272,4 +272,11 @@ class StyleManager {
             pickUp.classList.add("active");
         })
     }
+
+    static resetPaymentMethodBtns() {
+        const btns = document.querySelectorAll(".payment__container a");
+        btns.forEach(btn => {
+            btn.style.border = '';
+        })
+    }
 }
