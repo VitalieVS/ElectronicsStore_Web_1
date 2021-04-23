@@ -23,14 +23,14 @@ class CheckOut {
         });
         StyleManager.toggleMenu();
         StyleManager.renderCartCount();
-        StyleManager.cartStateHandler(LocalStorage.cart === "empty");
+        StyleManager.cartStateHandler(LocalStorage.cart === null);
         StyleManager.discountStateHandler(LocalStorage.discount);
         this.paymentMethodHandler();
         this.checkOutHandler();
     }
 
     async showCheckOut() {
-        if (this._cart === "empty") return;
+        if (this._cart === null) return;
         for (const key in this._cart) {
             if (this._cart.hasOwnProperty(key)) {
                 this._products.push(await this._service.getProduct(this._cart[key].id));
@@ -44,7 +44,7 @@ class CheckOut {
 
     quantityHandler() {
         const incrementBtns = document.querySelectorAll(".increment__btn");
-        const decrement = document.querySelectorAll(".decrement__btn");
+        const decrementBtns = document.querySelectorAll(".decrement__btn");
 
         incrementBtns.forEach(btn => {
             btn.addEventListener("click", e => {
@@ -53,7 +53,7 @@ class CheckOut {
             })
         });
 
-        decrement.forEach(btn => {
+        decrementBtns.forEach(btn => {
             btn.addEventListener("click", e => {
                 this.setSpecs(e.target.closest("li"));
                 this.decreaseQuantity(e);
@@ -62,12 +62,12 @@ class CheckOut {
     }
 
     increaseQuantity(e) {
-        const increase = e.target.parentNode.querySelector("span");
-        let count = parseInt(increase.innerHTML) + 1;
+        const countContainer = e.target.parentNode.querySelector("span");
+        const count = parseInt(countContainer.innerHTML) + 1;
 
         if (Cart.stockCount(this._products, this._id, this._color, this._size) >= count) {
-            this.modifyValue(1);
-            increase.innerHTML = `${count}`;
+            this.modifyValue('+');
+            countContainer.innerHTML = `${count}`;
             this.renderPrice("calculate");
         }
         this.renderPrice("renderSetCart");
@@ -78,12 +78,12 @@ class CheckOut {
     }
 
     decreaseQuantity(e) {
-        const decrease = e.target.parentNode.querySelector("span");
-        let count = parseInt(decrease.innerHTML) - 1;
+        const countContainer = e.target.parentNode.querySelector("span");
+        const count = parseInt(countContainer.innerHTML) - 1;
 
         if (Cart.stockCount(this._products, this._id, this._color, this._size) > count && count > 0) {
-            this.modifyValue();
-            decrease.innerHTML = `${count}`;
+            this.modifyValue('-');
+            countContainer.innerHTML = `${count}`;
             this.renderPrice("calculate");
         }
         this.renderPrice("renderSetCart");
@@ -103,16 +103,9 @@ class CheckOut {
     }
 
     modifyValue(value) {
-        if (value === 1) {
-            this._cart.forEach(item => {
-                if (this.searchPredicate(item)) item.quantity += 1;
-            });
-            return;
-        }
         this._cart.forEach(item => {
-            if (this.searchPredicate(item)) item.quantity -= 1;
+            if (this.searchPredicate(item)) item.quantity = eval(`${item.quantity}${value}1`);
         });
-        this.renderPrice();
     }
 
     renderPrice(state) {
@@ -140,9 +133,9 @@ class CheckOut {
         this._cart.splice(this._cart.findIndex(this.searchPredicate, this), 1);
         this.renderPrice("calculate");
         this.renderPrice("renderSetCart");
+        if (!LocalStorage.cart) LocalStorage.clearStorage();
+        StyleManager.cartStateHandler(!LocalStorage.cart);
         node.remove();
-        if (LocalStorage.cart === "empty") LocalStorage.clearStorage();
-        StyleManager.cartStateHandler(LocalStorage.cart === "empty");
     }
 
     calculateSubTotal() {
@@ -190,7 +183,6 @@ class CheckOut {
         const checkOutBtn = document.getElementById("check__out__btn");
         const popUp = document.querySelector(".check__out__window");
         checkOutBtn.addEventListener("click", () => {
-            //await this._service.deleteDiscount(LocalStorage.discount.id);
             popUp.classList.remove("disabled");
             this.popUpHandler(popUp);
         });
@@ -215,6 +207,7 @@ class CheckOut {
             "totalPrice": this.calculateTotal(),
             "paymentMethod": this._paymentMethod
         };
+        if (LocalStorage.discount !== null) await this._service.deleteDiscount(LocalStorage.discount.id);
         await this._service.addOrder(result);
     }
 

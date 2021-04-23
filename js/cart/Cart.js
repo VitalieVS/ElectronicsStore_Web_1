@@ -6,7 +6,7 @@ class Cart {
     _products = [];
 
     constructor(cart) {
-        this._cart = (cart === "empty") ? [] : cart;
+        this._cart = (cart === null) ? [] : cart;
     }
 
     addToCart() {
@@ -21,7 +21,6 @@ class Cart {
         if (canIncreaseCount) StyleManager.increaseCartCount();
         if (validItem) this.modifyValue();
         if (!this.inCart()) this.pushToArray();
-
         LocalStorage.setCart(this._cart);
     }
 
@@ -62,7 +61,7 @@ class Cart {
     }
 
     inCart() {
-        if (this._cart === "empty") return false;
+        if (this._cart === null) return false;
 
         return this._cart.find(this.itemSearch, this);
     }

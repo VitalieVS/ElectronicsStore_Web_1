@@ -1,6 +1,6 @@
 class LocalStorage {
     static get cart() {
-        return JSON.parse(localStorage.getItem("cart")) || "empty";
+        return JSON.parse(localStorage.getItem("cart")) || null;
     }
 
     static get shipping() {
@@ -8,7 +8,7 @@ class LocalStorage {
     }
 
     static get quantity() {
-        if (this.cart === "empty") return 0;
+        if (this.cart === null) return 0;
 
         return this.cart.reduce((prev, cur) => {
             return prev + cur.quantity;
@@ -16,8 +16,7 @@ class LocalStorage {
     }
 
     static setCart(cart) {
-        localStorage.removeItem("cart");
-        if (cart.length > 0) localStorage.setItem("cart", JSON.stringify(cart));
+        (cart.length > 0) ? localStorage.setItem("cart", JSON.stringify(cart)) : localStorage.removeItem("cart");
     }
 
     static setDiscount(discount) {
