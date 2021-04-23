@@ -17,7 +17,7 @@ class CheckOut {
         this.showCheckOut().then(() => {
             this.shippingListHandler();
             StyleManager.shippingHandler();
-            this.removeHandler();
+            this.removeItemHandler();
             this.quantityHandler();
             this.discount();
         });
@@ -89,7 +89,7 @@ class CheckOut {
         this.renderPrice("renderSetCart");
     }
 
-    removeHandler() {
+    removeItemHandler() {
         const removeButtons = document.querySelectorAll(".remove__btn");
         removeButtons.forEach(btn => {
             btn.addEventListener('click', e => this.removeFromCart(e));

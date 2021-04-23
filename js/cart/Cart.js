@@ -87,24 +87,16 @@ class Cart {
     }
 
     static stockCount(products, id, color, size) {
-        let colorQuantity = null;
-        let memoryQuantity = null;
-
+        const countArray = [];
         const element = products.find(product => product.id === Number(id));
 
         if (element.colors)
-            colorQuantity = element.colors.find(product => product.color === color).quantity;
+            countArray.push(element.colors.find(product => product.color === color).quantity);
 
         if (element.memoryCapacity)
-            memoryQuantity = element.memoryCapacity.find(product => product.size === size).quantity;
+            countArray.push(element.memoryCapacity.find(product => product.size === size).quantity);
 
-        if (memoryQuantity && colorQuantity) return Math.min(colorQuantity, memoryQuantity);
-
-        if (!memoryQuantity && colorQuantity) return colorQuantity;
-
-        if (memoryQuantity && !colorQuantity) return memoryQuantity;
-
-        return element.quantity;
+        return Math.min(...countArray.filter(elem => elem !== null));
     }
 
     modifyValue() {
