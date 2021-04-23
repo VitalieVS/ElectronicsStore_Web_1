@@ -21,6 +21,7 @@ class Cart {
         if (canIncreaseCount) StyleManager.increaseCartCount();
         if (validItem) this.modifyValue();
         if (!this.inCart()) this.pushToArray();
+
         LocalStorage.setCart(this._cart);
     }
 
@@ -63,10 +64,10 @@ class Cart {
     inCart() {
         if (this._cart === null) return false;
 
-        return this._cart.find(this.itemSearch, this);
+        return this._cart.find(this.itemSearchPredicate, this);
     }
 
-    itemSearch(item) {
+    itemSearchPredicate(item) {
         return item.id === this.id &&
             item.color === this.color &&
             item.size === this.size
@@ -83,7 +84,8 @@ class Cart {
     }
 
     checkQuantity() {
-        return this._cart.find(this.itemSearch, this).quantity < Cart.stockCount(this._products, this.id, this.color, this.size);
+        return this._cart.find(this.itemSearchPredicate, this).quantity <
+            Cart.stockCount(this._products, this.id, this.color, this.size);
     }
 
     static stockCount(products, id, color, size) {
@@ -101,7 +103,7 @@ class Cart {
 
     modifyValue() {
         this._cart.forEach(item => {
-            if (this.itemSearch(item)) item.quantity += 1;
+            if (this.itemSearchPredicate(item)) item.quantity += 1;
         });
     }
 }

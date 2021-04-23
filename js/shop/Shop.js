@@ -42,8 +42,8 @@ class Shop {
         this._cart.setProducts(response);
         StyleManager.renderProducts(response);
 
-        StyleManager.getRenderedProducts().forEach(element => {
-            element.addEventListener("click", evt => {
+        StyleManager.getRenderedProducts().forEach(product => {
+            product.addEventListener("click", evt => {
                 this.liClickHandler(evt);
             })
         })

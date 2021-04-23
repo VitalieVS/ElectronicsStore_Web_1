@@ -32,9 +32,8 @@ class CheckOut {
     async showCheckOut() {
         if (this._cart === null) return;
         for (const key in this._cart) {
-            if (this._cart.hasOwnProperty(key)) {
-                this._products.push(await this._service.getProduct(this._cart[key].id));
-            }
+            if (this._cart.hasOwnProperty(key)) this._products.push(await this._service.getProduct(this._cart[key].id));
+
         }
 
         StyleManager.renderCart(this._products);
@@ -258,6 +257,7 @@ class CheckOut {
             popUp.classList.add("disabled");
             StyleManager.cartStateHandler(true);
             document.getElementById("cart__products").innerHTML = "";
+            StyleManager.renderCartCount();
         });
 
     }

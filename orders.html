@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Page</title>
+    <link rel="stylesheet" href="styles/orders.css">
+</head>
+<body>
+<div class="title__container">
+    <ul id="title">
+        <li>ID</li>
+        <li>Products</li>
+        <li>Contact</li>
+        <li>Shipping Price</li>
+        <li>Discount</li>
+        <li>Payment Method</li>
+        <li>Total Price</li>
+    </ul>
+</div>
+
+<div class="order__container">
+
+    <ul id="orders">
+    </ul>
+
+    <template id="orders__template">
+        <li>
+            <div class="id__holder">
+                <span>dd434692-100c-46cf-99b0-f32641283550</span>
+            </div>
+        </li>
+        <li>
+            <div class="products__holder">
+                <div class="product__id">
+                    ID: <span>1</span>
+                </div>
+                <div class="product__price">
+                    <span>65.30</span>
+                </div>
+                <div class="product__quantity">
+                    <span>23</span>
+                </div>
+
+                <div class="product__color">
+                    <span>Red</span>
+                </div>
+                <div class="product__size">
+                    <span>256gb</span>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="user__contact__holder">
+                <div class="name">
+                    <span></span>
+                </div>
+                <div class="surname">
+                    <span></span>
+                </div>
+                <div class="address">
+                    <span></span>
+                </div>
+                <div class="phone">
+                    <span></span>
+                </div>
+                <div class="city">
+                    <span></span>
+                </div>
+                <div class="country">
+                    <span></span>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="shipping__price__holder">
+                <span></span>
+            </div>
+        </li>
+        <li>
+            <div class="discount__holder">
+                <span></span>
+            </div>
+        </li>
+        <li>
+            <div class="payment__method__holder">
+                <span></span>
+            </div>
+        </li>
+        <li>
+            <div class="total__price__holder">
+                <span></span>
+            </div>
+        </li>
+    </template>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="js/orders/orders.js"></script>
+</body>
+</html>
