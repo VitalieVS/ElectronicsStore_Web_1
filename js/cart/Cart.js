@@ -98,6 +98,7 @@ class Cart {
         if (element.memoryCapacity)
             countArray.push(element.memoryCapacity.find(product => product.size === size).quantity);
 
+        if (element.memoryCapacity === null && element.colors === null) return element.quantity;
         return Math.min(...countArray.filter(elem => elem !== null));
     }
 

@@ -67,7 +67,6 @@ class Shop {
 
         if (currTarget.getAttribute("data-configurable") === "false") this.resetFields(true);
 
-
         if (currTarget.getAttribute("data-configurable") === "color-only") this.resetFields(false);
 
         if (target.parentElement.classList[0] === "color") { // too lazy to refactor :)
